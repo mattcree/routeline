@@ -1,5 +1,5 @@
-New log file opened at Wed Feb 22 18:08:43 GMT 2017 by 9612@DESKTOP-A5F460V
-jvm 9612@DESKTOP-A5F460V
+New log file opened at Thu Feb 23 15:39:03 GMT 2017 by 11332@DESKTOP-A5F460V
+jvm 11332@DESKTOP-A5F460V
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.121-b13
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in D:\Projects\routeline\project, returning: (routeline-build)
 Loading project definition from D:\Projects\routeline\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@2d0e1672, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@4e38c028, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -69,7 +69,7 @@ Set current project to play-java (in build file:/D:/Projects/routeline/)
 > server-handle-next-server-request
 > {file:/D:/Projects/routeline/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@4095e127, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@6fad36ef, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -86,18 +86,18 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 1 s, completed 22-Feb-2017 18:08:48
+Total time: 1 s, completed 23-Feb-2017 15:39:08
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/D:/Projects/routeline/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@4e6f7eb4, check cycles: false
-Total time: 0 s, completed 22-Feb-2017 18:08:48
+Running task... Cancel: sbt.server.ServerTaskCancellation@27d2a192, check cycles: false
+Total time: 0 s, completed 23-Feb-2017 15:39:08
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/D:/Projects/routeline/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@52b8ee2a, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@6ba3950f, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -114,18 +114,159 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 0 s, completed 22-Feb-2017 18:08:48
+Total time: 0 s, completed 23-Feb-2017 15:39:08
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/D:/Projects/routeline/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@c076f01, check cycles: false
-Total time: 0 s, completed 22-Feb-2017 18:08:49
+Running task... Cancel: sbt.server.ServerTaskCancellation@3fbb7c2f, check cycles: false
+Total time: 0 s, completed 23-Feb-2017 15:39:08
+> server-post-command-cleanup
+> server-handle-next-server-request
+> backgroundRun
+Evaluating tasks: compile:backgroundRun
+Running task... Cancel: sbt.server.ServerTaskCancellation@36d5e434, check cycles: false
+Total time: 0 s, completed 23-Feb-2017 15:39:39
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/D:/Projects/routeline/}root/*:playForkConfig
+Evaluating tasks: *:playForkConfig
+Running task... Cancel: sbt.server.ServerTaskCancellation@1853bf2b, check cycles: false
+Total time: 0 s, completed 23-Feb-2017 15:39:41
+> server-post-command-cleanup
+> server-handle-next-server-request
+> root/playForkNotifyStart http://localhost:9000
+Evaluating tasks: *:playForkNotifyStart
+Running task... Cancel: sbt.server.ServerTaskCancellation@52c46342, check cycles: false
+Total time: 0 s, completed 23-Feb-2017 15:39:42
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/D:/Projects/routeline/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@5017f6bc, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(D:\Projects\routeline\conf\application.conf,D:\Projects\routeline\target\scala-2.11\classes\application.conf)
+	(D:\Projects\routeline\conf\logback.xml,D:\Projects\routeline\target\scala-2.11\classes\logback.xml)
+	(D:\Projects\routeline\conf\routes,D:\Projects\routeline\target\scala-2.11\classes\routes)
+Warning: node.js detection failed, sbt will use the Rhino based Trireme JavaScript engine instead to run JavaScript assets compilation, which in some cases may be orders of magnitude slower than using node.js.
+Total time: 1 s, completed 23-Feb-2017 15:39:49
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/D:/Projects/routeline/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@3d0593d5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(D:\Projects\routeline\conf\application.conf,D:\Projects\routeline\target\scala-2.11\classes\application.conf)
+	(D:\Projects\routeline\conf\logback.xml,D:\Projects\routeline\target\scala-2.11\classes\logback.xml)
+	(D:\Projects\routeline\conf\routes,D:\Projects\routeline\target\scala-2.11\classes\routes)
+Total time: 1 s, completed 23-Feb-2017 15:42:00
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@6a920d1e, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 0 s, completed 23-Feb-2017 15:42:05
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@5529a06, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 0 s, completed 23-Feb-2017 15:43:42
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/D:/Projects/routeline/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@56153d46, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(D:\Projects\routeline\conf\application.conf,D:\Projects\routeline\target\scala-2.11\classes\application.conf)
+	(D:\Projects\routeline\conf\logback.xml,D:\Projects\routeline\target\scala-2.11\classes\logback.xml)
+	(D:\Projects\routeline\conf\routes,D:\Projects\routeline\target\scala-2.11\classes\routes)
+Total time: 0 s, completed 23-Feb-2017 15:43:43
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/D:/Projects/routeline/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@253c4827, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@85ca4dd, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -142,13 +283,13 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 0 s, completed 22-Feb-2017 18:09:28
+Total time: 0 s, completed 23-Feb-2017 15:44:56
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/D:/Projects/routeline/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@71197214, check cycles: false
-Total time: 0 s, completed 22-Feb-2017 18:09:28
+Running task... Cancel: sbt.server.ServerTaskCancellation@3553042b, check cycles: false
+Total time: 0 s, completed 23-Feb-2017 15:44:56
 > server-post-command-cleanup
 > server-handle-next-server-request
 Done executing sbt server engine, result Right(Exit(0))
@@ -157,4 +298,4 @@ Waiting for socket thread
 Waiting for request processor thread
 Waiting for command engine result
 Returning control to sbt launcher with result Exit(0)
-Closing the 9612@DESKTOP-A5F460V logs at Wed Feb 22 18:09:31 GMT 2017, goodbye.
+Closing the 11332@DESKTOP-A5F460V logs at Thu Feb 23 15:44:59 GMT 2017, goodbye.

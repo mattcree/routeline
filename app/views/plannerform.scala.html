@@ -1,0 +1,27 @@
+<div class="row">
+	<div class=".col-sm-6">
+		<input list="from">
+		<datalist id="from">
+			<option selected disabled>Choose here</option>
+			<option value="Option 1">Option 1</option>
+		  <option value="Option 2">Option 2</option>
+		</datalist>
+
+		<input list="to">
+		<datalist id="to">
+			<option value="1">Option 1</option>
+		  <option value="2">Option 2</option>
+		</datalist>
+	</div>
+	<div class=".col-sm-3">
+		<input type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime">
+<script>
+$(function(){
+    $('#time').combodate({
+        firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+        minuteStep: 1
+    });  
+});
+</script>
+	</div>
+</div>
