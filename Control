@@ -1,0 +1,365 @@
+package RouteLine1;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+public class Control {
+
+	protected static final Map<String, Station> NAME_STATIONS = new HashMap<>();
+	
+	protected static final ArrayList<Station> LINE_A1 = new ArrayList<>();
+	protected static final ArrayList<Station> LINE_A2 = new ArrayList<>();
+	protected static final ArrayList<Station> LINE_B1 = new ArrayList<>();
+	protected static final ArrayList<Station> LINE_B2 = new ArrayList<>();
+	
+	protected static final ArrayList<ArrayList<Station>> LINES = new ArrayList<>();
+	
+	protected static final Map<ArrayList<Station>, String> NAME_LINES = new HashMap<>();
+	
+	
+	public static void main(String[] args) {
+		createPreDefinedStations();
+		setDefaultStationsConnectsTo();
+		
+		findFastestTime("York", "Dundee");
+		
+		//TEST-
+//				System.out.println("");
+//				System.out.println("All stations on any line that connect directly to " + LINE_A2.get(5).getName() + ": ");
+//				for (int i = 0; i < LINE_A2.get(5).getConnectsTo().size(); i++){
+//					System.out.println(LINE_A2.get(5).getConnectsTo().get(i).getName());
+//				}
+//		
+	}
+	
+	public static void findFastestTime(String location, String whereTo){
+		if (!NAME_STATIONS.containsKey(location) || !NAME_STATIONS.containsKey(whereTo)){
+			System.out.println("Invalid station name(s). Please try again.");
+			return;
+		}
+		
+		Station here = NAME_STATIONS.get(location);
+		Station there = NAME_STATIONS.get(whereTo);
+		
+		Map<Integer, String> TimeTaken_RouteTaken = new HashMap<>();
+		Map<Integer, ArrayList<Station>> TimeTaken_RouteArray = new HashMap<>();
+		
+		boolean foundWithoutLineChanging = false;
+		
+		for(int i = 0; i < LINES.size(); i++){
+			if (LINES.get(i).contains(here) && LINES.get(i).contains(there)){
+				foundWithoutLineChanging = true;
+				Integer stationsBetween = (LINES.get(i).indexOf(here) - LINES.get(i).indexOf(there));
+				if (stationsBetween < 0){
+					stationsBetween = stationsBetween * -1; //This makes the amount positive
+				}
+				String route = generateStringOfStationsBetweenSingleLine(LINES.get(i), here, there);
+				ArrayList<Station> routeArray = generateArrayListOfStationsBetweenSingleLine(LINES.get(i), here, there);
+				TimeTaken_RouteTaken.put(stationsBetween, route);
+				TimeTaken_RouteArray.put(stationsBetween, routeArray);
+			}
+		}
+		
+		if(foundWithoutLineChanging){ //IS IT ALWAYS THE CASE THAT WITHOUT CHANGING LINE IS FASTER???????
+			Set<Integer> intSet = TimeTaken_RouteTaken.keySet();
+			ArrayList<Integer> intList = new ArrayList<Integer>(intSet);
+			Integer shortest = intList.get(0);
+			
+			for (int i = 0; i < TimeTaken_RouteTaken.size(); i++){
+				if (intList.get(i) < shortest){
+					shortest = intList.get(i);
+				}
+			}
+			System.out.println(TimeTaken_RouteTaken.get(shortest) + shortest + " stops.");
+			Integer time = (shortest * 7) - 2; //MY TEST IS THAT IT TAKES 5 MINS BETWEEN EVERY STATION AND STOPS 2 MINS AT EACH
+			System.out.println("The journey will take " + time + " minutes.");
+			
+			return;
+		}
+		
+		boolean foundWithOneChange = false;
+		ArrayList<ArrayList<Station>> linesLocationIsOn = new ArrayList<>();
+		ArrayList<ArrayList<Station>> linesDestinationIsOn = new ArrayList<>();
+		
+		for (int i = 0; i < LINES.size(); i++){
+			if (LINES.get(i).contains(here)){
+				linesLocationIsOn.add(LINES.get(i));
+			}
+		}
+		
+		for (int i = 0; i < LINES.size(); i++){
+			if (LINES.get(i).contains(there)){
+				linesDestinationIsOn.add(LINES.get(i));
+			}
+		}
+		
+		for (int i = 0; i < linesLocationIsOn.size(); i++){
+			for (int j = 0; j < linesLocationIsOn.get(i).size(); j++){
+				for (int k = 0; k < linesDestinationIsOn.size(); k++){
+				if (linesDestinationIsOn.get(k).contains(linesLocationIsOn.get(i).get(j))){
+					foundWithOneChange = true;
+					ArrayList<Station> route = new ArrayList<>();
+					route.addAll(generateArrayListOfStationsBetweenSingleLine(linesLocationIsOn.get(i), here, linesLocationIsOn.get(i).get(j)));
+					route.addAll(generateArrayListOfStationsBetweenSingleLine(linesDestinationIsOn.get(k), linesLocationIsOn.get(i).get(j), there));
+					Integer stationsBetween = route.size() - 2; //At this point, the change station will be in the arrayList twice, and we don't count the starting station
+					TimeTaken_RouteArray.put(stationsBetween, route);
+					}
+				}
+			}
+		}
+		
+		
+		if(foundWithOneChange){
+			
+			Set<Integer> intSet = TimeTaken_RouteArray.keySet();
+			ArrayList<Integer> intList = new ArrayList<Integer>(intSet);
+			Integer shortest = intList.get(0);
+			
+			for (int i = 0; i < TimeTaken_RouteArray.size(); i++){
+				if (intList.get(i) < shortest){
+					shortest = intList.get(i);
+				}
+			}
+			
+			ArrayList<Station> shortestRoute = TimeTaken_RouteArray.get(shortest);
+			
+			for (int j = 0; j < shortestRoute.size(); j++){
+				System.out.println(shortestRoute.get(j).toString());
+			}
+			
+			// System.out.println(TimeTaken_RouteTaken.get(shortest) + shortest + " stops.");
+			Integer time = (shortest * 7) - 2 -7; //MY TEST IS THAT IT TAKES 5 MINS BETWEEN EVERY STATION AND STOPS 2 MINS AT EACH. - 7 because the change station appears twice at this point.
+			System.out.println("The journey will take " + time + " minutes.");
+			
+			return;
+			
+			} else {
+				System.out.println("oh dear");
+			}
+			
+			
+				
+	
+	}
+	
+	
+	
+//	
+//	public static HashMap<Integer, String> findRoute(){
+//		HashMap<Integer, String> toReturn = new HashMap<>();
+//		
+//		return toReturn;
+//	}
+	
+	public static ArrayList<Station> generateArrayListOfStationsBetweenSingleLine(ArrayList<Station> line, Station here, Station there){
+		ArrayList<Station> toReturn = new ArrayList<Station>();
+		
+		if (line.indexOf(here) <= line.indexOf(there)){
+			for(int i = line.indexOf(here); i <= line.indexOf(there); i++){
+				toReturn.add(line.get(i));
+			}
+		}
+		else {
+			for(int i = line.indexOf(here); i >= line.indexOf(there); i--){
+				toReturn.add(line.get(i));
+			}
+		}
+		
+		
+		return toReturn;
+	}
+	
+	public static String generateStringOfStationsBetweenSingleLine(ArrayList<Station> line, Station here, Station there){
+		String toReturn = "On Line " + NAME_LINES.get(line) + ", beginning at " + here.getName() + ": ";
+		
+		if (line.indexOf(here) < line.indexOf(there)){
+			for(int i = line.indexOf(here); i <= line.indexOf(there); i++){
+				if (i != line.indexOf(there)){
+					toReturn = (toReturn + line.get(i).toString() + ", ");
+				}
+				else {
+					toReturn = (toReturn + line.get(i).toString() + ". ");
+				}
+			}
+		}
+		else {
+			for(int i = line.indexOf(here); i >= line.indexOf(there); i--){
+				if (i != line.indexOf(there)){
+					toReturn = (toReturn + line.get(i).toString() + ", ");
+				}
+				else {
+					toReturn = (toReturn + line.get(i).toString() + ". ");
+				}
+			}
+		}
+		return toReturn;
+	}
+	
+
+	public static void setDefaultStationsConnectsTo(){
+		for (int i = 0; i < LINES.size(); i++){
+			for (int j = 0; j < LINES.get(i).size(); j++){
+				if(LINES.get(i).get(j).getConnectsTo() == null){
+					setStationConnectsTo(LINES.get(i).get(j));
+				}
+			}
+		}
+	}
+	
+	public static void setStationConnectsTo(Station s){
+		ArrayList<Station> toSet = new ArrayList<>();
+		
+		for(int i = 0; i < LINES.size(); i++){
+			if (LINES.get(i).contains(s)){
+				int index = LINES.get(i).indexOf(s);
+				if (index > 0 && !toSet.contains(LINES.get(i).get(index - 1))){
+					
+					toSet.add(LINES.get(i).get(index - 1));
+				}
+				int size = LINES.get(i).size() - 1; //.size starts counting at 1, indexes start at 0, so this -1 is needed to set the maths straight
+				if (index < size && !toSet.contains(LINES.get(i).get(index + 1))){
+					toSet.add(LINES.get(i).get(index + 1));
+				}
+			}
+		}
+		
+		s.setConnectsTo(toSet);
+		
+	}
+	
+	
+	public static void put(Station s){
+		NAME_STATIONS.put(s.getName(), s);
+	}
+	
+	
+	public static void createPreDefinedStations(){
+	
+		//First A1 up to Edinburgh Haymarket
+		
+		Station Inverness = new Station("Inverness");
+		LINE_A1.add(Inverness);
+		
+		Station Aviemore = new Station("Aviemore");
+		LINE_A1.add(Aviemore);
+		
+		Station Kingussie = new Station("Kingussie");
+		LINE_A1.add(Kingussie);
+		
+		Station Haymarket = new Station("Haymarket");
+		LINE_A1.add(Haymarket);
+		
+		Station Perth = new Station("Perth");
+		LINE_A1.add(Perth);
+		
+		Station Stirling = new Station("Stirling");
+		LINE_A1.add(Stirling);
+		
+		Station EdinburghHaymarket = new Station("Edinburgh Haymarket");
+		LINE_A1.add(EdinburghHaymarket);
+		//This will be added to A2 and B1 later, at the right place
+	
+		
+		//Then A2, which finishes at Edinburgh Haymarket.
+		//It will add Edinburgh Haymarket at the end to keep the order right.
+		
+		Station Aberdeen = new Station("Aberdeen");
+		LINE_A2.add(Aberdeen);
+		
+		Station Montrose = new Station("Montrose");
+		LINE_A2.add(Montrose);
+		
+		Station Dundee = new Station("Dundee");
+		LINE_A2.add(Dundee);
+		
+		Station Leuchars = new Station("Leuchars");
+		LINE_A2.add(Leuchars);
+		
+		Station Inverkeithing = new Station("Inverkeithing");
+		LINE_A2.add(Inverkeithing);
+		
+		LINE_A2.add(EdinburghHaymarket);
+		
+		//Now Line B1 will be started, the two stations before Edinburgh Haymarket
+		
+		Station Glasgow = new Station("Glasgow");
+		LINE_B1.add(Glasgow);
+		
+		Station Motherwell = new Station("Motherwell");
+		LINE_B1.add(Motherwell);
+		
+		LINE_B1.add(EdinburghHaymarket);
+		
+		//Now the A1/B1 route will be followed, adding stations to A1, B1 or both as they're created
+		
+		Station EdinburghWaverly = new Station("Edinburgh Waverly");
+		LINE_A1.add(EdinburghWaverly);
+		LINE_B1.add(EdinburghWaverly);
+		
+		Station Dunbar = new Station("Dunbar");
+		LINE_A1.add(Dunbar);
+		
+		Station BerwickUponTweed = new Station("Berwick-upon-Tweed");
+		LINE_A1.add(BerwickUponTweed);
+		
+		Station Alnmouth = new Station("Alnmouth");
+		LINE_B1.add(Alnmouth);
+		
+		Station Morpeth = new Station("Morpeth");
+		LINE_B1.add(Morpeth);
+		
+		Station Newcastle = new Station("Newcastle");
+		LINE_A1.add(Newcastle);
+		LINE_B1.add(Newcastle);
+		LINE_B2.add(Newcastle);
+		
+		Station Sunderland = new Station("Sunderland");
+		LINE_B2.add(Sunderland);
+		
+		Station Durham = new Station("Durham");
+		LINE_B1.add(Durham);
+		
+		Station Darlington = new Station("Darlington");
+		LINE_A1.add(Darlington);
+		LINE_B1.add(Darlington);
+		
+		Station Northallerton = new Station("Northallerton");
+		LINE_B1.add(Northallerton);
+		
+		Station York = new Station("York");
+		LINE_A1.add(York);
+		LINE_B1.add(York);
+		
+		
+		
+		//This adds all the stations to the HashMap NAME_STATIONS once, using the static put method
+		for(int i = 0; i < LINE_A1.size(); i++){
+			put(LINE_A1.get(i));
+		}
+		for(int i = 0; i < LINE_A2.size(); i++){
+			if(!NAME_STATIONS.containsValue(LINE_A2.get(i)))
+			put(LINE_A2.get(i));
+		}
+		for(int i = 0; i < LINE_B1.size(); i++){
+			if(!NAME_STATIONS.containsValue(LINE_B1.get(i)))
+			put(LINE_B1.get(i));
+		}
+		for(int i = 0; i < LINE_B2.size(); i++){
+			if(!NAME_STATIONS.containsValue(LINE_B2.get(i)))
+			put(LINE_B2.get(i));
+		}
+		
+		LINES.add(LINE_A1);
+		LINES.add(LINE_A2);
+		LINES.add(LINE_B1);
+		LINES.add(LINE_B2);
+		NAME_LINES.put(LINE_A1, "A1");
+		NAME_LINES.put(LINE_A2, "A2");
+		NAME_LINES.put(LINE_B1, "B1");
+		NAME_LINES.put(LINE_B2, "B2");
+		
+	}
+
+}
