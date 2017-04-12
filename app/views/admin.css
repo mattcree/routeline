@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-image: url(TrainOnBridge.jpg);
+  background-position: 50% 0%;
+  background-size: cover; 
+  background-repeat: no-repeat;
+}
+
+img {
+    padding-bottom: 10px;
+}
+
+table {
+	
+  max-width: 90%;
+  padding: 15px;
+  margin: 0 auto;
+  border-radius: 5px;
+  float: none;
+}

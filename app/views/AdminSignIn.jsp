@@ -19,15 +19,17 @@
 
   <body>
 	<img src="RouteLineLogo2.PNG" alt="RouteLine Logo" class="img-responsive" height="80" width=100% />
+	<!-- Form for taking in the ID and password for login. Performs basic pattern check for ID.  -->
     <div class="container">
-      <form class="form-signin">
+      <form class="form-signin" action="SignInServLet" method="get">
         <h2 class="form-signin-heading">Admin Sign in</h2>
         <label for="inputNumber" class="sr-only">Employee ID</label>
-        <input type="text" pattern="[a-b][0-9][0-9][0-9][0-9][0-9][0-9][0-9]" id="inputNumber" class="form-control" placeholder="Employee ID: b1234567" required autofocus>
+        <input type="text" pattern="[a-b][0-9][0-9][0-9][0-9][0-9][0-9][0-9]" id="inputNumber" name="empID" class="form-control" placeholder="Employee ID: b1234567" required autofocus/>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
+          <!-- Not yet functional -->
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
