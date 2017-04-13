@@ -2,12 +2,32 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+# Home page
+GET     /                           controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file)
+
+GET     /stops/:name                            controllers.Application.getStationStops(name: String)
+GET     /route/:name1/:line1/:name2/:line2      controllers.Application.getRoute(name1: String, line1: String, name2: String, line2: String)
+
+# Admin Routes
+# Logging In
+GET     /admin                          controllers.AdminController.getLogin
+POST    /admin                          controllers.AdminController.login
+
+# Getting Stops and Connections
+GET     /admin/stops                    controllers.AdminController.adminStops
+GET     /admin/connections              controllers.AdminController.connections
+
+# Admin Stop Functions
+GET     /admin/stops/add                controllers.AdminController.addStopForm
+POST    /admin/stops/add                controllers.AdminController.doAddStop
+GET     /admin/stops/delete/:id         controllers.AdminController.deleteStop(id: Long)
+
+# Add Stop
+GET     /admin/stops/add                controllers.AdminController.addStopForm
+POST    /admin/stops/add                controllers.AdminController.doAddStop
+
+# API
+GET     /api/stops                      controllers.AdminController.getJsonStops

@@ -1,16 +1,16 @@
-name := """play-java"""
+lazy val root = project.in(file(".")).enablePlugins(PlayJava, SbtWeb)
+
+name := """pathfindplay"""
 
 version := "1.0-SNAPSHOT"
-
-lazy val root = (project in file(".")).enablePlugins(PlayJava)
-
-scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
   javaJdbc,
   cache,
-  javaWs
+  javaWs,
+  javaEbean
 )
+
 
 
 fork in run := true

@@ -1,57 +1,39 @@
 package models;
 
-import java.util.*;
+import play.data.validation.Constraints;
+import play.db.ebean.Model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import com.avaje.ebean.annotation.EnumValue;
-
-import play.data.validation.Constraints.MaxLength;
-import play.data.validation.Constraints.Required;
-import play.db.ebean.Model;
-import play.utils.dao.BasicModel;
-
 @Entity
-@SuppressWarnings("serial")
-public class Stop extends Model implements BasicModel<Long>{
-	
+public class Stop extends Model{
     @Id
-	private Long key;
+    public Long id;
 
-	@Basic
-	@Required
-	private String name;
+    @Constraints.Required
+    private String name;
+    @Constraints.Required
+    private String line;
 
-	@Basic
-	@Required
-	private String line;
-	
-	public void setKey(Long key) {
-		this.key = key;
-	}
-	public Long getKey() {
-		return key;
-	}
+    public Stop(String name, String line){
+        this.name = name;
+        this.line = line;
+    }
 
     public String getName(){
         return name;
     }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-    public void setLine(String line) {
-		this.line = line;
-	}
-
     public String getLine(){
         return line;
     }
 
+    //Variant of .equals()
+    public boolean stopsAtSameStation(Stop stop) {
+        return this.getName().equals(stop.getName());
+    }
+
+    public static Model.Finder<Long, Stop> find = new Finder(Long.class,Stop.class);
 
     @Override
     public String toString() {
