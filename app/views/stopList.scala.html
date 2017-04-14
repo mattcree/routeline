@@ -1,6 +1,6 @@
 @(stops: List[Stop])
 <br>
-<div class="container">
+<div class="container transparent">
     <div class="container-fluid">
 
         @if(stops.isEmpty) {
@@ -32,8 +32,8 @@
 
         <br>
         <!-- Button (Double) -->
-        <div class="form-group text-center">
-            <div class="col-md-8">
+        <div class="form-group">
+            <div class="text-center">
                 <a href="@routes.AdminController.login()" id="back" name="back" class="btn btn-info">Back</a>
                 <a href="@routes.AdminController.addStopForm()"id="add" name="add" class="btn btn-success">Add Stop</a>
             </div>

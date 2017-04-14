@@ -1,31 +1,36 @@
 <br>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img src="@routes.Assets.versioned("img/stationbtn.png")" alt="Stations">
-                <div class="caption">
-                    <h3>Station Options</h3>
-                    <p><a href="@routes.AdminController.adminStops()" class="card-link">Maintain Stops</a></p>
-                </div>
+<div class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <a href="@routes.AdminController.adminStops()" class="card-link">
+                    <div class="thumbnail">
+                        <img src="@routes.Assets.versioned("img/stationbtn.png")" alt="Stations">
+                        <div class="caption">
+                            <h3 class="text-center">Station Options</h3>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img src="@routes.Assets.versioned("img/connectionsbtn.png")" alt="Connections">
-                <div class="caption">
-                    <h3>Connections Options</h3>
-                    <p><a href="@routes.AdminController.adminConnections()" class="card-link">Maintain Connections</a></p>
-                </div>
+            <div class="col-sm-6 col-md-4">
+                <a href="@routes.AdminController.adminConnections()" class="card-link">
+                    <div class="thumbnail">
+                        <img src="@routes.Assets.versioned("img/connectionsbtn.png")" alt="Connections">
+                        <div class="caption">
+                            <h3 class="text-center">Connections Options</h3>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img src="@routes.Assets.versioned("img/adminbtn.png")" alt="Users">
-                <div class="caption">
-                    <h3>User Accounts</h3>
-                    <p><a href="MaintainAdmins.jsp" class="card-link">Users</a></p>
-                </div>
+            <div class="col-sm-6 col-md-4">
+                <a href="MaintainAdmins.jsp" class="card-link">
+                    <div class="thumbnail">
+                        <img src="@routes.Assets.versioned("img/adminbtn.png")" alt="Users">
+                        <div class="caption">
+                            <h3 class="text-center">User Accounts</h3>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

@@ -1,16 +1,15 @@
 @(stops: List[Stop])
 <br>
-<div class="container">
+<div class="container transparent">
     <form class="form-horizontal dark">
         <fieldset>
-
             <!-- Form Name -->
             <legend>Add Connection</legend>
 
             <!-- Select Basic -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="stopA">Stop A</label>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <select id="stopA" name="stopA" class="form-control">
                         @for(stop <- stops) {
                         <option value="@stop.id">@stop.getName on Line @stop.getLine</option>
@@ -22,7 +21,7 @@
             <!-- Select Basic -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="stopB">Stop B</label>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <select id="stopB" name="stopB" class="form-control">
                         @for(stop <- stops) {
                         <option value="@stop.id">@stop.getName on Line @stop.getLine</option>
@@ -34,8 +33,8 @@
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="time">Connection Time</label>
-                <div class="col-md-4">
-                    <input id="time" name="time" type="number" placeholder="i.e. time between stops" class="form-control input-md">
+                <div class="col-md-6">
+                    <input id="time" name="time" type="number" placeholder="i.e. time between stops (minutes)" class="form-control input-md">
                 </div>
             </div>
 
