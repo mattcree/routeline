@@ -1,19 +1,7 @@
-New log file opened at Thu Apr 13 14:58:36 BST 2017 by 6468@DESKTOP-A5F460V
-Taking next connection to: 53230
-New client attempting to connect on port: 53231-53230
-  Address = /192.168.1.84:53230
-This client on port 53231 has uuid 1719ec17-8045-4b80-9d28-c1764983faef configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-1719ec17-8045-4b80-9d28-c1764983faef
-Taking next connection to: 53230
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 53230
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 53230
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 53230
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 53230
+New log file opened at Fri Apr 14 18:00:19 BST 2017 by 5952@DESKTOP-A5F460V
+Taking next connection to: 60762
+New client attempting to connect on port: 60763-60762
+  Address = /192.168.1.84:60762
+This client on port 60763 has uuid 883dc33f-f34a-40e3-8295-6d2d30b8193d configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-883dc33f-f34a-40e3-8295-6d2d30b8193d
+Taking next connection to: 60762

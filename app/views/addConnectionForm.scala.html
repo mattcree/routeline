@@ -1,0 +1,54 @@
+@(stops: List[Stop])
+<br>
+<div class="container">
+    <form class="form-horizontal dark">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Add Connection</legend>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="stopA">Stop A</label>
+                <div class="col-md-4">
+                    <select id="stopA" name="stopA" class="form-control">
+                        @for(stop <- stops) {
+                        <option value="@stop.id">@stop.getName on Line @stop.getLine</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="stopB">Stop B</label>
+                <div class="col-md-4">
+                    <select id="stopB" name="stopB" class="form-control">
+                        @for(stop <- stops) {
+                        <option value="@stop.id">@stop.getName on Line @stop.getLine</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="time">Connection Time</label>
+                <div class="col-md-4">
+                    <input id="time" name="time" type="number" placeholder="i.e. time between stops" class="form-control input-md">
+                </div>
+            </div>
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="submit"></label>
+                <div class="col-md-8">
+                    <button id="submit" name="submit" class="btn btn-success">Add</button>
+                    <button id="cancel" name="cancel" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<br>

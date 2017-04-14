@@ -3,13 +3,14 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                               controllers.Application.index
+
+# API
+GET     /api/stations                   controllers.Application.getJsonStations
+GET     /api/stops                      controllers.AdminController.getJsonStops
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file)
-
-GET     /stops/:name                            controllers.Application.getStationStops(name: String)
-GET     /route/:name1/:line1/:name2/:line2      controllers.Application.getRoute(name1: String, line1: String, name2: String, line2: String)
+GET     /assets/*file                   controllers.Assets.versioned(path="/public", file)
 
 # Admin Routes
 # Logging In
@@ -18,7 +19,7 @@ POST    /admin                          controllers.AdminController.login
 
 # Getting Stops and Connections
 GET     /admin/stops                    controllers.AdminController.adminStops
-GET     /admin/connections              controllers.AdminController.connections
+GET     /admin/connections              controllers.AdminController.adminConnections
 
 # Admin Stop Functions
 GET     /admin/stops/add                controllers.AdminController.addStopForm
@@ -29,5 +30,7 @@ GET     /admin/stops/delete/:id         controllers.AdminController.deleteStop(i
 GET     /admin/stops/add                controllers.AdminController.addStopForm
 POST    /admin/stops/add                controllers.AdminController.doAddStop
 
-# API
-GET     /api/stops                      controllers.AdminController.getJsonStops
+# Add Connection
+GET     /admin/connections/add          controllers.AdminController.addConnectionForm
+
+

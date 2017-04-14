@@ -1,0 +1,106 @@
+<br>
+
+<section class="call-to-action vertical-center">
+    <h1><span id="intro-text">Where would you like to go today?</span></h1>
+    <br>
+    <div class="row">
+        <div id="typeahead">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <!-- id must match script below -->
+                    <input type="text" class="form-control" id="stationFromInput" aria-label="Text input with dropdown button" placeholder="From">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <!-- id must match script below -->
+                    <input type="text" class="form-control" id="stationToInput" aria-label="Text input with dropdown button" placeholder="To">
+                    <br>
+                </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+    <br>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+<script src="@routes.Assets.versioned("bootstrap-3.3.7-dist/js/bootstrap.min.js")"></script>
+
+<script type="text/javascript">
+
+   var stations;
+
+   // takes an array of strings
+   // and returns a matcher function that checks whether a given string is found in the array
+   var substringMatcher = function(strs) {
+	   return function findMatches(q, cb) {
+
+		   console.log('trying to match:');
+		   console.log(q);
+
+	     var matches, substringRegex;
+
+	     // an array that will be populated with substring matches
+	     matches = [];
+
+	     // regex used to determine if a string contains the substring `q`
+	     substrRegex = new RegExp(q, 'i');
+
+	     // iterate through the pool of strings and for any string that
+	     // contains the substring `q`, add it to the `matches` array
+	     $.each(strs, function(i, str) {
+	       if (substrRegex.test(str)) {
+	         matches.push(str);
+	       }
+	     });
+
+	     cb(matches);
+	   };
+	 };
+
+
+	// get the list of stations
+   $.get('@routes.Application.getJsonStations()').then(function(data){
+
+	   stations = data;
+
+	   // stations should be an array of strings
+   		console.log(stations);
+
+	   // settings for jQuery typeahead plugin
+   		var typeaheadCustomSettings = {
+   		  hint: true,
+   		  highlight: true,
+   		  minLength: 1
+   		};
+
+	   // data source for our jQuery typeahead
+   		var dataSetup = {
+   		  name: 'stations',
+   		  source: substringMatcher(stations)
+   		};
+
+
+
+	   var stationFromInput = $('#stationFromInput');
+
+	   console.log(stationFromInput);
+
+	   // activate the jQuery typeahead plugin on the element with id "stationFromInput"
+   		stationFromInput.typeahead(typeaheadCustomSettings, dataSetup);
+
+
+
+   		var stationToInput = $('#stationToInput');
+
+ 	   console.log(stationToInput);
+
+ 	   // activate the jQuery typeahead plugin on the element with id "stationToInput"
+    		stationToInput.typeahead(typeaheadCustomSettings, dataSetup);
+   });
+   </script>

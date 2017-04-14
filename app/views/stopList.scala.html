@@ -1,40 +1,43 @@
 @(stops: List[Stop])
+<br>
+<div class="container">
+    <div class="container-fluid">
 
-<div class="container-fluid">
-
-    @if(stops.isEmpty) {
-    <h1>No records</h1>
-    } else {
-    <table id="stops" class="table table-striped table-hover table-bordered" style="max-width: 90%;">
-        <thead class="thead-inverse">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Line</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @for(stop <- stops) {
-        <tr>
-            <th>@stop.id</th>
-            <th>@stop.getName</th>
-            <th>@stop.getLine</th>
-            <th>
-                <a class="btn btn-danger" href="@routes.AdminController.deleteStop(stop.id)">Delete</a>
-            </th>
-        </tr>
+        @if(stops.isEmpty) {
+        <h1 class="dark">No records</h1>
+        } else {
+        <table id="stops" class="table dark table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Line</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="dark">
+            @for(stop <- stops) {
+            <tr>
+                <th>@stop.id</th>
+                <th>@stop.getName</th>
+                <th>@stop.getLine</th>
+                <th>
+                    <a class="btn btn-danger" href="@routes.AdminController.deleteStop(stop.id)">Delete</a>
+                </th>
+            </tr>
+            }
+            </tbody>
+        </table>
         }
-        </tbody>
-    </table>
-    }
 
-    <br>
-    <div class="text-center">
-        <form action="@routes.AdminController.addStopForm()">
-            <button class="btn btn-md btn-primary" type="submit">Add Stop</button>
-        </form>
+        <br>
+        <!-- Button (Double) -->
+        <div class="form-group text-center">
+            <div class="col-md-8">
+                <a href="@routes.AdminController.login()" id="back" name="back" class="btn btn-info">Back</a>
+                <a href="@routes.AdminController.addStopForm()"id="add" name="add" class="btn btn-success">Add Stop</a>
+            </div>
+        </div>
     </div>
-
-
 </div>
+<br>

@@ -17,11 +17,11 @@ import static play.libs.Json.toJson;
 public class AdminController extends Controller {
 
     public static Result getLogin() {
-        return ok(admin.render(signin.render()));
+        return ok(index.render(signin.render()));
     }
 
     public static Result login() {
-        return ok(admin.render(adminOptions.render()));
+        return ok(index.render(adminOptions.render()));
     }
 
     public static Result stops() {
@@ -30,16 +30,21 @@ public class AdminController extends Controller {
 
     public static Result adminStops() {
         List<Stop> stops = Stop.find.all();
-        return ok(admin.render(stopList.render(stops)));
+        return ok(index.render(stopList.render(stops)));
     }
 
-    public static Result connections() {
+    public static Result adminConnections() {
         return ok();
     }
 
+    public static Result addConnectionForm() {
+        List<Stop> stops = Stop.find.all();
+
+        return ok(index.render(addConnectionForm.render(stops)));
+    }
 
     public static Result addStopForm() {
-        return ok(admin.render(addStopForm.render()));
+        return ok(index.render(addStopForm.render()));
     }
 
     public static Result doAddStop() {

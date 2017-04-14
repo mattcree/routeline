@@ -1,7 +1,7 @@
 body {
   padding-top: 0px;
   padding-bottom: 0px;
-  background-image: url(../img/train.jpg);
+  background-image: url(assets/img/train.jpg);
   background-position: 50% 0%;
   background-size: cover; 
   background-repeat: no-repeat;

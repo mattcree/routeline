@@ -1,11 +1,12 @@
 package controllers;
+import com.avaje.ebean.Ebean;
 import models.*;
-import play.data.*;
 import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
 
-import java.util.Collection;
+import java.util.*;
+
 
 public class Application extends Controller {
 
@@ -96,32 +97,17 @@ public class Application extends Controller {
 
 
     public static Result index()  {
-        String start = request().getQueryString("start");
-        System.out.println(start);
-        String startLine = request().getQueryString("startLine");
-        System.out.println(startLine);
+        return ok(index.render(stationPicker.render()));
+    }
 
-        String end = request().getQueryString("end");
-        System.out.println(end);
-        String endLine = request().getQueryString("endLine");
-        System.out.println(endLine);
-
-        Stop startStop = network.getStop(start, startLine);
-        System.out.println(startStop);
-        Stop endStop = network.getStop(end, endLine);
-        System.out.println(endStop);
-
-
-        rf.generateDistancesFrom(startStop);
-
-        System.out.println(rf.getConnections());
-
-        System.out.println(rf.getRouteTo(endStop));
-
-        if(startStop == null || endStop == null)
-            return ok(index.render());
-
-        return ok(index.render());
+    public static Result getJsonStations()  {
+        List<Stop> stops = Stop.find.all();
+        if (stops.isEmpty()) return notFound(Json.parse("[]"));
+        Set<String> stopNames = new TreeSet<>();
+        for (Stop stop : stops) {
+            stopNames.add(stop.getName());
+        }
+        return ok(Json.toJson(stopNames));
     }
 
 
@@ -130,24 +116,7 @@ public class Application extends Controller {
         return ok(Json.toJson(network.getAllStops()));
     }
 
-    //Public API Functions
-    public static Result getRoute(String name1, String line1, String name2, String line2) {
-        Stop stop1 = network.getStop(name1, line1);
-        Stop stop2 = network.getStop(name2, line2);
 
-        if (stop1 == null || stop2 == null)
-            return ok(Json.parse("{}"));
 
-        rf.generateDistancesFrom(stop1);
-
-        return ok(Json.toJson(rf.getRouteTo(stop2)));
-    }
-
-    public static Result getStationStops(String name) {
-        Collection<Stop> stops = network.getAllLineStopsAt(name);
-
-        if(stops.isEmpty()) return ok(Json.parse("{}"));
-        return ok(Json.toJson(stops));
-    }
 
 }

@@ -1,35 +1,37 @@
-<form class="form-horizontal" action="@routes.AdminController.doAddStop()" method="post">
-    <fieldset>
+<div class="container">
+    <br>
+    <form class="form-horizontal dark" action="@routes.AdminController.doAddStop()" method="post">
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Add Stop</legend>
 
-        <!-- Form Name -->
-        <legend>Add Stop</legend>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Stop Name</label>
+                <div class="col-md-4">
+                    <input id="name" name="name" type="text" placeholder="e.g. Newcastle" class="form-control input-md" required="">
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="name">Stop Name</label>
-            <div class="col-md-4">
-                <input id="name" name="name" type="text" placeholder="e.g. Newcastle" class="form-control input-md" required="">
-
+                </div>
             </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="line">Line</label>
-            <div class="col-md-4">
-                <input id="line" name="line" type="text" placeholder="e.g. A, Blue, East Coast" class="form-control input-md" required="">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="line">Line</label>
+                <div class="col-md-4">
+                    <input id="line" name="line" type="text" placeholder="e.g. A, Blue, East Coast" class="form-control input-md" required="">
 
+                </div>
             </div>
-        </div>
 
-        <!-- Button (Double) -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="submit"></label>
-            <div class="col-md-8">
-                <button id="submit" name="submit" class="btn btn-success">Add</button>
-                <a href="@routes.AdminController.adminStops()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="submit"></label>
+                <div class="col-md-8">
+                    <button id="submit" name="submit" class="btn btn-success">Add</button>
+                    <a href="@routes.AdminController.adminStops()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
+                </div>
             </div>
-        </div>
-
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+    <br>
+</div>

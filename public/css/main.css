@@ -1,0 +1,182 @@
+
+
+.navbar {
+    margin-bottom: 0;
+    
+}
+
+body {
+    overflow:hidden;
+	background: #403b59;
+	color: #f7f7f7;
+	font-family: 'Raleway', sans-serif;
+	background-image: url(/assets/img/train.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 0%;
+}
+
+h1,
+h2 {
+	font-weight: bold;
+    text-align: center;
+    color: #f7f7f7;
+}
+
+
+
+.btn-primary {
+	color: #fff;
+	background-color: #181863;
+    color: white;
+	border-color: #5E86BF;
+	margin-bottom: 5px;
+}
+.btn-primary:hover {
+	background-color: #5E86BF;
+  	color: white;
+	border-color: transparent;
+}
+
+
+
+#intro-text {
+	
+	color: #181863; 
+	
+}
+
+.navbar-inverse {
+	background: #16165A;
+	border: 0;
+	height: 80px;
+}
+.navbar-inverse .navbar-nav li a {
+	color: #f7f7f7;
+	font-size: 16px;
+}
+.navbar-inverse .navbar-nav li a:hover {
+	background: #27A967;
+}
+
+.navbar-brand
+{
+	width: 50px;
+	height: 80px;
+	padding: 5px;
+	background-image: url(/assets/img/routeline150_white-01.png);
+	background-size: 50px 80px;
+	
+}
+
+h1.logo-text
+{
+	position: relative;
+	left: 45px;
+	top: 7px;
+	padding: 2px;
+	
+}
+
+
+.dropdown-menu {
+	background: #f7f7f7;
+	border-radius: 0;
+	border: 0;
+}
+.dropdown-menu li a {
+	padding: 10px;
+}
+.navbar-inverse .navbar-nav .dropdown-menu li a:hover {
+	background: #f7f7f7;
+}
+
+
+.call-to-action {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.call-to-action p {
+	margin-bottom: 30px;
+	font-family: sans-serif;
+}
+
+
+.input-group {
+   margin: auto; 
+}
+
+.card
+{
+	padding: 3px;
+	max-width: 289px;
+	background-color: white;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #16165A;
+  color: #F7F7F7;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+
+.call-to-action {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  width: 50%;
+  height: 30%;
+  padding: 40px;
+}
+
+img {
+    padding-bottom: 10px;
+}
+
+.dark {
+    color: darkblue;
+}
+
+table {
+  max-width: 90%;
+  padding: 15px;
+  margin: 0 auto;
+  border-radius: 5px;
+  float: none;
+}
+
+tr, th {
+  background-color: rgba(256,256,256, 0.4);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.thumbnail {
+
+}

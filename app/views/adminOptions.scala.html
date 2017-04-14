@@ -1,35 +1,35 @@
-
+<br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img-top card-img-responsive" src="@routes.Assets.versioned("img/station.jpg")" alt="Maintain Stops">
-                <div class="card-block card-primary card-inverse">
-                    <p class="card-text text-center"><a href="@routes.AdminController.adminStops()" class="card-link">Maintain Stops</a></p>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="@routes.Assets.versioned("img/stationbtn.png")" alt="Stations">
+                <div class="caption">
+                    <h3>Station Options</h3>
+                    <p><a href="@routes.AdminController.adminStops()" class="card-link">Maintain Stops</a></p>
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img-top card-img-responsive" src="@routes.Assets.versioned("img/network.jpg")" alt="Maintain Connections">
-                <div class="card-block card-primary card-inverse">
-                    <p class="card-text text-center"><a href="MaintainLines.jsp" class="card-link">Maintain Connections</a></p>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="@routes.Assets.versioned("img/connectionsbtn.png")" alt="Connections">
+                <div class="caption">
+                    <h3>Connections Options</h3>
+                    <p><a href="@routes.AdminController.adminConnections()" class="card-link">Maintain Connections</a></p>
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img-top card-img-responsive" src="@routes.Assets.versioned("img/maintenance.jpg")" alt="User Records">
-                <div class="card-block card-primary card-inverse">
-                    <p class="card-text text-center"><a href="MaintainAdmins.jsp" class="card-link">Users</a></p>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="@routes.Assets.versioned("img/adminbtn.png")" alt="Users">
+                <div class="caption">
+                    <h3>User Accounts</h3>
+                    <p><a href="MaintainAdmins.jsp" class="card-link">Users</a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br>
 <div class="text-center">
     <form action="Logout">
         <button class="btn btn-md btn-primary" type="submit">Logout</button>
