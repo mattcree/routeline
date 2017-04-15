@@ -3,25 +3,19 @@
 <section class="call-to-action vertical-center">
     <h1><span id="intro-text">Where would you like to go today?</span></h1>
     <br>
-    <div class="row">
-        <div id="typeahead">
-            <div class="col-md-4">
+    <div id="typeahead" class="row">
+
+            <div class="input-group">
+                <!-- id must match script below -->
+                <input type="text" class="form-control" id="stationFromInput" aria-label="Text input with dropdown button" placeholder="From">
             </div>
-            <div class="col-md-2">
-                <div class="input-group">
-                    <!-- id must match script below -->
-                    <input type="text" class="form-control" id="stationFromInput" aria-label="Text input with dropdown button" placeholder="From">
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="input-group">
-                    <!-- id must match script below -->
-                    <input type="text" class="form-control" id="stationToInput" aria-label="Text input with dropdown button" placeholder="To">
-                    <br>
-                </div>
-            </div>
-            <div class="col-md-4">
-            </div>
+
+
+            <div class="input-group">
+                <!-- id must match script below -->
+                <input type="text" class="form-control" id="stationToInput" aria-label="Text input with dropdown button" placeholder="To">
+                <br>
+
         </div>
     </div>
     <br>

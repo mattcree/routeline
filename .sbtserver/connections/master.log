@@ -1,7 +1,16 @@
-New log file opened at Sat Apr 15 18:08:30 BST 2017 by 9008@DESKTOP-A5F460V
-Taking next connection to: 57603
-New client attempting to connect on port: 57604-57603
-  Address = /192.168.1.84:57603
-This client on port 57604 has uuid 7f0ed627-5ac4-4c6c-87b9-8a30eea0afbe configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-7f0ed627-5ac4-4c6c-87b9-8a30eea0afbe
-Taking next connection to: 57603
+New log file opened at Sat Apr 15 18:45:27 BST 2017 by 10612@DESKTOP-A5F460V
+Taking next connection to: 58204
+New client attempting to connect on port: 58205-58204
+  Address = /192.168.1.84:58204
+This client on port 58205 has uuid fad37da1-85e0-460b-ac3d-cc3e15c4db79 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-fad37da1-85e0-460b-ac3d-cc3e15c4db79
+Taking next connection to: 58204
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 58204
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 58204
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 58204
