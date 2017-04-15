@@ -202,5 +202,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="com.bluecatcode.junit:junit-4.12-extended:1.0.41" level="project" />
   </component>
 </module>

@@ -1,12 +1,14 @@
-@(stops: List[Stop])
+@(stops: List[StationStop])
 <br>
 <div class="container transparent">
     <div class="container-fluid">
 
         @if(stops.isEmpty) {
+        <legend>Current Stops</legend>
         <h1 class="dark">No records</h1>
         } else {
         <table id="stops" class="table dark table-striped">
+            <legend>Current Stops</legend>
             <thead>
             <tr>
                 <th>ID</th>
@@ -19,8 +21,8 @@
             @for(stop <- stops) {
             <tr>
                 <th>@stop.id</th>
-                <th>@stop.getName</th>
-                <th>@stop.getLine</th>
+                <th>@stop.name</th>
+                <th>@stop.line</th>
                 <th>
                     <a class="btn btn-danger" href="@routes.AdminController.deleteStop(stop.id)">Delete</a>
                 </th>
@@ -34,7 +36,7 @@
         <!-- Button (Double) -->
         <div class="form-group">
             <div class="text-center">
-                <a href="@routes.AdminController.login()" id="back" name="back" class="btn btn-info">Back</a>
+                <a href="@routes.AdminController.options()" id="back" name="back" class="btn btn-info">Back</a>
                 <a href="@routes.AdminController.addStopForm()"id="add" name="add" class="btn btn-success">Add Stop</a>
             </div>
         </div>

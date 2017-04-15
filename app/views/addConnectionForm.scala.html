@@ -1,7 +1,7 @@
-@(stops: List[Stop])
+@(stops: List[StationStop])
 <br>
 <div class="container transparent">
-    <form class="form-horizontal dark">
+    <form class="form-horizontal dark" action="@routes.AdminController.doAddConnection()" method="post">
         <fieldset>
             <!-- Form Name -->
             <legend>Add Connection</legend>
@@ -10,9 +10,9 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="stopA">Stop A</label>
                 <div class="col-md-6">
-                    <select id="stopA" name="stopA" class="form-control">
+                    <select id="stopA" name="stopA" class="form-control" required="">
                         @for(stop <- stops) {
-                        <option value="@stop.id">@stop.getName on Line @stop.getLine</option>
+                        <option value="@stop.id">@stop.name on Line @stop.line</option>
                         }
                     </select>
                 </div>
@@ -22,9 +22,9 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="stopB">Stop B</label>
                 <div class="col-md-6">
-                    <select id="stopB" name="stopB" class="form-control">
+                    <select id="stopB" name="stopB" class="form-control" required="">
                         @for(stop <- stops) {
-                        <option value="@stop.id">@stop.getName on Line @stop.getLine</option>
+                        <option value="@stop.id">@stop.name on Line @stop.line</option>
                         }
                     </select>
                 </div>
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="time">Connection Time</label>
                 <div class="col-md-6">
-                    <input id="time" name="time" type="number" placeholder="i.e. time between stops (minutes)" class="form-control input-md">
+                    <input id="time" name="time" type="number" placeholder="i.e. time between stops (minutes)" class="form-control input-md" required="" min="0">
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
                 <label class="col-md-4 control-label" for="submit"></label>
                 <div class="col-md-8">
                     <button id="submit" name="submit" class="btn btn-success">Add</button>
-                    <button id="cancel" name="cancel" class="btn btn-danger">Cancel</button>
+                    <a href="@routes.AdminController.adminConnections()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
 

@@ -1,11 +1,9 @@
 package controllers;
-import com.avaje.ebean.Ebean;
-import models.*;
+import models.routefinder.Network;
+import models.routefinder.Routefinder;
 import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
-
-import java.util.*;
 
 
 public class Application extends Controller {
@@ -100,15 +98,7 @@ public class Application extends Controller {
         return ok(index.render(stationPicker.render()));
     }
 
-    public static Result getJsonStations()  {
-        List<Stop> stops = Stop.find.all();
-        if (stops.isEmpty()) return notFound(Json.parse("[]"));
-        Set<String> stopNames = new TreeSet<>();
-        for (Stop stop : stops) {
-            stopNames.add(stop.getName());
-        }
-        return ok(Json.toJson(stopNames));
-    }
+
 
 
     //Public API Functions

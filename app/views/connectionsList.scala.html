@@ -1,0 +1,47 @@
+@(connections: List[StopConnection])
+<br>
+<div class="container transparent">
+    <div class="container-fluid">
+        <legend>Current Connections</legend>
+        @if(connections.isEmpty) {
+        <h1 class="dark">No records</h1>
+        } else {
+        <table id="connections" class="table dark table-striped">
+            <!-- Form Name -->
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Stop A</th>
+                <th>Stop B</th>
+                <th>Time (minutes)</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="dark">
+            @for(connection <- connections) {
+            @stopAName = {@StationStop.find.byId(@connection.stopA)}
+            <tr>
+                <th>@connection.id</th>
+                <th>@stopAName</th>
+                <th>@connection.stopB</th>
+                <th>@connection.distance</th>
+                <th>
+                    <a class="btn btn-danger" href="@routes.AdminController.deleteConnection(connection.id)">Delete</a>
+                </th>
+            </tr>
+            }
+            </tbody>
+        </table>
+        }
+
+        <br>
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <div class="text-center">
+                <a href="@routes.AdminController.options()" id="back" name="back" class="btn btn-info">Back</a>
+                <a href="@routes.AdminController.addConnectionForm()"id="add" name="add" class="btn btn-success">Add Connection</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
