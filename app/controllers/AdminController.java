@@ -88,8 +88,8 @@ public class AdminController extends Controller {
 
         if (stopA == null || stopB == null || stopA.equals(stopB)) return redirect(routes.AdminController.addConnectionForm());
         StopConnection connection = new StopConnection();
-        connection.stopA = stopAId;
-        connection.stopB = stopBId;
+        connection.stopA = stopA;
+        connection.stopB = stopB;
         connection.distance = distance;
         System.out.println(connection);
         connection.save();

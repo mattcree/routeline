@@ -3,8 +3,8 @@ package models;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 /**
  * Created by Cree on 24/03/2017.
  */
@@ -14,9 +14,11 @@ public class StopConnection extends Model{
     @Id
     public Long id;
     @Constraints.Required
-    public Long stopA;
+    @ManyToOne
+    public StationStop stopA;
     @Constraints.Required
-    public Long stopB;
+    @ManyToOne
+    public StationStop stopB;
     @Constraints.Required
     public Long distance;
 

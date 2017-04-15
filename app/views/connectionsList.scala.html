@@ -19,10 +19,9 @@
             </thead>
             <tbody class="dark">
             @for(connection <- connections) {
-            @stopAName = {@StationStop.find.byId(@connection.stopA)}
             <tr>
                 <th>@connection.id</th>
-                <th>@stopAName</th>
+                <th>@connection.stopA</th>
                 <th>@connection.stopB</th>
                 <th>@connection.distance</th>
                 <th>

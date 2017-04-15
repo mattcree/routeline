@@ -12,8 +12,8 @@ create table station_stop (
 
 create table stop_connection (
   id                        bigint not null,
-  stop_a                    bigint,
-  stop_b                    bigint,
+  stop_a_id                 bigint,
+  stop_b_id                 bigint,
   distance                  bigint,
   constraint pk_stop_connection primary key (id))
 ;
@@ -22,6 +22,10 @@ create sequence station_stop_seq;
 
 create sequence stop_connection_seq;
 
+alter table stop_connection add constraint fk_stop_connection_stopA_1 foreign key (stop_a_id) references station_stop (id) on delete restrict on update restrict;
+create index ix_stop_connection_stopA_1 on stop_connection (stop_a_id);
+alter table stop_connection add constraint fk_stop_connection_stopB_2 foreign key (stop_b_id) references station_stop (id) on delete restrict on update restrict;
+create index ix_stop_connection_stopB_2 on stop_connection (stop_b_id);
 
 
 

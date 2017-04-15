@@ -18,4 +18,7 @@ public class StationStop extends Model{
 
     public static Model.Finder<Long, StationStop> find = new Finder(Long.class, StationStop.class);
 
+    public String toString() {
+        return name;
+    }
 }
