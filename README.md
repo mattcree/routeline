@@ -13,4 +13,3 @@ The system allows the user to do the following:
 -	Provide an interface for the user to allow them to search for optimal routes between stations
 -	Allow a route to be requested that must avoid, or has to include, a given station.
 -	Allow a traveller to select a maximum number of train changes for a long trip.
--	Other extensions you may think are useful.
