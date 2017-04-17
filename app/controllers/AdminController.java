@@ -1,12 +1,12 @@
 package controllers;
 
-import filters.Secure;
 import models.*;
 import play.data.Form;
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Security;
 import views.html.*;
 
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -16,43 +16,42 @@ import java.util.List;
 
 public class AdminController extends Controller {
 
-    public static Result getLogin() {
+    public Result getLogin() {
         return ok(index.render(signin.render()));
     }
 
-    public static Result login() {
+    public Result login() {
         return ok(index.render(adminOptions.render()));
     }
 
-    public static Result options() {
+    public Result options() {
         return ok(index.render(adminOptions.render()));
     }
 
-    public static Result stops() {
+    public Result stops() {
         return ok();
     }
 
-    public static Result adminStops() {
+    public Result adminStops() {
         List<StationStop> stops = StationStop.find.all();
         return ok(index.render(stopList.render(stops)));
     }
 
-    public static Result adminConnections() {
+    public Result adminConnections() {
         List<StopConnection> connections = StopConnection.find.all();
         return ok(index.render(connectionsList.render(connections)));
     }
 
-    public static Result addConnectionForm() {
+    public Result addConnectionForm() {
         List<StationStop> stops = StationStop.find.all();
-
         return ok(index.render(addConnectionForm.render(stops)));
     }
 
-    public static Result addStopForm() {
+    public Result addStopForm() {
         return ok(index.render(addStopForm.render()));
     }
 
-    public static Result doAddStop() {
+    public Result doAddStop() {
         Form form = Form.form().bindFromRequest();
         System.out.println(form.data());
 
@@ -68,7 +67,7 @@ public class AdminController extends Controller {
         return redirect(routes.AdminController.adminStops());
     }
 
-    public static Result doAddConnection() {
+    public Result doAddConnection() {
         Form form = Form.form().bindFromRequest();
 
         Long stopAId = null;
@@ -98,7 +97,7 @@ public class AdminController extends Controller {
         return redirect(routes.AdminController.adminConnections());
     }
 
-    public static Result deleteStop(Long id) {
+    public Result deleteStop(Long id) {
         StationStop stop = StationStop.find.byId(id);
         if(stop == null) {
             return redirect(routes.AdminController.adminStops());
@@ -108,7 +107,7 @@ public class AdminController extends Controller {
         }
     }
 
-    public static Result deleteConnection(Long id) {
+    public Result deleteConnection(Long id) {
         StopConnection connection = StopConnection.find.byId(id);
         if(connection == null) {
             return redirect(routes.AdminController.adminConnections());

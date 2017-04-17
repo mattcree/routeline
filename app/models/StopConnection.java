@@ -1,7 +1,8 @@
 package models;
 
+import com.avaje.ebean.Model;
 import play.data.validation.Constraints;
-import play.db.ebean.Model;
+
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
  * Created by Cree on 24/03/2017.
  */
 @Entity
-public class StopConnection extends Model{
+public class StopConnection extends Model {
 
     @Id
     public Long id;
@@ -23,6 +24,6 @@ public class StopConnection extends Model{
     @Constraints.Required
     public Long distance;
 
-    public static Model.Finder<Long, StopConnection> find = new Finder(Long.class, StopConnection.class);
+    public static Finder<Long, StopConnection> find = new Finder<>(StopConnection.class);
 
 }

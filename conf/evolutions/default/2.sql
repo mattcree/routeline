@@ -1,5 +1,6 @@
 # --- !Ups
-/*Line A*/
+
+
 insert into station_stop(id, name, line) values(1,'York','A');
 insert into station_stop(id, name, line) values(2,'Darlington','A');
 insert into station_stop(id, name, line) values(3,'Newcastle','A');
@@ -109,8 +110,5 @@ insert into stop_connection(id, stop_a_id, stop_b_id, distance)
 values (32,6,26,5);
 insert into stop_connection(id, stop_a_id, stop_b_id, distance)
 values (33,7,27,5);
-
-
-insert into user(id, username, auth_token) values (1,'barry','barry');
 
 # --- !Downs

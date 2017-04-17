@@ -8,14 +8,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static play.libs.Json.toJson;
 
 /**
  * Created by Cree on 14/04/2017.
  */
 public class ApiController extends Controller {
 
-    public static Result getJsonStations()  {
+    public Result getJsonStations()  {
         List<StationStop> stops = StationStop.find.all();
 
         if (stops.isEmpty()) return notFound(Json.parse("[]"));
@@ -27,10 +26,10 @@ public class ApiController extends Controller {
         return ok(Json.toJson(stopNames));
     }
 
-    public static Result getJsonStops() {
+    public Result getJsonStops() {
         List<StationStop> stops = StationStop.find.all();
         System.out.println(stops);
-        return ok(toJson(stops));
+        return ok(Json.toJson(stops));
     }
 
 }

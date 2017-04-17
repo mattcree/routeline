@@ -1,15 +1,14 @@
 package models;
 
+import com.avaje.ebean.Model;
 import play.data.validation.Constraints;
-import play.db.ebean.Model;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class StationStop extends Model{
+public class StationStop extends Model {
 
     @Id
     public Long id;
@@ -18,7 +17,7 @@ public class StationStop extends Model{
     @Constraints.Required
     public String line;
 
-    public static Model.Finder<Long, StationStop> find = new Finder(Long.class, StationStop.class);
+    public static Finder<Long, StationStop> find = new Finder<>(StationStop.class);
 
     public String toString() {
         return name + " " + line;

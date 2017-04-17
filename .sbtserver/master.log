@@ -1,5 +1,5 @@
-New log file opened at Mon Apr 17 15:34:29 BST 2017 by 12068@DESKTOP-A5F460V
-jvm 12068@DESKTOP-A5F460V
+New log file opened at Mon Apr 17 19:57:08 BST 2017 by 9872@DESKTOP-A5F460V
+jvm 9872@DESKTOP-A5F460V
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.111-b14
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\Cree\.sbt\0.13\plugins, returning: (global-plugins)
 Loading global plugins from C:\Users\Cree\.sbt\0.13\plugins
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5e7ade0a, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@52c85ac8, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -62,7 +62,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in D:\Projects\routeline\project, returning: (routeline-build)
 Loading project definition from D:\Projects\routeline\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5e7ade0a, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@52c85ac8, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -100,3 +100,10 @@ Set current project to pathfindplay (in build file:/D:/Projects/routeline/)
 > iflast shell
 > server-send-ready-for-request
 > server-handle-next-server-request
+Done executing sbt server engine, result Right(Exit(0))
+Closing listening server socket
+Waiting for socket thread
+Waiting for request processor thread
+Waiting for command engine result
+Returning control to sbt launcher with result Exit(0)
+Closing the 9872@DESKTOP-A5F460V logs at Mon Apr 17 20:33:08 BST 2017, goodbye.

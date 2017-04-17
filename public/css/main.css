@@ -180,3 +180,6 @@ tr, th {
     background-color: rgba(256,256,256, 0.4);
     border-radius: 5px;
 }
+legend {
+    padding: 10px;
+}

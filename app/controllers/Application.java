@@ -94,7 +94,7 @@ public class Application extends Controller {
 
 
 
-    public static Result index()  {
+    public Result index()  {
         return ok(index.render(stationPicker.render()));
     }
 
@@ -102,7 +102,7 @@ public class Application extends Controller {
 
 
     //Public API Functions
-    public static Result getStops() {
+    public Result getStops() {
         return ok(Json.toJson(network.getAllStops()));
     }
 

@@ -1,7 +1,46 @@
-New log file opened at Mon Apr 17 15:34:29 BST 2017 by 12068@DESKTOP-A5F460V
-Taking next connection to: 58700
-New client attempting to connect on port: 58701-58700
-  Address = /192.168.1.84:58700
-This client on port 58701 has uuid d6fd7e20-3f49-492b-ad1d-e9a9f39861f0 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: play-fork-run-d6fd7e20-3f49-492b-ad1d-e9a9f39861f0
-Taking next connection to: 58700
+New log file opened at Mon Apr 17 19:57:08 BST 2017 by 9872@DESKTOP-A5F460V
+Taking next connection to: 62682
+New client attempting to connect on port: 62683-62682
+  Address = /192.168.1.84:62682
+This client on port 62683 has uuid d34c3271-0eb8-4c19-9bfa-e75b9d1b30ea configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: play-fork-run-d34c3271-0eb8-4c19-9bfa-e75b9d1b30ea
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 62682
+Checking to see if clients are empty...
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 9872@DESKTOP-A5F460V logs at Mon Apr 17 20:33:08 BST 2017, goodbye.
