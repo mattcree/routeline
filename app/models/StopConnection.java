@@ -5,6 +5,7 @@ import play.db.ebean.Model;
 
 import javax.persistence.*;
 
+
 /**
  * Created by Cree on 24/03/2017.
  */

@@ -1,5 +1,6 @@
 package controllers;
 
+import filters.Secure;
 import models.*;
 import play.data.Form;
 import play.mvc.*;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by Cree on 10/04/2017.
  */
+
 public class AdminController extends Controller {
 
     public static Result getLogin() {
