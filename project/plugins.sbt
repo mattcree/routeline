@@ -7,3 +7,5 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-play-ebean" % "3.0.0")
 addSbtPlugin("com.typesafe.sbt" % "sbt-coffeescript" % "1.0.0")
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-play-enhancer" % "1.1.0")
+
+addSbtPlugin("com.heroku" % "sbt-heroku" % "0.5.1")
