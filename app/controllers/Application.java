@@ -98,8 +98,13 @@ public class Application extends Controller {
         return ok(index.render(stationPicker.render()));
     }
 
+    public Result getLogin() {
+        return ok(index.render(signin.render()));
+    }
 
-
+    public Result logout() {
+        return ok(index.render(signin.render()));
+    }
 
     //Public API Functions
     public Result getStops() {

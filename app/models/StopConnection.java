@@ -14,12 +14,13 @@ import javax.persistence.*;
 public class StopConnection extends Model {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
     @Constraints.Required
-    @ManyToOne
+    @OneToOne
     public StationStop stopA;
     @Constraints.Required
-    @ManyToOne
+    @OneToOne
     public StationStop stopB;
     @Constraints.Required
     public Long distance;

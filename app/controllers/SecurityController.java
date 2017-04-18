@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.User;
 import play.data.Form;
+import play.data.FormFactory;
 import play.data.validation.Constraints;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -11,7 +12,13 @@ import play.mvc.Http.Cookie;
 import play.mvc.Result;
 import play.mvc.Security;
 
+import javax.inject.Inject;
+import javax.sound.midi.Soundbank;
+
 public class SecurityController extends Controller {
+
+    @Inject
+    FormFactory formFactory;
 
     public final static String AUTH_TOKEN_HEADER = "X-AUTH-TOKEN";
     public static final String AUTH_TOKEN = "authToken";
@@ -24,15 +31,14 @@ public class SecurityController extends Controller {
 
     // returns an authToken
     public Result login() {
-        Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
+        Form<Login> loginForm = formFactory.form(Login.class).bindFromRequest();
         System.out.println(loginForm);
         if (loginForm.hasErrors()) {
-            System.out.println("mmmm");
             return badRequest(loginForm.errorsAsJson());
         }
 
         Login login = loginForm.get();
-        System.out.println(login);
+
         User user = User.findByEmailAddressAndPassword(login.emailAddress, login.password);
 
         if (user == null) {
@@ -43,12 +49,13 @@ public class SecurityController extends Controller {
             ObjectNode authTokenJson = Json.newObject();
             authTokenJson.put(AUTH_TOKEN, authToken);
             response().setCookie(Http.Cookie.builder(AUTH_TOKEN, authToken).withSecure(ctx().request().secure()).build());
-            return ok(authTokenJson);
+            return redirect(routes.AdminController.options());
         }
     }
 
     @Security.Authenticated(Secured.class)
     public Result logout() {
+        System.out.println("working");
         response().discardCookie(AUTH_TOKEN);
         getUser().deleteAuthToken();
         return redirect("/");

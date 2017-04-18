@@ -14,7 +14,19 @@ import java.util.List;
  * Created by Cree on 10/04/2017.
  */
 
+@Security.Authenticated(Secured.class)
 public class AdminController extends Controller {
+
+    private static User admin = createFirstUser();
+
+    private static User createFirstUser() {
+        User user = new User("bob@bob.com", "bob", "bob bob");
+        System.out.println(user);
+        user.save();
+        System.out.println(User.find.all());
+
+        return user;
+    }
 
     public Result getLogin() {
         return ok(index.render(signin.render()));

@@ -12,10 +12,12 @@ GET     /assets/*file                   controllers.Assets.versioned(path="/publ
 GET     /api/stations                   controllers.ApiController.getJsonStations
 GET     /api/stops                      controllers.ApiController.getJsonStops
 
+
 # Admin Routes
 # Logging In
-GET     /admin                          controllers.AdminController.getLogin
-POST    /admin                          controllers.AdminController.login
+GET     /admin                          controllers.Application.getLogin
+POST    /admin/login                    controllers.SecurityController.login
+GET     /admin/logout                   controllers.SecurityController.logout
 GET     /admin/options                  controllers.AdminController.options
 
 # Getting Stops and Connections

@@ -110,5 +110,4 @@ insert into stop_connection(id, stop_a_id, stop_b_id, distance)
 values (32,6,26,5);
 insert into stop_connection(id, stop_a_id, stop_b_id, distance)
 values (33,7,27,5);
-
 # --- !Downs

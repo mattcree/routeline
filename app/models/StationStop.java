@@ -11,6 +11,7 @@ import javax.persistence.Id;
 public class StationStop extends Model {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
     @Constraints.Required
     public String name;

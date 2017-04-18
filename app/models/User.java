@@ -16,6 +16,7 @@ import java.util.UUID;
 @Entity
 public class User extends Model {
 
+    //Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
@@ -35,6 +36,19 @@ public class User extends Model {
     @JsonIgnore
     private String password;
 
+    @Column(length = 64, nullable = false)
+    private byte[] shaPassword;
+
+    @Column(nullable = false)
+    public Date creationDate;
+
+    @Column(length = 256, nullable = false)
+    @Constraints.Required
+    @Constraints.MinLength(2)
+    @Constraints.MaxLength(256)
+    public String fullName;
+
+    //Methods
     public User() {
         this.creationDate = new Date();
     }
@@ -54,11 +68,6 @@ public class User extends Model {
         this.emailAddress = emailAddress.toLowerCase();
     }
 
-    @Column(length = 64, nullable = false)
-    private byte[] shaPassword;
-
-
-
     public String getPassword() {
         return password;
     }
@@ -68,14 +77,7 @@ public class User extends Model {
         shaPassword = getSha512(password);
     }
 
-    @Column(length = 256, nullable = false)
-    @Constraints.Required
-    @Constraints.MinLength(2)
-    @Constraints.MaxLength(256)
-    public String fullName;
-
-    @Column(nullable = false)
-    public Date creationDate;
+    public static Finder<Long, User> find = new Finder<>(User.class);
 
     public String createToken() {
         authToken = UUID.randomUUID().toString();
@@ -96,8 +98,6 @@ public class User extends Model {
             throw new RuntimeException(e);
         }
     }
-
-    public static Model.Finder<Long, User> find = new Finder(Long.class, User.class);
 
     public static User findByAuthToken(String authToken) {
         if (authToken == null) {
