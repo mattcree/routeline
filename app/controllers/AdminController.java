@@ -2,11 +2,13 @@ package controllers;
 
 import models.*;
 import play.data.Form;
+import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 
@@ -17,13 +19,8 @@ import java.util.List;
 @Security.Authenticated(Secured.class)
 public class AdminController extends Controller {
 
-    public Result getLogin() {
-        return ok(index.render(signin.render()));
-    }
-
-    public Result login() {
-        return ok(index.render(adminOptions.render()));
-    }
+    @Inject
+    FormFactory formFactory;
 
     public Result options() {
         return ok(index.render(adminOptions.render()));
@@ -48,12 +45,35 @@ public class AdminController extends Controller {
         return ok(index.render(addConnectionForm.render(stops)));
     }
 
+    public Result adminLines() {
+        List<Line> lines = Line.find.all();
+        return ok(index.render(lineList.render(lines)));
+    }
+
+    public Result doAddLine() {
+        Form form = formFactory.form().bindFromRequest();
+        String lineName = form.data().get("name").toString();
+
+        Line line = new Line();
+        line.name = lineName;
+
+        line.save();
+        return redirect(routes.AdminController.adminLines());
+    }
+
+
+
+    public Result addLineForm() {
+        return ok(index.render(addLineForm.render()));
+    }
+
+
     public Result addStopForm() {
         return ok(index.render(addStopForm.render()));
     }
 
     public Result doAddStop() {
-        Form form = Form.form().bindFromRequest();
+        Form form = formFactory.form().bindFromRequest();
         System.out.println(form.data());
 
         System.out.println(form.data().get("name"));
@@ -69,7 +89,7 @@ public class AdminController extends Controller {
     }
 
     public Result doAddConnection() {
-        Form form = Form.form().bindFromRequest();
+        Form form = formFactory.form().bindFromRequest();
 
         Long stopAId = null;
         Long stopBId = null;

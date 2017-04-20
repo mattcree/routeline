@@ -1,6 +1,3 @@
-# --- Created by Ebean DDL
-# To stop Ebean DDL generation, remove this comment and start using Evolutions
-
 # --- !Ups
 
 create table station_stop (
@@ -29,10 +26,19 @@ create table user (
   constraint pk_user primary key (id)
 );
 
-alter table stop_connection add constraint fk_stop_connection_stop_a_id foreign key (stop_a_id) references station_stop (id) on delete restrict on update restrict;
+create table line (
+  id                            bigint auto_increment not null,
+  name                          varchar(255),
+  constraint pk_line primary key (id)
+);
+
+
+
+
+alter table stop_connection add constraint fk_stop_connection_stop_a_id foreign key (stop_a_id) references station_stop (id) on delete cascade on update cascade;
 create index ix_stop_connection_stop_a_id on stop_connection (stop_a_id);
 
-alter table stop_connection add constraint fk_stop_connection_stop_b_id foreign key (stop_b_id) references station_stop (id) on delete restrict on update restrict;
+alter table stop_connection add constraint fk_stop_connection_stop_b_id foreign key (stop_b_id) references station_stop (id) on delete cascade on update cascade;
 create index ix_stop_connection_stop_b_id on stop_connection (stop_b_id);
 
 

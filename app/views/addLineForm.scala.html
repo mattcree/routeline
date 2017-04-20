@@ -1,0 +1,28 @@
+<div class="container">
+    <br>
+    <form class="form-horizontal dark" action="@routes.AdminController.doAddLine()" method="post">
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Add Line</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Line Name</label>
+                <div class="col-md-4">
+                    <input id="name" name="name" type="text" placeholder="e.g. Blue, Red, A, B" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="submit"></label>
+                <div class="col-md-8">
+                    <button id="submit" name="submit" class="btn btn-success">Add</button>
+                    <a href="@routes.AdminController.adminLines()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <br>
+</div>
