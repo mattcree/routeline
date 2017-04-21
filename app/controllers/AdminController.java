@@ -2,11 +2,13 @@ package controllers;
 
 import models.*;
 import play.data.Form;
+import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 
@@ -17,43 +19,27 @@ import java.util.List;
 @Security.Authenticated(Secured.class)
 public class AdminController extends Controller {
 
-    public Result getLogin() {
-        return ok(index.render(signin.render()));
-    }
+    @Inject
+    FormFactory formFactory;
 
-    public Result login() {
-        return ok(index.render(adminOptions.render()));
-    }
-
+    //Main Admin Menu
     public Result options() {
         return ok(index.render(adminOptions.render()));
     }
 
-    public Result stops() {
-        return ok();
-    }
-
+    //Stops
     public Result adminStops() {
         List<StationStop> stops = StationStop.find.all();
         return ok(index.render(stopList.render(stops)));
     }
 
-    public Result adminConnections() {
-        List<StopConnection> connections = StopConnection.find.all();
-        return ok(index.render(connectionsList.render(connections)));
-    }
-
-    public Result addConnectionForm() {
-        List<StationStop> stops = StationStop.find.all();
-        return ok(index.render(addConnectionForm.render(stops)));
-    }
-
     public Result addStopForm() {
-        return ok(index.render(addStopForm.render()));
+        List<Line> lines = Line.find.all();
+        return ok(index.render(addStopForm.render(lines)));
     }
 
     public Result doAddStop() {
-        Form form = Form.form().bindFromRequest();
+        Form form = formFactory.form().bindFromRequest();
         System.out.println(form.data());
 
         System.out.println(form.data().get("name"));
@@ -68,8 +54,27 @@ public class AdminController extends Controller {
         return redirect(routes.AdminController.adminStops());
     }
 
+    public Result deleteStop(Long id) {
+        StationStop stop = StationStop.find.byId(id);
+        if(stop != null) {
+            stop.delete();
+        }
+        return redirect(routes.AdminController.adminStops());
+    }
+
+    //Connections
+    public Result adminConnections() {
+        List<StopConnection> connections = StopConnection.find.all();
+        return ok(index.render(connectionsList.render(connections)));
+    }
+
+    public Result addConnectionForm() {
+        List<StationStop> stops = StationStop.find.all();
+        return ok(index.render(addConnectionForm.render(stops)));
+    }
+
     public Result doAddConnection() {
-        Form form = Form.form().bindFromRequest();
+        Form form = formFactory.form().bindFromRequest();
 
         Long stopAId = null;
         Long stopBId = null;
@@ -98,24 +103,41 @@ public class AdminController extends Controller {
         return redirect(routes.AdminController.adminConnections());
     }
 
-    public Result deleteStop(Long id) {
-        StationStop stop = StationStop.find.byId(id);
-        if(stop == null) {
-            return redirect(routes.AdminController.adminStops());
-        } else {
-            stop.delete();
-            return redirect(routes.AdminController.adminStops());
-        }
-    }
-
     public Result deleteConnection(Long id) {
         StopConnection connection = StopConnection.find.byId(id);
-        if(connection == null) {
-            return redirect(routes.AdminController.adminConnections());
-        } else {
+        if(connection != null) {
             connection.delete();
-            return redirect(routes.AdminController.adminConnections());
         }
+        return redirect(routes.AdminController.adminConnections());
+    }
+
+    //Lines
+    public Result adminLines() {
+        List<Line> lines = Line.find.all();
+        return ok(index.render(lineList.render(lines)));
+    }
+
+    public Result addLineForm() {
+        return ok(index.render(addLineForm.render()));
+    }
+
+    public Result doAddLine() {
+        Form form = formFactory.form().bindFromRequest();
+        String lineName = form.data().get("name").toString();
+
+        Line line = new Line();
+        line.name = lineName;
+
+        line.save();
+        return redirect(routes.AdminController.adminLines());
+    }
+
+    public Result deleteLine(Long id) {
+        Line line = Line.find.byId(id);
+        if(line != null) {
+            line.delete();
+        }
+        return redirect(routes.AdminController.adminLines());
     }
 
 }

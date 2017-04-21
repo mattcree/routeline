@@ -23,7 +23,6 @@ public class Secured extends Security.Authenticator {
                 return user.getEmailAddress();
             }
         }
-
         return null;
     }
 

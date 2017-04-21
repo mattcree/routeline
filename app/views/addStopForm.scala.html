@@ -1,7 +1,17 @@
+@(lines: List[Line])
 <div class="container">
     <br>
     <form class="form-horizontal dark" action="@routes.AdminController.doAddStop()" method="post">
         <fieldset>
+            @if(lines.isEmpty) {
+            <legend>Add Stop</legend>
+            <h1 class="dark">Add Lines first.</h1>
+            <div class="form-group">
+                <br>
+                <div class="text-center">
+                    <a href="@routes.AdminController.adminStops()" id="cancel" name="cancel" class="btn btn-danger">Back</a>
+                </div>
+            </div>            } else {
             <!-- Form Name -->
             <legend>Add Stop</legend>
 
@@ -14,12 +24,14 @@
                 </div>
             </div>
 
-            <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="line">Line</label>
-                <div class="col-md-4">
-                    <input id="line" name="line" type="text" placeholder="e.g. A, Blue, East Coast" class="form-control input-md" required="">
-
+                <div class="col-md-6">
+                    <select id="line" name="line" class="form-control" required="">
+                        @for(line <- lines) {
+                        <option value="@line.name">@line.name Line</option>
+                        }
+                    </select>
                 </div>
             </div>
 
@@ -31,6 +43,7 @@
                     <a href="@routes.AdminController.adminStops()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
+            }
         </fieldset>
     </form>
     <br>

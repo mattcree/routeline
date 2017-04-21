@@ -1,0 +1,51 @@
+@(lines: List[Line])
+<br>
+<div class="container transparent">
+    <div class="container-fluid">
+        @if(lines.isEmpty) {
+        <legend>Current Lines</legend>
+        <h1 class="dark">No records</h1>
+
+        } else {
+        <table id="lines" class="table dark table-striped">
+            <legend>Current Lines
+                <div class="form-group pull-right">
+                <div class="text-center">
+                    <a href="@routes.AdminController.options()" id="back" name="back" class="btn btn-info">Back</a>
+                    <a href="@routes.AdminController.addLineForm()"id="add" name="add" class="btn btn-success">Add Line</a>
+                </div>
+                </div>
+            </legend>
+            <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Line Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="dark">
+            @for(line <- lines) {
+            <tr>
+                <th>@line.id</th>
+                <th>@line.name</th>
+                <th>
+                    <a class="btn btn-danger" href="@routes.AdminController.deleteLine(line.id)">Delete</a>
+                </th>
+            </tr>
+            }
+            </tbody>
+        </table>
+        }
+
+        <br>
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <div class="text-center">
+                <a href="@routes.AdminController.options()" id="back" name="back" class="btn btn-info">Back</a>
+                <a href="@routes.AdminController.addLineForm()"id="add" name="add" class="btn btn-success">Add Line</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>

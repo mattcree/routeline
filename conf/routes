@@ -14,6 +14,7 @@ GET     /api/stations                   controllers.ApiController.getJsonStation
 GET     /api/stops                      controllers.ApiController.getJsonStops
 
 
+
 # Admin Routes
 # Logging In
 GET     /admin                          controllers.Application.getLogin
@@ -33,5 +34,13 @@ GET     /admin/stops/delete/:id         controllers.AdminController.deleteStop(i
 # Admin Connection Functions
 GET     /admin/connections/add          controllers.AdminController.addConnectionForm
 POST    /admin/connections/add          controllers.AdminController.doAddConnection
-GET     /admin/Connections/delete/:id   controllers.AdminController.deleteConnection(id: Long)
+GET     /admin/connections/delete/:id   controllers.AdminController.deleteConnection(id: Long)
+
+# Admin Line Functions
+GET     /admin/lines                    controllers.AdminController.adminLines
+GET     /admin/lines/add                controllers.AdminController.addLineForm
+POST    /admin/lines/add                controllers.AdminController.doAddLine
+GET     /admin/lines/delete/:id         controllers.AdminController.deleteLine(id: Long)
+
+
 

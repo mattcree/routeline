@@ -1,13 +1,12 @@
 <br>
-<div class="container">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6 col-md-3">
-                <a href="@routes.AdminController.adminStops()" class="card-link">
+                <a href="@routes.AdminController.adminLines()" class="card-link">
                     <div class="thumbnail">
                         <img src="@routes.Assets.versioned("img/linesbtn.png")" alt="Lines">
                         <div class="caption">
-                            <h3 class="text-center">Line Options</h3>
+                            <h3 class="text-center">Lines</h3>
                         </div>
                     </div>
                 </a>
@@ -17,7 +16,7 @@
                     <div class="thumbnail">
                         <img src="@routes.Assets.versioned("img/stationbtn.png")" alt="Stations">
                         <div class="caption">
-                            <h3 class="text-center">Station Options</h3>
+                            <h3 class="text-center">Stops</h3>
                         </div>
                     </div>
                 </a>
@@ -27,7 +26,7 @@
                     <div class="thumbnail">
                         <img src="@routes.Assets.versioned("img/connectionsbtn.png")" alt="Connections">
                         <div class="caption">
-                            <h3 class="text-center">Connections Options</h3>
+                            <h3 class="text-center">Connections</h3>
                         </div>
                     </div>
                 </a>
@@ -37,14 +36,13 @@
                     <div class="thumbnail">
                         <img src="@routes.Assets.versioned("img/adminbtn.png")" alt="Users">
                         <div class="caption">
-                            <h3 class="text-center">User Accounts</h3>
+                            <h3 class="text-center">Accounts</h3>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
     </div>
-</div>
 <div class="text-center">
     <form action="@routes.SecurityController.logout()">
         <button class="btn btn-md btn-primary" type="submit">Logout</button>
