@@ -43,4 +43,7 @@ POST    /admin/lines/add                controllers.AdminController.doAddLine
 GET     /admin/lines/delete/:id         controllers.AdminController.deleteLine(id: Long)
 
 
-
+# Admin User Functions
+GET     /admin/users                    controllers.AdminController.adminUsers
+GET     /admin/users/add                controllers.AdminController.addUserForm
+POST    /admin/users/add                controllers.AdminController.doAddUser

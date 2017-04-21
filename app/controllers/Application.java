@@ -108,11 +108,11 @@ public class Application extends Controller {
     }
 
     public Result getLogin() {
-        return ok(index.render(signin.render()));
+        return ok(index.render(loginForm.render()));
     }
 
     public Result logout() {
-        return ok(index.render(signin.render()));
+        return ok(index.render(loginForm.render()));
     }
 
     //Public API Functions
