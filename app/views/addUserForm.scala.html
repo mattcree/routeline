@@ -1,0 +1,37 @@
+<div class="container">
+    <br>
+    <form class="form-horizontal dark" action="@routes.AdminController.doAddUser()" method="post">
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Add User</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="username">Stop Name</label>
+                <div class="col-md-4">
+                    <input id="username" name="username" type="text" placeholder="e.g. johnrouteline.com" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="password">Line</label>
+                <div class="col-md-4">
+                    <input id="password" name="password" type="text" placeholder="Think Secure!" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="submit"></label>
+                <div class="col-md-8">
+                    <button id="submit" name="submit" class="btn btn-success">Add</button>
+                    <a href="@routes.AdminController.adminStops()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <br>
+</div>
