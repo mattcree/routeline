@@ -30,7 +30,7 @@ public class AdminController extends Controller {
     //Stops
     public Result adminStops() {
         List<StationStop> stops = StationStop.find.all();
-        return ok(index.render(stopList.render(stops)));
+        return ok(index.render(listStops.render(stops)));
     }
 
     public Result addStopForm() {
@@ -65,7 +65,7 @@ public class AdminController extends Controller {
     //Connections
     public Result adminConnections() {
         List<StopConnection> connections = StopConnection.find.all();
-        return ok(index.render(connectionsList.render(connections)));
+        return ok(index.render(listConnections.render(connections)));
     }
 
     public Result addConnectionForm() {
@@ -114,7 +114,7 @@ public class AdminController extends Controller {
     //Lines
     public Result adminLines() {
         List<Line> lines = Line.find.all();
-        return ok(index.render(lineList.render(lines)));
+        return ok(index.render(listLines.render(lines)));
     }
 
     public Result addLineForm() {
@@ -137,6 +137,26 @@ public class AdminController extends Controller {
         if(line != null) {
             line.delete();
         }
+        return redirect(routes.AdminController.adminLines());
+    }
+
+    //Users
+    public Result adminUsers() {
+        return ok();
+    }
+
+    public Result addUserForm() {
+        return ok(index.render(addUserForm.render()));
+    }
+
+    public Result doAddUser() {
+        Form form = formFactory.form().bindFromRequest();
+        String lineName = form.data().get("name").toString();
+
+        Line line = new Line();
+        line.name = lineName;
+
+        line.save();
         return redirect(routes.AdminController.adminLines());
     }
 

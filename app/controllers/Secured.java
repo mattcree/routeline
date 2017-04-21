@@ -6,7 +6,7 @@ import play.mvc.Http.Context;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.index;
-import views.html.signin;
+import views.html.loginForm;
 
 public class Secured extends Security.Authenticator {
 
@@ -28,7 +28,7 @@ public class Secured extends Security.Authenticator {
 
     @Override
     public Result onUnauthorized(Context ctx) {
-        return unauthorized(index.render(signin.render()));
+        return unauthorized(index.render(loginForm.render()));
     }
 
 }
