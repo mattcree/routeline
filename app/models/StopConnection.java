@@ -27,4 +27,8 @@ public class StopConnection extends Model {
 
     public static Finder<Long, StopConnection> find = new Finder<>(StopConnection.class);
 
+    public String toString() {
+        return stopA.toString() + " to " + stopB.toString() ;
+    }
+
 }

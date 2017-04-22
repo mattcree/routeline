@@ -1,8 +1,10 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import models.*;
 import play.data.Form;
 import play.data.FormFactory;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -94,12 +96,23 @@ public class AdminController extends Controller {
         StationStop stopB = StationStop.find.byId(stopBId);
 
         if (stopA == null || stopB == null || stopA.equals(stopB)) return redirect(routes.AdminController.addConnectionForm());
-        StopConnection connection = new StopConnection();
-        connection.stopA = stopA;
-        connection.stopB = stopB;
-        connection.distance = distance;
-        System.out.println(connection);
-        connection.save();
+        Ebean.beginTransaction();
+        try {
+            StopConnection connection = new StopConnection();
+            StopConnection connection2 = new StopConnection();
+
+            connection.stopA = stopA;
+            connection.stopB = stopB;
+            connection2.stopA = stopB;
+            connection2.stopB = stopA;
+
+            connection.save();
+            connection2.save();
+            Ebean.commitTransaction();
+        } finally {
+            Ebean.endTransaction();
+        }
+        System.out.println(StopConnection.find.all().toString());
         return redirect(routes.AdminController.adminConnections());
     }
 
