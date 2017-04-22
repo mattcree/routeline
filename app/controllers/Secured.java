@@ -17,7 +17,7 @@ public class Secured extends Security.Authenticator {
         if ((authTokenHeaderValues != null)) {
             User user = User.findByAuthToken(authTokenHeaderValues.value());
             System.out.println();
-            System.out.println("Here: " + user);
+            System.out.println("Accessing Secure Route: " + user);
             if (user != null) {
                 ctx.args.put("user", user);
                 return user.getEmailAddress();
