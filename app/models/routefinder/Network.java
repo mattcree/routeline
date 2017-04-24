@@ -140,9 +140,9 @@ public class Network {
      * @param line1 First Stop's line
      * @param name2 Second Stop's name
      * @param line2 Second Stop's line
-     * @param distance The distance between the Stops
+     * @param distance The time between the Stops
      * @return True if the Path was successfully added, False if either Stop doesn't
-     * exist or the distance is less than 1.
+     * exist or the time is less than 1.
      */
     public boolean addConnection(String name1, String line1, String name2, String line2, int distance) {
         Stop one = getStop(name1, line1);
@@ -157,9 +157,9 @@ public class Network {
      * connections.
      * @param one The first Stop
      * @param two The second Stop
-     * @param distance The distance between the Stops
+     * @param distance The time between the Stops
      * @return True if the Path was successfully added, False if either Stop doesn't
-     * exist or the distance is less than 1.
+     * exist or the time is less than 1.
      */
     public boolean addConnection(Stop one, Stop two, int distance) {
         if (!stops.contains(one) || !stops.contains(two) || distance <= 0) return false;

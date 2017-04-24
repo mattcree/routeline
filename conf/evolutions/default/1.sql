@@ -26,7 +26,7 @@ create table stop_connection (
   id                            bigint auto_increment not null,
   stop_a_id                     bigint not null,
   stop_b_id                     bigint not null,
-  distance                      bigint not null,
+  time                          int not null,
   constraint pk_stop_connection primary key (id)
 );
 

@@ -1,9 +1,14 @@
 package controllers;
 
 import models.StationStop;
+import models.routefinder.Stop;
+import play.data.Form;
+import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.*;
 
+import javax.inject.Inject;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -13,6 +18,9 @@ import java.util.TreeSet;
  * Created by Cree on 14/04/2017.
  */
 public class ApiController extends Controller {
+
+    @Inject
+    FormFactory formFactory;
 
     public Result getJsonStations()  {
         List<StationStop> stops = StationStop.find.all();
@@ -30,6 +38,21 @@ public class ApiController extends Controller {
         List<StationStop> stops = StationStop.find.all();
         System.out.println(stops);
         return ok(Json.toJson(stops));
+    }
+
+    public Result getJsonRoute(Long a, Long b){
+        StationStop stopA = StationStop.find.byId(a);
+        StationStop stopB = StationStop.find.byId(b);
+
+        System.out.println(stopA);
+        System.out.println(stopB);
+
+
+        Application.ROUTEFINDER.generateDistancesFrom(stopA);
+
+        Collection<StationStop> route = Application.ROUTEFINDER.getRouteTo(stopB);
+
+        return ok(Json.toJson(route));
     }
 
 }

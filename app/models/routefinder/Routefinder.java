@@ -1,72 +1,84 @@
 package models.routefinder;
-import models.StopConnection;
 import models.StationStop;
+import models.StopConnection;
 
 import java.util.*;
 
 public class Routefinder {
 
-    private final Collection<Stop> stops;
-    private final Collection<Connection> connections;
-    private final Network network;
+    private Collection<StationStop> stops;
+    private Collection<StopConnection> connections;
+    private Set<StationStop> calculatedStationStops;
+    private Set<StationStop> remainingStationStops;
+    private Map<StationStop, StationStop> predecessors;
+    private Map<StationStop, Integer> knownDistances;
 
-    private Set<Stop> calculatedStops;
-    private Set<Stop> remainingStops;
-    private Map<Stop, Stop> predecessors;
-    private Map<Stop, Integer> knownDistances;
-
-    public Routefinder(Network network) {
-        this.network = network;
-        this.stops = new ArrayList<>(network.getAllStops());
-        this.connections = new ArrayList<>(network.getAllConnections());
+    public Routefinder() {
+        this.stops = new ArrayList<>();
+        this.connections = new ArrayList<>();
     }
 
-    public Collection<Stop> getCalculatedStops() {
-        return this.calculatedStops;
+    public Routefinder(Collection<StationStop> stops, Collection<StopConnection> connections) {
+        this.stops = new ArrayList<>(stops);
+        this.connections = new ArrayList<>(connections);
     }
-    public Collection<Connection> getConnections() {
-        return this.connections;
+
+    public Collection<StationStop> getStops() {
+        return new ArrayList<>(stops);
     }
+
+    public Collection<StopConnection> getConnections() {
+        return new ArrayList<>(connections);
+    }
+
+    public void setConnections(Collection<StopConnection> connections) {
+        this.connections = connections;
+    }
+
+    public void setStops(Collection<StationStop> stops) {
+        this.stops = stops;
+    }
+
 
     //Main function which populates
-    public void generateDistancesFrom(Stop originStop) {
-        calculatedStops = new HashSet<>();
-        remainingStops = new HashSet<>();
+    public void generateDistancesFrom(StationStop originStationStop) {
+        calculatedStationStops = new HashSet<>();
+        remainingStationStops = new HashSet<>();
         knownDistances = new HashMap<>();
-        //Stop as Key and Value the Stop which preceeds it on its shortest route
+        //StationStop as Key and Value the StationStop which preceeds it on its shortest route
         predecessors = new HashMap<>();
 
-        //Adds our start point to knownDistances map with distance of 0
-        knownDistances.put(originStop, 0);
+        //Adds our start point to knownDistances map with time of 0
+        knownDistances.put(originStationStop, 0);
         //Adds starting stop to the list of stations
         //whose shortest routes have not been calculated
-        remainingStops.add(originStop);
+        remainingStationStops.add(originStationStop);
 
         //While there are still stops whose routes have not been calculated
-        while (remainingStops.size() > 0) {
+        while (remainingStationStops.size() > 0) {
             //Gets the closest stop which is still to be calculated
             //(starts with the source)
-            Stop stop = getNearestStop(remainingStops);
-            //Adds that stop to the calculatedStops
-            calculatedStops.add(stop);
+            StationStop stop = getNearestStationStop(remainingStationStops);
+            //Adds that stop to the calculatedStationStops
+            calculatedStationStops.add(stop);
             //removes it from the stops still to be calculated
-            remainingStops.remove(stop);
+            remainingStationStops.remove(stop);
             //
             findClosest(stop);
         }
     }
 
     //Takes a Set of stops
-    private Stop getNearestStop(Set<Stop> stops) {
+    private StationStop getNearestStationStop(Set<StationStop> stops) {
         //Initialises the minimum as null
-        Stop minimum = null;
+        StationStop minimum = null;
         //iterates through each stop in the Set
-        for (Stop stop : stops) {
+        for (StationStop stop : stops) {
             //Assigns current stop as new minimum if the minimum is currently null
             if (minimum == null) {
                 minimum = stop;
-            //if the stop has a shorter known distance
-            //that the shortest known distance of the current minimum
+            //if the stop has a shorter known time
+            //that the shortest known time of the current minimum
             //update the minimum to be the stop
             } else {
                 if (shortestKnownDistance(stop) < shortestKnownDistance(minimum)) {
@@ -78,65 +90,70 @@ public class Routefinder {
     }
 
     //Takes a destination stop
-    private int shortestKnownDistance(Stop destination) {
-        //gets the distance value from the knownDistances list
-        Integer distance = this.knownDistances.get(destination);
+    private int shortestKnownDistance(StationStop destination) {
+        //gets the time value from the knownDistances list
+        Integer time = this.knownDistances.get(destination);
 
         //if the destination is not in the knownDistances list
         //MAX_VALUE used in place of INFINITY
-        if(distance == null) return Integer.MAX_VALUE;
-        else return distance;
+        if(time == null) return Integer.MAX_VALUE;
+        else return time;
     }
 
     //Finds the closest stations to the start point and
-    private void findClosest(Stop stopOnRoute) {
+    private void findClosest(StationStop stopOnRoute) {
         //Gets the list of stops connected to the starting stop
-        List<Stop> connectedStops = getConnectedStops(stopOnRoute);
+        List<StationStop> connectedStationStops = getConnectedStationStops(stopOnRoute);
         //Iterates through each connected stop
-        for (Stop stop : connectedStops) {
-            //if the shortest known distance to the current stop is greater
-            //than the shortest known distance from the current stop plus
+        for (StationStop stop : connectedStationStops) {
+            //if the shortest known time to the current stop is greater
+            //than the shortest known time from the current stop plus
             int shortestKnownPath = shortestKnownDistance(stop);
-            int distanceToNext = getDistance(stopOnRoute, stop);
+            System.out.println(stopOnRoute);
+            System.out.println(stop);
+            int timeToNext = getDistance(stopOnRoute, stop);
+            System.out.println(timeToNext);
 
             //i.e. if no path known shortestKnownPath returns huge value, making
             //this true
-            if (shortestKnownPath + distanceToNext < shortestKnownPath) {
-                knownDistances.put(stop, shortestKnownPath + distanceToNext);
+            if (shortestKnownPath + timeToNext < shortestKnownPath) {
+                knownDistances.put(stop, shortestKnownPath + timeToNext);
                     predecessors.put(stop, stopOnRoute);
-                remainingStops.add(stop);
+                remainingStationStops.add(stop);
             }
         }
     }
 
-    //Returns the distance of the connection between here and there
+    //Returns the time of the connection between here and there
     //from the connection list.
-    private int getDistance(Stop here, Stop there) {
-        for (Connection connection : connections)
-            if ((connection.from() == here) && (connection.to() == there)) return connection.distance();
-        throw new RuntimeException("No connection between these stops.");
+    private int getDistance(StationStop here, StationStop there) {
+        StopConnection connection1 = StopConnection.find.where()
+                .eq("stop_a_id", here.id)
+                .eq("stop_b_id", there.id)
+                .findUnique();
+        return connection1.time();
     }
 
     //Returns a List of stations connected to the chosen stop
-    private List<Stop> getConnectedStops(Stop stop) {
-        List<Stop> connectedStops = new ArrayList<>();
+    private List<StationStop> getConnectedStationStops(StationStop stop) {
+        List<StationStop> connectedStationStops = new ArrayList<>();
         //Goes through each connection in our list of connections
-        for (Connection connection : connections) {
+        for (StopConnection connection : connections) {
             //checks if the connection's origin is the param stop *and* that
             //the connection's destination has not already been calculated.
 
-            //If both are true, adds the destination to the list of connectedStops
-            if ((connection.from().equals(stop)) && !calculatedStops.contains(connection.to())) {
-                connectedStops.add(connection.to());
+            //If both are true, adds the destination to the list of connectedStationStops
+            if ((connection.from().equals(stop)) && !calculatedStationStops.contains(connection.to())) {
+                connectedStationStops.add(connection.to());
             }
         }
         //Returns the list
-        return connectedStops;
+        return connectedStationStops;
     }
 
-    public Collection<Stop> getRouteTo(Stop destination) {
-        LinkedList<Stop> route = new LinkedList<>();
-        Stop waypoint = destination;
+    public Collection<StationStop> getRouteTo(StationStop destination) {
+        LinkedList<StationStop> route = new LinkedList<>();
+        StationStop waypoint = destination;
         // check if destination has a preceeding stop
         //listed. If no stop preceeds destination,
         //no route was found and returns null.
@@ -157,29 +174,6 @@ public class Routefinder {
 
         //and return the route
         return route;
-    }
-
-    public int timeForRoute(Stop destination){
-        int time = 0;
-        Collection<Stop> route = getRouteTo(destination);
-        if (route == null) return time;
-        System.out.println(route);
-
-        Stop thisStop = null;
-        Stop thatStop = null;
-        for (Stop stop : route) {
-            if (thisStop == null) thisStop = stop;
-            else {
-                thatStop = stop;
-                Connection connection = network.getOneWayConnection(thisStop, thatStop);
-                time = time + connection.distance();
-                System.out.println(connection.distance());
-                thisStop = thatStop;
-            }
-        }
-
-
-        return time;
     }
 
 
