@@ -1,3 +1,4 @@
+@(message: String)
 <div class="container">
     <br>
     <form id = "identicalForm" class="form-horizontal dark" action="@routes.AdminController.doAddUser()" method="post"
@@ -8,8 +9,12 @@
             <!-- Form Name -->
             <legend>Add User</legend>
 
+            @Html(message)
+
             <!-- Text input-->
             <div class="form-group">
+
+
 
                 <label class="col-md-4 control-label" for="username">Username</label>
                 <div class="col-md-4">
@@ -76,8 +81,9 @@
     <br>
 </div>
 
-<script>
 
+
+<script>
 $(document).ready(function() {
     $('#identicalForm').formValidation();
 });

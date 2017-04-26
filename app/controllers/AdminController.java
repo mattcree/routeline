@@ -147,16 +147,20 @@ public class AdminController extends Controller {
     }
 
     public Result addUserForm() {
-        return ok(index.render(addUserForm.render()));
+        return ok(index.render(addUserForm.render("")));
     }
 
     public Result doAddUser() {
         Form form = formFactory.form().bindFromRequest();
+
         String userName = form.data().get("username").toString();
         String email = form.data().get("email").toString();
-
-
         String password = form.data().get("password").toString();
+        String passwordMatch = form.data().get("passwordmatch").toString();
+
+        if (!password.equals(passwordMatch) ||
+                User.findByEmailAddressAndPassword(email, password) != null)
+            return badRequest(index.render(addUserForm.render("<b>error</b>")));
 
         User user = new User(email, password, userName);
 
