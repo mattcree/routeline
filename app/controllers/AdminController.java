@@ -158,22 +158,37 @@ public class AdminController extends Controller {
 
     //Users
     public Result adminUsers() {
-        return ok();
+        List<User> user = User.find.all();
+        return ok(index.render(listUsers.render(user)));
     }
 
     public Result addUserForm() {
-        return ok(index.render(addUserForm.render()));
+        return ok(index.render(addUserForm.render("")));
     }
 
     public Result doAddUser() {
         Form form = formFactory.form().bindFromRequest();
-        String lineName = form.data().get("name").toString();
 
-        Line line = new Line();
-        line.name = lineName;
+        String userName = form.data().get("username").toString();
+        String email = form.data().get("email").toString();
+        String password = form.data().get("password").toString();
+        String passwordMatch = form.data().get("passwordmatch").toString();
 
-        line.save();
-        return redirect(routes.AdminController.adminLines());
+        if (User.find.where().eq("email_address",email).findUnique() != null)
+            return badRequest(index.render(addUserForm.render("<b>email exists!</b>")));
+        if (User.findByEmailAddressAndPassword(email, password) != null)
+            return badRequest(index.render(addUserForm.render("<b>user already here mate!</b>")));
+
+        if (!password.equals(passwordMatch))
+            return badRequest(index.render(addUserForm.render("<b>no matchy no likey</b>")));
+
+        User user = new User(email, password, userName);
+
+        System.out.println(password);
+        System.out.println("get " + user.getPassword());
+
+        user.save();
+        return redirect(routes.AdminController.adminUsers());
     }
 
 
