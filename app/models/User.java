@@ -8,9 +8,7 @@ import javax.persistence.*;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -69,12 +67,21 @@ public class User extends Model {
     }
 
     public String getPassword() {
-        return password;
+
+        System.out.println(password);
+        return this.password;
     }
+
+//    public String getSha()
+//    {
+//        String Sha = DatatypeConverter.printBase64Binary(shaPassword);
+//        return Sha;
+//    }
 
     public void setPassword(String password) {
         this.password = password;
         shaPassword = getSha512(password);
+
     }
 
     public static Finder<Long, User> find = new Finder<>(User.class);
@@ -116,5 +123,13 @@ public class User extends Model {
         // todo: verify this query is correct.  Does it need an "and" statement?
         return find.where().eq("emailAddress", emailAddress.toLowerCase()).eq("shaPassword", getSha512(password)).findUnique();
     }
+
+
+    @Override
+    public String toString()
+    {
+        return this.emailAddress + this.fullName;
+    }
+
 
 }

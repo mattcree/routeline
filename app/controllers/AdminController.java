@@ -142,7 +142,8 @@ public class AdminController extends Controller {
 
     //Users
     public Result adminUsers() {
-        return ok();
+        List<User> user = User.find.all();
+        return ok(index.render(listUsers.render(user)));
     }
 
     public Result addUserForm() {
@@ -151,13 +152,19 @@ public class AdminController extends Controller {
 
     public Result doAddUser() {
         Form form = formFactory.form().bindFromRequest();
-        String lineName = form.data().get("name").toString();
+        String userName = form.data().get("username").toString();
+        String email = form.data().get("email").toString();
 
-        Line line = new Line();
-        line.name = lineName;
 
-        line.save();
-        return redirect(routes.AdminController.adminLines());
+        String password = form.data().get("password").toString();
+
+        User user = new User(email, password, userName);
+
+        System.out.println(password);
+        System.out.println("get " + user.getPassword());
+
+        user.save();
+        return redirect(routes.AdminController.adminUsers());
     }
 
 }

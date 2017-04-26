@@ -1,37 +1,84 @@
 <div class="container">
     <br>
-    <form class="form-horizontal dark" action="@routes.AdminController.doAddUser()" method="post">
+    <form id = "identicalForm" class="form-horizontal dark" action="@routes.AdminController.doAddUser()" method="post"
+          data-fv-icon-valid="glyphicon glyphicon-ok"
+          data-fv-icon-invalid="glyphicon glyphicon-remove"
+          data-fv-icon-validating="glyphicon glyphicon-refresh">
         <fieldset>
             <!-- Form Name -->
             <legend>Add User</legend>
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="username">Stop Name</label>
+
+                <label class="col-md-4 control-label" for="username">Username</label>
                 <div class="col-md-4">
-                    <input id="username" name="username" type="text" placeholder="e.g. johnrouteline.com" class="form-control input-md" required="">
+                    <input id="username" name="username" type="text" placeholder="e.g. johnTrain" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email</label>
+                <div class="col-md-4">
+                    <input id="email" name="email" type="email" placeholder="e.g. johnATroutline.com" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="password">Password</label>
+                <div class="col-md-4">
+                    <input id="password" name="password" type="password" placeholder="Think Secure!" class="form-control input-md" required=""
+                           data-fv-notempty="true"
+                           data-fv-notempty-message="The password is required and cannot be empty"
+
+                           data-fv-different="true"
+                           data-fv-different-field="username"
+                           data-fv-different-message="The password cannot be the same as username" />
 
                 </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="password">Line</label>
+                <label class="col-md-4 control-label" for="password">Re-Type Password</label>
                 <div class="col-md-4">
-                    <input id="password" name="password" type="text" placeholder="Think Secure!" class="form-control input-md" required="">
+                    <input id="passwordmatch" name="passwordmatch" type="password" placeholder="Passwords must match" class="form-control input-md" required=""
+                           data-fv-notempty="true"
+                           data-fv-notempty-message="The confirm password is required and cannot be empty"
+
+                           data-fv-identical="true"
+                           data-fv-identical-field="password"
+                           data-fv-identical-message="The password and its confirm are not the same" />
 
                 </div>
             </div>
+
+
+
 
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="submit"></label>
                 <div class="col-md-8">
-                    <button id="submit" name="submit" class="btn btn-success">Add</button>
-                    <a href="@routes.AdminController.adminStops()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
+                    <button id="submit" name="submit" class="btn btn-success" type="submit">Add</button>
+                    <a href="@routes.AdminController.adminUsers()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
         </fieldset>
     </form>
     <br>
 </div>
+
+<script>
+
+$(document).ready(function() {
+    $('#identicalForm').formValidation();
+});
+</script>

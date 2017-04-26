@@ -103,6 +103,14 @@ public class Application extends Controller {
         return ok(Json.toJson(user));
     }
 
+    public Result createTestUser(String email, String password, String name) {
+        User user = new User(email, password, name);
+        user.save();
+        System.out.println(User.find.all());
+        return ok(Json.toJson(user));
+    }
+
+
     public Result index()  {
         return ok(index.render(stationPicker.render()));
     }

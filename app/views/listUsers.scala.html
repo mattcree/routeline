@@ -1,0 +1,48 @@
+@(users: List[User])
+<br>
+<div class="container transparent">
+    <div class="container-fluid">
+        @if(users.isEmpty) {
+        <legend>Current Users</legend>
+        <h1 class="dark">No records</h1>
+
+        } else {
+        <table id="stops" class="table dark table-striped">
+            <legend>Current Users            <div class="form-group pull-right">
+                <div class="text-center">
+                    <a href="@routes.AdminController.options()" id="back" name="back" class="btn btn-info">Back</a>
+                    <a href="@routes.AdminController.addUserForm()"id="add" name="add" class="btn btn-success">Add User</a>
+                </div>
+            </div></legend>
+            <thead>
+
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody class="dark">
+            @for(user <- users) {
+            <tr>
+                <th>@user.fullName</th>
+                <th>@user.getEmailAddress</th>
+                <th>
+                    <a class="btn btn-danger" href="#">Delete</a>
+                </th>
+            </tr>
+            }
+            </tbody>
+        </table>
+        }
+
+        <br>
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <div class="text-center">
+                <a href="@routes.AdminController.options()" id="back" name="back" class="btn btn-info">Back</a>
+                <a href="@routes.AdminController.addUserForm()"id="add" name="add" class="btn btn-success">Add User</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
