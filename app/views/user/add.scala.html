@@ -1,7 +1,7 @@
 @(message: String)
 <div class="container">
     <br>
-    <form id = "identicalForm" class="form-horizontal dark" action="@routes.AdminController.doAddUser()" method="post"
+    <form id = "identicalForm" class="form-horizontal dark" action="@routes.UserController.doAddUser()" method="post"
           data-fv-icon-valid="glyphicon glyphicon-ok"
           data-fv-icon-invalid="glyphicon glyphicon-remove"
           data-fv-icon-validating="glyphicon glyphicon-refresh">
@@ -14,25 +14,21 @@
             <!-- Text input-->
             <div class="form-group">
 
-
-
-                <label class="col-md-4 control-label" for="username">Username</label>
+                <label class="col-md-4 control-label" for="username">Name</label>
                 <div class="col-md-4">
-                    <input id="username" name="username" type="text" placeholder="e.g. johnTrain" class="form-control input-md" required="">
+                    <input id="username" name="username" type="text" placeholder="e.g. Train Man" class="form-control input-md" required="">
 
                 </div>
             </div>
-
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="email">Email</label>
+                <label class="col-md-4 control-label" for="email">E-mail</label>
                 <div class="col-md-4">
-                    <input id="email" name="email" type="email" placeholder="e.g. johnATroutline.com" class="form-control input-md" required="">
+                    <input id="email" name="email" type="email" placeholder="e.g. train@@lads.com" class="form-control input-md" required="">
 
                 </div>
             </div>
-
 
             <!-- Text input-->
 
@@ -53,15 +49,12 @@
                 </div>
             </div>
 
-
-
-
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="submit"></label>
                 <div class="col-md-8">
                     <button id="submit" name="submit" class="btn btn-success" type="submit">Add</button>
-                    <a href="@routes.AdminController.adminUsers()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
+                    <a href="@routes.UserController.list()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
         </fieldset>

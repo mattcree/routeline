@@ -13,7 +13,7 @@ GET     /assets/*file                   controllers.Assets.versioned(path="/publ
 # API
 GET     /api/stations                   controllers.ApiController.getJsonStations
 GET     /api/stops                      controllers.ApiController.getJsonStops
-GET     /api/route/:a/:b                 controllers.ApiController.getJsonRoute(a: Long, b: Long)
+GET     /api/route/:a/:b                controllers.ApiController.getJsonRoute(a: Long, b: Long)
 
 
 # Admin Routes
@@ -23,28 +23,26 @@ POST    /admin/login                    controllers.SecurityController.login
 GET     /admin/logout                   controllers.SecurityController.logout
 GET     /admin/options                  controllers.AdminController.options
 
-# Getting Stops and Connections
-GET     /admin/stops                    controllers.AdminController.adminStops
-GET     /admin/connections              controllers.AdminController.adminConnections
-
 # Admin Stop Functions
-GET     /admin/stops/add                controllers.AdminController.addStopForm
-POST    /admin/stops/add                controllers.AdminController.doAddStop
-GET     /admin/stops/delete/:id         controllers.AdminController.deleteStop(id: Long)
+GET     /admin/stops                    controllers.StopController.list
+GET     /admin/stops/add                controllers.StopController.add
+POST    /admin/stops/add                controllers.StopController.doAddStop
+GET     /admin/stops/delete/:id         controllers.StopController.deleteStop(id: Long)
 
 # Admin Connection Functions
-GET     /admin/connections/add          controllers.AdminController.addConnectionForm
-POST    /admin/connections/add          controllers.AdminController.doAddConnection
-GET     /admin/connections/delete/:id   controllers.AdminController.deleteConnection(id: Long)
+GET     /admin/connections              controllers.ConnectionController.list
+GET     /admin/connections/add          controllers.ConnectionController.add
+POST    /admin/connections/add          controllers.ConnectionController.doAddConnection
+GET     /admin/connections/delete/:id   controllers.ConnectionController.deleteConnection(id: Long)
 
 # Admin Line Functions
-GET     /admin/lines                    controllers.AdminController.adminLines
-GET     /admin/lines/add                controllers.AdminController.addLineForm
-POST    /admin/lines/add                controllers.AdminController.doAddLine
-GET     /admin/lines/delete/:id         controllers.AdminController.deleteLine(id: Long)
+GET     /admin/lines                    controllers.LineController.list
+GET     /admin/lines/add                controllers.LineController.add
+POST    /admin/lines/add                controllers.LineController.doAddLine
+GET     /admin/lines/delete/:id         controllers.LineController.deleteLine(id: Long)
 
 
 # Admin User Functions
-GET     /admin/users                    controllers.AdminController.adminUsers
-GET     /admin/users/add                controllers.AdminController.addUserForm
-POST    /admin/users/add                controllers.AdminController.doAddUser
+GET     /admin/users                    controllers.UserController.list
+GET     /admin/users/add                controllers.UserController.add
+POST    /admin/users/add                controllers.UserController.doAddUser

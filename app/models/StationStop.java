@@ -20,14 +20,19 @@ public class StationStop extends Model {
     @Constraints.Required
     public String line;
 
+    public String getName(){
+        return name;
+    }
+
     public String getLine(){
         return line;
     }
 
     public static Finder<Long, StationStop> find = new Finder<>(StationStop.class);
 
+    @Override
     public String toString() {
-        return name + " " + line;
+        return this.getName() + " on " + this.getLine() + " line";
     }
 
     @Override

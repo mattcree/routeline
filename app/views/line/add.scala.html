@@ -1,6 +1,6 @@
 <div class="container">
     <br>
-    <form class="form-horizontal dark" action="@routes.AdminController.doAddLine()" method="post">
+    <form class="form-horizontal dark" action="@routes.LineController.doAddLine()" method="post">
         <fieldset>
             <!-- Form Name -->
             <legend>Add Line</legend>
@@ -19,7 +19,7 @@
                 <label class="col-md-4 control-label" for="submit"></label>
                 <div class="col-md-8">
                     <button id="submit" name="submit" class="btn btn-success">Add</button>
-                    <a href="@routes.AdminController.adminLines()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
+                    <a href="@routes.LineController.list()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
         </fieldset>
