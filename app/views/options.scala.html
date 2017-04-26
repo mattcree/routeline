@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6 col-md-3">
-                <a href="@routes.AdminController.adminLines()" class="card-link">
+                <a href="@routes.LineController.list()" class="card-link">
                     <div class="thumbnail">
                         <img src="@routes.Assets.versioned("img/linesbtn.png")" alt="Lines">
                         <div class="caption">
@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="@routes.AdminController.adminStops()" class="card-link">
+                <a href="@routes.StopController.list()" class="card-link">
                     <div class="thumbnail">
                         <img src="@routes.Assets.versioned("img/stationbtn.png")" alt="Stations">
                         <div class="caption">
@@ -22,7 +22,7 @@
                 </a>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="@routes.AdminController.adminConnections()" class="card-link">
+                <a href="@routes.ConnectionController.list()" class="card-link">
                     <div class="thumbnail">
                         <img src="@routes.Assets.versioned("img/connectionsbtn.png")" alt="Connections">
                         <div class="caption">
@@ -32,7 +32,7 @@
                 </a>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="@routes.AdminController.adminUsers()" class="card-link">
+                <a href="@routes.UserController.list()" class="card-link">
                     <div class="thumbnail">
                         <img src="@routes.Assets.versioned("img/adminbtn.png")" alt="Users">
                         <div class="caption">

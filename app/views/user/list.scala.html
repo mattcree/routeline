@@ -1,36 +1,33 @@
-@(stops: List[StationStop])
+@(users: List[User])
 <br>
 <div class="container transparent">
     <div class="container-fluid">
-        @if(stops.isEmpty) {
-        <legend>Current Stops</legend>
+        @if(users.isEmpty) {
+        <legend>Current Users</legend>
         <h1 class="dark">No records</h1>
 
         } else {
         <table id="stops" class="table dark table-striped">
-            <legend>Current Stops            <div class="form-group pull-right">
+            <legend>Current Users            <div class="form-group pull-right">
                 <div class="text-center">
                     <a href="@routes.AdminController.options()" id="back" name="back" class="btn btn-info">Back</a>
-                    <a href="@routes.AdminController.addStopForm()"id="add" name="add" class="btn btn-success">Add Stop</a>
+                    <a href="@routes.UserController.add()"id="add" name="add" class="btn btn-success">Add User</a>
                 </div>
             </div></legend>
             <thead>
 
             <tr>
-                <th>ID</th>
                 <th>Name</th>
-                <th>Line</th>
-                <th></th>
+                <th>Email</th>
             </tr>
             </thead>
             <tbody class="dark">
-            @for(stop <- stops) {
+            @for(user <- users) {
             <tr>
-                <th>@stop.id</th>
-                <th>@stop.name</th>
-                <th>@stop.line</th>
+                <th>@user.fullName</th>
+                <th>@user.getEmailAddress</th>
                 <th>
-                    <a class="btn btn-danger" href="@routes.AdminController.deleteStop(stop.id)">Delete</a>
+                    <a class="btn btn-danger" href="#">Delete</a>
                 </th>
             </tr>
             }
@@ -43,7 +40,7 @@
         <div class="form-group">
             <div class="text-center">
                 <a href="@routes.AdminController.options()" id="back" name="back" class="btn btn-info">Back</a>
-                <a href="@routes.AdminController.addStopForm()"id="add" name="add" class="btn btn-success">Add Stop</a>
+                <a href="@routes.UserController.add()"id="add" name="add" class="btn btn-success">Add User</a>
             </div>
         </div>
     </div>

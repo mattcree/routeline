@@ -1,5 +1,7 @@
 package models.routefinder;
 
+import models.StationStop;
+import models.StopConnection;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -9,8 +11,8 @@ import java.util.LinkedList;
  */
 public class Network {
 
-    private Collection<Stop> stops;
-    private Collection<Connection> connections;
+    private Collection<StationStop> stops;
+    private Collection<StopConnection> connections;
 
 
     public Network() {
@@ -21,18 +23,18 @@ public class Network {
     //Accessor Methods
     //Collections
     /**
-     * Gets the Collection of Stops
-     * @return A Collection of Stop
+     * Gets the Collection of StationStops
+     * @return A Collection of StationStop
      */
-    public Collection<Stop> getAllStops() {
+    public Collection<StationStop> getAllStationStops() {
         return stops;
     }
 
     //Takes a station name and returns Collection
-    //of Stops at that Station
-    public Collection<Stop> getAllLineStopsAt(String name) {
-        LinkedList<Stop> list = new LinkedList<>();
-        for(Stop stop : stops) {
+    //of StationStops at that Station
+    public Collection<StationStop> getAllLineStationStopsAt(String name) {
+        LinkedList<StationStop> list = new LinkedList<>();
+        for(StationStop stop : stops) {
             if(stop.getName().equals(name)) list.add(stop);
         }
         return list;
@@ -40,25 +42,25 @@ public class Network {
 
     public Collection<String> getAllLines() {
         LinkedList<String> list = new LinkedList<>();
-        for(Stop stop : stops) {
+        for(StationStop stop : stops) {
             String line = stop.getLine();
             if(!list.contains(line)) list.add(line);
         }
         return list;
     }
 
-    public Collection<String> getAllStopNames() {
+    public Collection<String> getAllStationStopNames() {
         LinkedList<String> list = new LinkedList<>();
-        for(Stop stop : stops) {
+        for(StationStop stop : stops) {
             String stopName = stop.getName();
             if(!list.contains(stopName)) list.add(stopName);
         }
         return list;
     }
 
-    public Collection<Stop> getConnectedStops(Stop stop) {
-        LinkedList<Stop> stops = new LinkedList<>();
-        for(Connection connection : connections) {
+    public Collection<StationStop> getConnectedStationStops(StationStop stop) {
+        LinkedList<StationStop> stops = new LinkedList<>();
+        for(StopConnection connection : connections) {
             if (connection.from().equals(stop)) {
                 stops.add(connection.to());
             }
@@ -67,22 +69,22 @@ public class Network {
     }
 
     /**
-     * Gets the Collection of Connections.
+     * Gets the Collection of StopConnections.
      * @return A Collection of Path
      */
-    public Collection<Connection> getAllConnections() {
+    public Collection<StopConnection> getAllStopConnections() {
         return connections;
     }
 
-    //Get Stops and Connections
+    //Get StationStops and StopConnections
     /**
-     * Gets a stop from the List of Stops based on the name and line params
-     * @param name The name of a Stop
-     * @param line The line the Stop is on
-     * @return A Stop object if found, or null if no Stop found
+     * Gets a stop from the List of StationStops based on the name and line params
+     * @param name The name of a StationStop
+     * @param line The line the StationStop is on
+     * @return A StationStop object if found, or null if no StationStop found
      */
-    public Stop getStop(String name, String line) {
-        for (Stop stop : stops) {
+    public StationStop getStationStop(String name, String line) {
+        for (StationStop stop : stops) {
             if (stop.getName().equals(name) && stop.getLine().equals(line)) {
                 return stop;
             }
@@ -90,97 +92,100 @@ public class Network {
         return null;
     }
 
-    public Connection getOneWayConnection(Stop one, Stop two) {
-        for(Connection connection : connections) {
+    public StopConnection getOneWayStopConnection(StationStop one, StationStop two) {
+        for(StopConnection connection : connections) {
             if (isConnected(one, two, connection)) return connection;
         }
         return null;
     }
 
-    //Stop Methods
-    //Adding Stops
+    //StationStop Methods
+    //Adding StationStops
     /**
-     * Adds a new stop to the Stops list and returns true. If the
-     * Stop already exists, returns false.
-     * @param name The name of a Stop
-     * @param line The line of a Stop
-     * @return True if the Stop has been added to the list, false if it already exists.
+     * Adds a new stop to the StationStops list and returns true. If the
+     * StationStop already exists, returns false.
+     * @param name The name of a StationStop
+     * @param line The line of a StationStop
+     * @return True if the StationStop has been added to the list, false if it already exists.
      */
-    public boolean addStop(String name, String line) {
-        if (getStop(name, line) != null) return false;
-        return stops.add(new Stop(name, line));
+    public boolean addStationStop(String name, String line) {
+        if (getStationStop(name, line) != null) return false;
+        StationStop stop = new StationStop();
+        stop.name = name;
+        stop.line = line;
+        return stops.add(stop);
     }
 
-    //Removing Stops
+    //Removing StationStops
     /**
-     * Removes a Stop from the list of stops. Also removes any Connections
-     * made to this Stop.
-     * @param name The name of a Stop
-     * @param line The line of a Stop
-     * @return True if the Stop has been successfully removed, false if
+     * Removes a StationStop from the list of stops. Also removes any StopConnections
+     * made to this StationStop.
+     * @param name The name of a StationStop
+     * @param line The line of a StationStop
+     * @return True if the StationStop has been successfully removed, false if
      * the stop does not exist.
      */
-    public boolean removeStop(String name, String line) {
-        Stop stopToRemove = getStop(name, line);
+    public boolean removeStationStop(String name, String line) {
+        StationStop stopToRemove = getStationStop(name, line);
         if (stopToRemove == null) return false;
-        removeAllConnections(stopToRemove);
-        for(Stop stop : stops) {
+        removeAllStopConnections(stopToRemove);
+        for(StationStop stop : stops) {
             if (stop.equals(stopToRemove)) return stops.remove(stopToRemove);
         }
         return false;
     }
 
     //Path methods
-    //Adding Connections
+    //Adding StopConnections
     /**
-     * Adds a connection using String values to identify the Stops to be
+     * Adds a connection using String values to identify the StationStops to be
      * connected. A complete Path is bi-directional, and constitutes
      * two separate unidirectional connections.
-     * @param name1 First Stop's name
-     * @param line1 First Stop's line
-     * @param name2 Second Stop's name
-     * @param line2 Second Stop's line
-     * @param distance The time between the Stops
-     * @return True if the Path was successfully added, False if either Stop doesn't
+     * @param name1 First StationStop's name
+     * @param line1 First StationStop's line
+     * @param name2 Second StationStop's name
+     * @param line2 Second StationStop's line
+     * @param distance The time between the StationStops
+     * @return True if the Path was successfully added, False if either StationStop doesn't
      * exist or the time is less than 1.
      */
-    public boolean addConnection(String name1, String line1, String name2, String line2, int distance) {
-        Stop one = getStop(name1, line1);
-        Stop two = getStop(name2, line2);
+    public boolean addStopConnection(String name1, String line1, String name2, String line2, int distance) {
+        StationStop one = getStationStop(name1, line1);
+        StationStop two = getStationStop(name2, line2);
         if (one == null || two == null) return false;
-        return addConnection(one, two, distance);
+        return addStopConnection(one, two, distance);
     }
 
     /**
-     * Adds a connection using Stop objects. A complete Path
+     * Adds a connection using StationStop objects. A complete Path
      * is bi-directional, and constitutes two separate unidirectional
      * connections.
-     * @param one The first Stop
-     * @param two The second Stop
-     * @param distance The time between the Stops
-     * @return True if the Path was successfully added, False if either Stop doesn't
+     * @param one The first StationStop
+     * @param two The second StationStop
+     * @param distance The time between the StationStops
+     * @return True if the Path was successfully added, False if either StationStop doesn't
      * exist or the time is less than 1.
      */
-    public boolean addConnection(Stop one, Stop two, int distance) {
+    public boolean addStopConnection(StationStop one, StationStop two, int distance) {
         if (!stops.contains(one) || !stops.contains(two) || distance <= 0) return false;
-        return addOneWayConnection(one, two, distance) && addOneWayConnection(two, one, distance);
+        return addOneWayStopConnection(one, two, distance) && addOneWayStopConnection(two, one, distance);
     }
 
-    //Removing Connections
+    //Removing StopConnections
     /**
      * Removes Path(s) from Path Collection.
-     * @param one Stop one
-     * @param two Stop two
+     * @param one StationStop one
+     * @param two StationStop two
      * @return True if the connection has been successfully removed, false
      * if connection does not exist.
      */
-    public boolean removeConnectionBetween(Stop one, Stop two) {
+    public boolean removeStopConnectionBetween(StationStop one, StationStop two) {
         int removalCount = 0;
         if (!stops.contains(one) || !stops.contains(two)) return false;
-        Iterator<Connection> iterator = connections.iterator();
+        Iterator<StopConnection> iterator = connections.iterator();
         while (iterator.hasNext()) {
-            Connection connection = iterator.next();
-            if (isAConnectionBetween(one, two, connection)) {
+            StopConnection connection = iterator.next();
+            if (isAStopConnectionBetween(one, two, connection)) {
                 iterator.remove();
                 removalCount++;
             }
@@ -188,36 +193,40 @@ public class Network {
         return removalCount == 2;
     }
 
-    public boolean removeConnectionBetween(String name1, String line1, String name2, String line2) {
-        Stop one = getStop(name1, line1);
-        Stop two = getStop(name2, line2);
+    public boolean removeStopConnectionBetween(String name1, String line1, String name2, String line2) {
+        StationStop one = getStationStop(name1, line1);
+        StationStop two = getStationStop(name2, line2);
         if (one == null || two == null) return false;
-        return removeConnectionBetween(one, two);
+        return removeStopConnectionBetween(one, two);
     }
 
 
-    public boolean removeAllConnections(Stop stop) {
-        Collection<Stop> stops = getConnectedStops(stop);
+    public boolean removeAllStopConnections(StationStop stop) {
+        Collection<StationStop> stops = getConnectedStationStops(stop);
         if (stops.isEmpty()) return false;
-        for(Stop targetStop : stops) {
-            removeConnectionBetween(stop, targetStop);
+        for(StationStop targetStationStop : stops) {
+            removeStopConnectionBetween(stop, targetStationStop);
         }
         return true;
     }
 
     //Private helper functions
     //Adds a Path A -> B
-    private boolean addOneWayConnection(Stop a, Stop b, int distance) {
-        return connections.add(new Connection(a, b, distance));
+    private boolean addOneWayStopConnection(StationStop a, StationStop b, int time) {
+        StopConnection connection = new StopConnection();
+        connection.stopA = a;
+        connection.stopB = b;
+        connection.time = time;
+        return connections.add(connection);
     }
 
     //True if Path represents Path A -> B
-    private boolean isConnected(Stop a, Stop b, Connection connection) {
+    private boolean isConnected(StationStop a, StationStop b, StopConnection connection) {
         return connection.from().equals(a) && connection.to().equals(b);
     }
 
     //True if Path is A -> B or B -> A
-    private boolean isAConnectionBetween(Stop a, Stop b, Connection connection) {
+    private boolean isAStopConnectionBetween(StationStop a, StationStop b, StopConnection connection) {
         return isConnected(a, b, connection) || isConnected(b, a, connection);
     }
 
