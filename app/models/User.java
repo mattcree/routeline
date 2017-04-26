@@ -124,12 +124,4 @@ public class User extends Model {
         return find.where().eq("emailAddress", emailAddress.toLowerCase()).eq("shaPassword", getSha512(password)).findUnique();
     }
 
-
-    @Override
-    public String toString()
-    {
-        return this.emailAddress + this.fullName;
-    }
-
-
 }

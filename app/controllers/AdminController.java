@@ -1,8 +1,10 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import models.*;
 import play.data.Form;
 import play.data.FormFactory;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -78,28 +80,42 @@ public class AdminController extends Controller {
 
         Long stopAId = null;
         Long stopBId = null;
-        Long distance = null;
+        Integer time = null;
 
         try {
             stopAId = Long.parseLong(form.data().get("stopA").toString());
             stopBId = Long.parseLong(form.data().get("stopB").toString());
-            distance = Long.parseLong(form.data().get("time").toString());
+            time = Integer.parseInt(form.data().get("time").toString());
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
 
-        if (distance == null || stopAId == null || stopBId == null) return redirect(routes.AdminController.addConnectionForm());
+        if (time == null || stopAId == null || stopBId == null) return redirect(routes.AdminController.addConnectionForm());
 
         StationStop stopA = StationStop.find.byId(stopAId);
         StationStop stopB = StationStop.find.byId(stopBId);
 
         if (stopA == null || stopB == null || stopA.equals(stopB)) return redirect(routes.AdminController.addConnectionForm());
-        StopConnection connection = new StopConnection();
-        connection.stopA = stopA;
-        connection.stopB = stopB;
-        connection.distance = distance;
-        System.out.println(connection);
-        connection.save();
+        Ebean.beginTransaction();
+        try {
+            StopConnection connection = new StopConnection();
+            StopConnection connection2 = new StopConnection();
+
+            connection.stopA = stopA;
+            connection.stopB = stopB;
+            connection.time = time;
+
+            connection2.stopA = stopB;
+            connection2.stopB = stopA;
+            connection2.time = time;
+
+            connection.save();
+            connection2.save();
+            Ebean.commitTransaction();
+        } finally {
+            Ebean.endTransaction();
+        }
+        System.out.println(StopConnection.find.all().toString());
         return redirect(routes.AdminController.adminConnections());
     }
 
@@ -174,5 +190,8 @@ public class AdminController extends Controller {
         user.save();
         return redirect(routes.AdminController.adminUsers());
     }
+
+
+
 
 }

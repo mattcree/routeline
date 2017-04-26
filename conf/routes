@@ -5,7 +5,7 @@
 # Home page
 GET     /                               controllers.Application.index
 GET     /init                           controllers.Application.createFirstUser
-GET     /test/:email/:password/:name    controllers.Application.createTestUser(email: String, password: String, name: String)
+GET     /make                           controllers.Application.populateRoutefinder
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                   controllers.Assets.versioned(path="/public", file)
@@ -13,7 +13,7 @@ GET     /assets/*file                   controllers.Assets.versioned(path="/publ
 # API
 GET     /api/stations                   controllers.ApiController.getJsonStations
 GET     /api/stops                      controllers.ApiController.getJsonStops
-
+GET     /api/route/:a/:b                 controllers.ApiController.getJsonRoute(a: Long, b: Long)
 
 
 # Admin Routes

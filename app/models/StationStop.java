@@ -20,9 +20,29 @@ public class StationStop extends Model {
     @Constraints.Required
     public String line;
 
+    public String getLine(){
+        return line;
+    }
+
     public static Finder<Long, StationStop> find = new Finder<>(StationStop.class);
 
     public String toString() {
         return name + " " + line;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || this.getClass() != object.getClass()) return false;
+        StationStop stop = (StationStop) object;
+        if (!name.equals(stop.name)) return false;
+        return line.equals(stop.line);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + line.hashCode();
+        return result;
     }
 }
