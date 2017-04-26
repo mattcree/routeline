@@ -7,6 +7,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 
+import play.twirl.api.Html;
+import views.html.failure;
 import views.html.index;
 import views.html.user.list;
 import views.html.user.add;
@@ -30,7 +32,7 @@ public class UserController extends Controller {
     }
 
     public Result add() {
-        return ok(index.render(add.render("")));
+        return ok(index.render(add.render(Html.apply(""))));
     }
 
     public Result doAddUser() {
@@ -42,11 +44,11 @@ public class UserController extends Controller {
         String passwordMatch = form.data().get("passwordmatch").toString();
 
         if (User.find.where().eq("email_address",email).findUnique() != null)
-            return badRequest(index.render(add.render("<b>email exists!</b>")));
+            return badRequest(index.render(add.render(failure.render("<b>email exists!</b>"))));
         if (User.findByEmailAddressAndPassword(email, password) != null)
-            return badRequest(index.render(add.render("<b>user already here mate!</b>")));
+            return badRequest(index.render(add.render(failure.render("<b>user already here mate!</b>"))));
         if (!password.equals(passwordMatch))
-            return badRequest(index.render(add.render("<b>no matchy no likey</b>")));
+            return badRequest(index.render(add.render(failure.render(("<b>Error:</b> Passwords must match.")))));
 
         User user = new User(email, password, userName);
 
@@ -56,6 +58,5 @@ public class UserController extends Controller {
         user.save();
         return redirect(routes.UserController.list());
     }
-
 
 }

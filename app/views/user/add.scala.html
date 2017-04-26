@@ -1,4 +1,4 @@
-@(message: String)
+@(message: Html)
 <div class="container">
     <br>
     <form id = "identicalForm" class="form-horizontal dark" action="@routes.UserController.doAddUser()" method="post"
@@ -9,7 +9,7 @@
             <!-- Form Name -->
             <legend>Add User</legend>
 
-            @Html(message)
+            @message
 
             <!-- Text input-->
             <div class="form-group">
