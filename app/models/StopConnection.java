@@ -43,6 +43,7 @@ public class StopConnection extends Model {
         return !stopA.getLine().equals(stopB.getLine());
     }
 
+    @Override
     public String toString() {
         return stopA.toString() + " to " + stopB.toString() ;
     }

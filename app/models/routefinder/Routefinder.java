@@ -23,6 +23,11 @@ public class Routefinder {
         this.connections = new ArrayList<>(connections);
     }
 
+    public Routefinder(Network network) {
+        this.stops = new ArrayList<>(network.getAllStationStops());
+        this.connections = new ArrayList<>(network.getAllStopConnections());
+    }
+
     public Collection<StationStop> getStops() {
         return new ArrayList<>(stops);
     }
@@ -127,11 +132,20 @@ public class Routefinder {
     //Returns the time of the connection between here and there
     //from the connection list.
     private int getDistance(StationStop here, StationStop there) {
-        StopConnection connection1 = StopConnection.find.where()
-                .eq("stop_a_id", here.id)
-                .eq("stop_b_id", there.id)
-                .findUnique();
-        return connection1.time();
+        for (StopConnection connection : connections) {
+            System.out.println("-----------------------");
+            System.out.println("Start:" + here);
+            System.out.println("Destination:" + there);
+            System.out.println("");
+            System.out.println(connection);
+            System.out.println(connection.from() == here);
+            System.out.println(connection.to() == there);
+            System.out.println("-----------------------");
+
+            if ((connection.from().equals(here)) && (connection.to().equals(there)))
+                return connection.time();
+        }
+        throw new RuntimeException("No connection between these stops.");
     }
 
     //Returns a List of stations connected to the chosen stop

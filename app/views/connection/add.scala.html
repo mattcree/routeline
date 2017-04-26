@@ -1,7 +1,7 @@
 @(stops: List[StationStop])
 <br>
 <div class="container">
-    <form class="form-horizontal dark" action="@routes.AdminController.doAddConnection()" method="post">
+    <form class="form-horizontal dark" action="@routes.ConnectionController.doAddConnection()" method="post">
         <fieldset>
             <!-- Form Name -->
             <legend>Add Connection</legend>
@@ -43,7 +43,7 @@
                 <label class="col-md-4 control-label" for="submit"></label>
                 <div class="col-md-8">
                     <button id="submit" name="submit" class="btn btn-success">Add</button>
-                    <a href="@routes.AdminController.adminConnections()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
+                    <a href="@routes.ConnectionController.list()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
 
