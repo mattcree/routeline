@@ -12,10 +12,21 @@ GET     /make                           controllers.AppController.populateRoutef
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                   controllers.Assets.versioned(path="/public", file)
 
-# API
+# API for SPA front-end
+# Station Names i.e. Set of Stop names
 GET     /api/stations                   controllers.ApiController.getJsonStations
+
+# Stop Information
 GET     /api/stops                      controllers.ApiController.getJsonStops
+GET     /api/stops/:name                controllers.ApiController.getJsonAllStopsAtStation(name: String)
+
+# Line Information
+GET     /api/lines                      controllers.ApiController.getJsonAllLines
+GET     /api/lines/:line                controllers.ApiController.getJsonAllStopsOnLine(line: String)
+
+# Route Information
 GET     /api/route/:a/:b                controllers.ApiController.getJsonRoute(a: Long, b: Long)
+
 
 # Admin Routes
 # Logging In

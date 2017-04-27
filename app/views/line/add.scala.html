@@ -1,10 +1,11 @@
+@(message: Html)
 <div class="container">
     <br>
     <form class="form-horizontal dark" action="@routes.LineController.doAddLine()" method="post">
         <fieldset>
             <!-- Form Name -->
             <legend>Add Line</legend>
-
+            @message
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="name">Line Name</label>

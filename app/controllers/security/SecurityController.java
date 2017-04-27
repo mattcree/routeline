@@ -3,10 +3,12 @@ package controllers.security;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import controllers.routes;
 import models.User;
+
 import play.data.Form;
 import play.data.FormFactory;
 import play.data.validation.Constraints;
 import play.libs.Json;
+
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -22,9 +24,8 @@ public class SecurityController extends Controller {
     public final static String AUTH_TOKEN_HEADER = "X-AUTH-TOKEN";
     public static final String AUTH_TOKEN = "authToken";
 
-
+    //Returns value of 'user' in header from current Http.Context as a User.
     public static User getUser() {
-        System.out.println(Http.Context.current().args.get("user"));
         return (User)Http.Context.current().args.get("user");
     }
 
@@ -44,9 +45,11 @@ public class SecurityController extends Controller {
             return unauthorized();
         }
         else {
+            //Creates
             String authToken = user.createToken();
             ObjectNode authTokenJson = Json.newObject();
             authTokenJson.put(AUTH_TOKEN, authToken);
+            //Sets the cookie on user's machine with their authToken from DB.
             response().setCookie(Http.Cookie.builder(AUTH_TOKEN, authToken).withSecure(ctx().request().secure()).build());
             return redirect(routes.AdminController.options());
         }
@@ -60,6 +63,7 @@ public class SecurityController extends Controller {
         return redirect("/");
     }
 
+    //Nested static class representing Login form.
     public static class Login {
 
         @Constraints.Required
