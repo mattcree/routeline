@@ -1,11 +1,10 @@
 package controllers;
 
 import models.StationStop;
-import models.routefinder.Stop;
-import play.data.Form;
 import play.data.FormFactory;
 import play.libs.Json;
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Result;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -48,9 +47,9 @@ public class ApiController extends Controller {
         System.out.println(stopB);
 
 
-        Application.ROUTEFINDER.generateDistancesFrom(stopA);
+        AppController.ROUTEFINDER.generateDistancesFrom(stopA);
 
-        Collection<StationStop> route = Application.ROUTEFINDER.getRouteTo(stopB);
+        Collection<StationStop> route = AppController.ROUTEFINDER.getRouteTo(stopB);
 
         return ok(Json.toJson(route));
     }

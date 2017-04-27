@@ -1,6 +1,7 @@
 package routefindertest;
 
-import models.routefinder.*;
+import models.routefinder.Connection;
+import models.routefinder.Stop;
 import org.junit.Assert;
 import org.junit.Test;
 

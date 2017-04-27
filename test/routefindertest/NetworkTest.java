@@ -2,8 +2,7 @@ package routefindertest;
 
 import models.StationStop;
 import models.StopConnection;
-import models.routefinder.*;
-
+import models.routefinder.Network;
 import org.junit.Assert;
 import org.junit.Test;
 

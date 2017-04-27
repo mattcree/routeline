@@ -1,19 +1,17 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import controllers.security.Secured;
 import models.StationStop;
 import models.StopConnection;
-
 import play.data.Form;
 import play.data.FormFactory;
-
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-
-import views.html.index;
-import views.html.connection.list;
 import views.html.connection.add;
+import views.html.connection.list;
+import views.html.index;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -47,9 +45,9 @@ public class ConnectionController extends Controller {
         Integer time = null;
 
         try {
-            stopAId = Long.parseLong(form.data().get("stopA").toString());
-            stopBId = Long.parseLong(form.data().get("stopB").toString());
-            time = Integer.parseInt(form.data().get("time").toString());
+            stopAId = (Long) form.data().get("stopA");
+            stopBId = (Long) form.data().get("stopB");
+            time = (Integer) form.data().get("time");
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
@@ -60,6 +58,7 @@ public class ConnectionController extends Controller {
         StationStop stopB = StationStop.find.byId(stopBId);
 
         if (stopA == null || stopB == null || stopA.equals(stopB)) return redirect(routes.ConnectionController.add());
+
         Ebean.beginTransaction();
         try {
             StopConnection connection = new StopConnection();
@@ -79,7 +78,6 @@ public class ConnectionController extends Controller {
         } finally {
             Ebean.endTransaction();
         }
-        System.out.println(StopConnection.find.all().toString());
         return redirect(routes.ConnectionController.list());
     }
 

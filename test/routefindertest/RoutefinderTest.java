@@ -1,7 +1,7 @@
 package routefindertest;
 
-import models.routefinder.*;
-
+import models.routefinder.Network;
+import models.routefinder.Routefinder;
 import org.junit.Assert;
 import org.junit.Test;
 

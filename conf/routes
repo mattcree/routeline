@@ -3,9 +3,11 @@
 # ~~~~
 
 # Home page
-GET     /                               controllers.Application.index
-GET     /init                           controllers.Application.createFirstUser
-GET     /make                           controllers.Application.populateRoutefinder
+GET     /                               controllers.AppController.index
+
+# Development Helpers
+GET     /init                           controllers.AppController.createFirstUser
+GET     /make                           controllers.AppController.populateRoutefinder
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                   controllers.Assets.versioned(path="/public", file)
@@ -15,12 +17,11 @@ GET     /api/stations                   controllers.ApiController.getJsonStation
 GET     /api/stops                      controllers.ApiController.getJsonStops
 GET     /api/route/:a/:b                controllers.ApiController.getJsonRoute(a: Long, b: Long)
 
-
 # Admin Routes
 # Logging In
-GET     /admin                          controllers.Application.getLogin
-POST    /admin/login                    controllers.SecurityController.login
-GET     /admin/logout                   controllers.SecurityController.logout
+GET     /admin                          controllers.AppController.getLogin
+POST    /admin/login                    controllers.security.SecurityController.login
+GET     /admin/logout                   controllers.security.SecurityController.logout
 GET     /admin/options                  controllers.AdminController.options
 
 # Admin Stop Functions
@@ -40,7 +41,6 @@ GET     /admin/lines                    controllers.LineController.list
 GET     /admin/lines/add                controllers.LineController.add
 POST    /admin/lines/add                controllers.LineController.doAddLine
 GET     /admin/lines/delete/:id         controllers.LineController.deleteLine(id: Long)
-
 
 # Admin User Functions
 GET     /admin/users                    controllers.UserController.list

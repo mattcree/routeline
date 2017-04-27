@@ -1,7 +1,5 @@
 package models.routefinder;
 
-import models.StationStop;
-
 /**
  * Created by Cree on 15/04/2017.
  */
