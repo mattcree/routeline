@@ -133,15 +133,6 @@ public class Routefinder {
     //from the connection list.
     private int getDistance(StationStop here, StationStop there) {
         for (StopConnection connection : connections) {
-            System.out.println("-----------------------");
-            System.out.println("Start:" + here);
-            System.out.println("Destination:" + there);
-            System.out.println("");
-            System.out.println(connection);
-            System.out.println(connection.from() == here);
-            System.out.println(connection.to() == there);
-            System.out.println("-----------------------");
-
             if ((connection.from().equals(here)) && (connection.to().equals(there)))
                 return connection.time();
         }

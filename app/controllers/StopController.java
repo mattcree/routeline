@@ -24,7 +24,7 @@ public class StopController extends Controller {
     @Inject
     FormFactory formFactory;
 
-    //Stops
+    //Shows list of Stops
     public Result list() {
         List<StationStop> stops = StationStop.find.all();
         return ok(index.render(list.render(stops)));
@@ -37,17 +37,12 @@ public class StopController extends Controller {
 
     public Result doAddStop() {
         Form form = formFactory.form().bindFromRequest();
-        System.out.println(form.data());
-
-        System.out.println(form.data().get("name"));
-        String name = form.data().get("name").toString();
-        String line = form.data().get("line").toString();
+        String name = (String) form.data().get("name");
+        String line = (String) form.data().get("line");
         StationStop stop = new StationStop();
         stop.name = name;
         stop.line = line;
         stop.save();
-
-        System.out.println(stop);
         return redirect(routes.StopController.list());
     }
 

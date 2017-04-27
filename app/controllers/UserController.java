@@ -25,7 +25,7 @@ public class UserController extends Controller {
     @Inject
     FormFactory formFactory;
 
-    //Users
+    //Shows list of Users
     public Result list() {
         List<User> user = User.find.all();
         return ok(index.render(list.render(user)));
@@ -44,9 +44,9 @@ public class UserController extends Controller {
         String passwordMatch = (String) form.data().get("passwordmatch");
 
         if (User.find.where().eq("email_address",email).findUnique() != null)
-            return badRequest(index.render(add.render(failure.render("<b>Error:</b> E-mail already registered."))));
+            return badRequest(index.render(add.render(failure.render("E-mail already registered."))));
         if (!password.equals(passwordMatch))
-            return badRequest(index.render(add.render(failure.render(("<b>Error:</b> Passwords must match.")))));
+            return badRequest(index.render(add.render(failure.render(("Passwords must match.")))));
 
         User user = new User(email, password, userName);
         user.save();

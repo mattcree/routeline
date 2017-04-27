@@ -26,7 +26,7 @@ public class ConnectionController extends Controller {
     @Inject
     FormFactory formFactory;
 
-    //Connections
+    //Shows list of Connections
     public Result list() {
         List<StopConnection> connections = StopConnection.find.all();
         return ok(index.render(list.render(connections)));
