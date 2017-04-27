@@ -1,6 +1,7 @@
-package controllers;
+package controllers.security;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import controllers.routes;
 import models.User;
 import play.data.Form;
 import play.data.FormFactory;
@@ -8,12 +9,10 @@ import play.data.validation.Constraints;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
-import play.mvc.Http.Cookie;
 import play.mvc.Result;
 import play.mvc.Security;
 
 import javax.inject.Inject;
-import javax.sound.midi.Soundbank;
 
 public class SecurityController extends Controller {
 

@@ -1,12 +1,12 @@
 package controllers;
 
+import controllers.security.Secured;
 import models.Line;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-
 import views.html.index;
 import views.html.line.add;
 import views.html.line.list;
@@ -34,7 +34,7 @@ public class LineController extends Controller {
 
     public Result doAddLine() {
         Form form = formFactory.form().bindFromRequest();
-        String lineName = form.data().get("name").toString();
+        String lineName = (String) form.data().get("name");
 
         Line line = new Line();
         line.name = lineName;

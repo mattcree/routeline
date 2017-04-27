@@ -1,14 +1,11 @@
 package controllers;
 
+import controllers.security.Secured;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-
 import views.html.index;
 import views.html.options;
-
-import javax.inject.Inject;
-import java.util.List;
 
 
 /**

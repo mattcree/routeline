@@ -1,17 +1,17 @@
 package controllers;
 
+import controllers.security.Secured;
 import models.User;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-
 import play.twirl.api.Html;
 import views.html.components.failure;
 import views.html.index;
-import views.html.user.list;
 import views.html.user.add;
+import views.html.user.list;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -38,10 +38,10 @@ public class UserController extends Controller {
     public Result doAddUser() {
         Form form = formFactory.form().bindFromRequest();
 
-        String userName = form.data().get("username").toString();
-        String email = form.data().get("email").toString();
-        String password = form.data().get("password").toString();
-        String passwordMatch = form.data().get("passwordmatch").toString();
+        String userName = (String) form.data().get("username");
+        String email = (String) form.data().get("email");
+        String password = (String) form.data().get("password");
+        String passwordMatch = (String) form.data().get("passwordmatch");
 
         if (User.find.where().eq("email_address",email).findUnique() != null)
             return badRequest(index.render(add.render(failure.render("<b>Error:</b> E-mail already registered."))));

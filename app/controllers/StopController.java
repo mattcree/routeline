@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.security.Secured;
 import models.Line;
 import models.StationStop;
 import play.data.Form;
@@ -7,9 +8,9 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.index;
 import views.html.stop.add;
 import views.html.stop.list;
-import views.html.index;
 
 import javax.inject.Inject;
 import java.util.List;

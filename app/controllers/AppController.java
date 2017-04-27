@@ -1,18 +1,20 @@
 package controllers;
+
 import models.StationStop;
 import models.StopConnection;
 import models.User;
 import models.routefinder.Routefinder;
-import org.h2.engine.Database;
 import play.libs.Json;
-import play.mvc.*;
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
+import views.html.components.login;
+import views.html.stationPicker;
 
 import java.util.Collection;
-import java.util.List;
 
 
-public class Application extends Controller {
+public class AppController extends Controller {
 
     protected static Routefinder ROUTEFINDER = new Routefinder();
 
@@ -36,11 +38,11 @@ public class Application extends Controller {
     }
 
     public Result getLogin() {
-        return ok(index.render(loginForm.render()));
+        return ok(index.render(login.render()));
     }
 
     public Result logout() {
-        return ok(index.render(loginForm.render()));
+        return redirect(routes.AppController.index());
     }
 
     //Public API Functions
