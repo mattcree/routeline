@@ -63,7 +63,7 @@ public class ApiController extends Controller {
         StationStop stopA = StationStop.find.byId(a);
         StationStop stopB = StationStop.find.byId(b);
 
-        if (stopA == null || stopB == null) return badRequest(Json.parse("[]"));
+        if (stopA == null || stopB == null || stopA.equals(stopB)) return badRequest(Json.parse("[]"));
 
         AppController.ROUTEFINDER.generateDistancesFrom(stopA);
         Collection<StationStop> route = AppController.ROUTEFINDER.getRouteTo(stopB);
