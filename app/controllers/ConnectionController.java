@@ -45,9 +45,9 @@ public class ConnectionController extends Controller {
         Integer time = null;
 
         try {
-            stopAId = (Long) form.data().get("stopA");
-            stopBId = (Long) form.data().get("stopB");
-            time = (Integer) form.data().get("time");
+            stopAId = Long.parseLong((String) form.data().get("stopA"));
+            stopBId = Long.parseLong((String) form.data().get("stopB"));
+            time = Integer.parseInt((String) form.data().get("time"));
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }

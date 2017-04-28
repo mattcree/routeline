@@ -51,11 +51,4 @@ public class AppController extends Controller {
         return ok(index.render(login.render()));
     }
 
-    public Result logout() {
-        return redirect(routes.AppController.index());
-    }
-
-
-
-
 }

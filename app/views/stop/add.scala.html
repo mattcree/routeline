@@ -1,4 +1,4 @@
-@(lines: List[Line])
+@(lines: List[Line], message: Html)
 <div class="container">
     <br>
     <form class="form-horizontal dark" action="@routes.StopController.doAddStop()" method="post">
@@ -14,7 +14,7 @@
             </div>            } else {
             <!-- Form Name -->
             <legend>Add Stop</legend>
-
+            @message
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="name">Stop Name</label>
