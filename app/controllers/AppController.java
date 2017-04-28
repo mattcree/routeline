@@ -47,6 +47,7 @@ public class AppController extends Controller {
         return ok(index.render(stationPicker.render()));
     }
 
+    //Displays admin login page
     public Result getLogin() {
         return ok(index.render(login.render()));
     }
