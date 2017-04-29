@@ -203,7 +203,7 @@ values (62,22,3,5);
 insert into stop_connection(id, stop_a_id, stop_b_id, time)
 values (63,6,26,5);
 insert into stop_connection(id, stop_a_id, stop_b_id, time)
-values (64,26,2,5);
+values (64,26,6,5);
 
 insert into stop_connection(id, stop_a_id, stop_b_id, time)
 values (65,7,27,5);
