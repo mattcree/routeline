@@ -9,9 +9,11 @@ import org.junit.Test;
 import java.util.Collection;
 import java.util.LinkedList;
 
-/**
+
+/*
  * Created by Cree on 01/04/2017.
- */
+*/
+
 public class NetworkTest {
 
     @Test
@@ -127,19 +129,6 @@ public class NetworkTest {
         Assert.assertTrue(network.getStationStop(name1, line1).equals(stop));
     }
 
-    //Add Stop Tests
-    @Test
-    public void addStopShouldReturnTrueAndAddStopToList(){
-        Network network = new Network();
-        Assert.assertTrue(network.addStationStop(name1, line1) && !network.getAllStationStops().isEmpty());
-    }
-
-    @Test
-    public void addStopShouldReturnFalseIfNewStopAlreadyExists(){
-        Network network = new Network();
-        network.addStationStop(name1, line1);
-        Assert.assertFalse(network.addStationStop(name1, line1));
-    }
 
     //Remove Stop Tests
     @Test
@@ -182,68 +171,6 @@ public class NetworkTest {
         assert network.getAllStopConnections().size() == 2;
 
         Assert.assertTrue(network.getConnectedStationStops(stop).isEmpty());
-    }
-
-
-    //Add Path Tests
-    @Test
-    public void addConnectionShouldReturnFalseIfStopsNotFound() {
-        Network network = new Network();
-        StationStop stop1 = createValidStation();
-        StationStop stop2 = new StationStop(name2, line2);
-        Assert.assertFalse(network.addStopConnection(stop1, stop2, 10));
-    }
-
-    @Test
-    public void addConnectionShouldReturnFalseIfFirstStopNotFound() {
-        Network network = new Network();
-        StationStop stop1 = createValidStation();
-        StationStop stop2 = new StationStop(name2, line2);
-        network.addStationStop(stop2.getName(), stop2.getLine());
-        Assert.assertFalse(network.addStopConnection(stop1, network.getStationStop(name2, line2), 10));
-    }
-
-    @Test
-    public void addConnectionShouldReturnFalseIfSecondStopNotFound() {
-        Network network = new Network();
-        StationStop stop1 = createValidStation();
-        StationStop stop2 = new StationStop(name2, line2);
-        network.addStationStop(stop2.getName(), stop2.getLine());
-        Assert.assertFalse(network.addStopConnection(network.getStationStop(name2, line2), stop1, 10));
-    }
-
-    @Test
-    public void addConnectionShouldReturnFalseIfBothStopsFoundButDistanceLessThanOne() {
-        Network network = new Network();
-        network.addStationStop(name1, line1);
-        network.addStationStop(name2, line2);
-        Assert.assertFalse(network.addStopConnection(network.getStationStop(name1, line1), network.getStationStop(name2, line2), 0));
-    }
-
-    @Test
-    public void addConnectionShouldReturnTrueIfBothStopsFoundAndDistanceGreaterThanZero() {
-        Network network = new Network();
-        network.addStationStop(name1, line1);
-        network.addStationStop(name2, line2);
-        Assert.assertTrue(network.addStopConnection(network.getStationStop(name1, line1), network.getStationStop(name2, line2), 1));
-    }
-
-    @Test
-    public void addConnectionShouldAddTwoConnectionsToConnectionList() {
-        Network network = new Network();
-        network.addStationStop(name1, line1);
-        network.addStationStop(name2, line1);
-        network.addStopConnection(network.getStationStop(name1, line1), network.getStationStop(name2, line1), 10);
-        Assert.assertTrue(network.getAllStopConnections().size() == 2);
-    }
-
-    @Test
-    public void addConnectionShouldReturnFalseIfConnectionAlreadyExists() {
-        Network network = new Network();
-        network.addStationStop(name1, line1);
-        network.addStationStop(name2, line1);
-        network.addStopConnection(network.getStationStop(name1, line1), network.getStationStop(name2, line1), 10);
-        Assert.assertFalse(network.addStopConnection(name1, line1, name2, name1, 1));
     }
 
     //Remove Path Tests
@@ -334,11 +261,27 @@ public class NetworkTest {
     private String name1 = "Newcastle";
     private String name2 = "Morpeth";
     private String name3 = "Darlington";
-    private StationStop from = new StationStop(name1, line1);
-    private StationStop to = new StationStop(name2, line1);
+    private StationStop from = createValidStationFromString(name1, line1);
+    private StationStop to = createValidStationFromString(name2, line1);
 
     private StopConnection createValidConnection() {
-        return new StopConnection(from, to, cost);
+        return createValidStopConnectionFromStops(from, to, cost);
+    }
+
+    private StopConnection createValidStopConnectionFromStops(StationStop stop1, StationStop stop2, int time) {
+        StopConnection stopConnection = new StopConnection();
+        stopConnection.stopA = stop1;
+        stopConnection.stopB = stop2;
+        stopConnection.time = time;
+
+        return stopConnection;
+    }
+
+    private StationStop createValidStationFromString(String name, String line) {
+        StationStop stop = new StationStop();
+        stop.name = name;
+        stop.line = line;
+        return stop;
     }
 
 }
