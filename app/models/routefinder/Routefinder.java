@@ -182,6 +182,22 @@ public class Routefinder {
     }
 
 
+    public int timeForRoute(Collection<StationStop> route){
+        int time = 0;
+        if (route == null) return time;
+        StationStop thisStop = null;
+        StationStop thatStop = null;
+        for (StationStop stop : route) {
+            if (thisStop == null) thisStop = stop;
+            else {
+                thatStop = stop;
+                StopConnection connection = StopConnection.find.where().eq("stop_a_id", thisStop).eq("stop_b_id",thatStop).findUnique();
+                time = time + connection.time();
+                thisStop = thatStop;
+            }
+        }
+        return time;
+    }
 
 }
 
