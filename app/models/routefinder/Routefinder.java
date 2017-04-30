@@ -1,4 +1,5 @@
 package models.routefinder;
+import models.Route;
 import models.StationStop;
 import models.StopConnection;
 
@@ -11,7 +12,7 @@ public class Routefinder {
     private Set<StationStop> calculatedStationStops;
     private Set<StationStop> remainingStationStops;
     private Map<StationStop, StationStop> predecessors;
-    private Map<StationStop, Integer> knownDistances;
+    private Map<StationStop, Integer> knownTimes;
 
     public Routefinder() {
         this.stops = new ArrayList<>();
@@ -46,15 +47,15 @@ public class Routefinder {
 
 
     //Main function which populates
-    public void generateDistancesFrom(StationStop originStationStop) {
+    public void generateTimesFrom(StationStop originStationStop) {
         calculatedStationStops = new HashSet<>();
         remainingStationStops = new HashSet<>();
-        knownDistances = new HashMap<>();
+        knownTimes = new HashMap<>();
         //StationStop as Key and Value the StationStop which preceeds it on its shortest route
         predecessors = new HashMap<>();
 
-        //Adds our start point to knownDistances map with time of 0
-        knownDistances.put(originStationStop, 0);
+        //Adds our start point to knownTimes map with time of 0
+        knownTimes.put(originStationStop, 0);
         //Adds starting stop to the list of stations
         //whose shortest routes have not been calculated
         remainingStationStops.add(originStationStop);
@@ -86,7 +87,7 @@ public class Routefinder {
             //that the shortest known time of the current minimum
             //update the minimum to be the stop
             } else {
-                if (shortestKnownDistance(stop) < shortestKnownDistance(minimum)) {
+                if (shortestKnownTime(stop) < shortestKnownTime(minimum)) {
                     minimum = stop;
                 }
             }
@@ -95,11 +96,11 @@ public class Routefinder {
     }
 
     //Takes a destination stop
-    private int shortestKnownDistance(StationStop destination) {
-        //gets the time value from the knownDistances list
-        Integer time = this.knownDistances.get(destination);
+    private int shortestKnownTime(StationStop destination) {
+        //gets the time value from the knownTimes list
+        Integer time = this.knownTimes.get(destination);
 
-        //if the destination is not in the knownDistances list
+        //if the destination is not in the knownTimes list
         //MAX_VALUE used in place of INFINITY
         if(time == null) return Integer.MAX_VALUE;
         else return time;
@@ -113,16 +114,12 @@ public class Routefinder {
         for (StationStop stop : connectedStationStops) {
             //if the shortest known time to the current stop is greater
             //than the shortest known time from the current stop plus
-            int shortestKnownPath = shortestKnownDistance(stop);
-            System.out.println(stopOnRoute);
-            System.out.println(stop);
-            int timeToNext = getDistance(stopOnRoute, stop);
-            System.out.println(timeToNext);
-
+            int shortestKnownPath = shortestKnownTime(stop);
+            int timeToNext = getTime(stopOnRoute, stop);
             //i.e. if no path known shortestKnownPath returns huge value, making
             //this true
             if (shortestKnownPath + timeToNext < shortestKnownPath) {
-                knownDistances.put(stop, shortestKnownPath + timeToNext);
+                knownTimes.put(stop, shortestKnownPath + timeToNext);
                     predecessors.put(stop, stopOnRoute);
                 remainingStationStops.add(stop);
             }
@@ -131,7 +128,7 @@ public class Routefinder {
 
     //Returns the time of the connection between here and there
     //from the connection list.
-    private int getDistance(StationStop here, StationStop there) {
+    private int getTime(StationStop here, StationStop there) {
         for (StopConnection connection : connections) {
             if ((connection.from().equals(here)) && (connection.to().equals(there)))
                 return connection.time();
@@ -156,8 +153,8 @@ public class Routefinder {
         return connectedStationStops;
     }
 
-    public Collection<StationStop> getRouteTo(StationStop destination) {
-        LinkedList<StationStop> route = new LinkedList<>();
+    public List<StationStop> getRouteTo(StationStop destination) {
+        List<StationStop> route = new LinkedList<>();
         StationStop waypoint = destination;
         // check if destination has a preceeding stop
         //listed. If no stop preceeds destination,
@@ -181,23 +178,34 @@ public class Routefinder {
         return route;
     }
 
+//    public Route getRouteToAsRoute(StationStop destination) {
+//        return getRouteTo()
+//    }
 
-    public int timeForRoute(Collection<StationStop> route){
-        int time = 0;
-        if (route == null) return time;
+    private StopConnection getConnection(StationStop here, StationStop there) {
+        for (StopConnection connection : connections) {
+            if ((connection.from().equals(here)) && (connection.to().equals(there)))
+                return connection;
+        }
+        throw new RuntimeException("No connection between these stops.");
+    }
+
+
+    public List<StopConnection> getAllConnectionsOnRoute(List<StationStop> route){
+        List<StopConnection> routeConnections = new LinkedList<>();
         StationStop thisStop = null;
         StationStop thatStop = null;
         for (StationStop stop : route) {
             if (thisStop == null) thisStop = stop;
             else {
                 thatStop = stop;
-                StopConnection connection = StopConnection.find.where().eq("stop_a_id", thisStop).eq("stop_b_id",thatStop).findUnique();
-                time = time + connection.time();
+                routeConnections.add(getConnection(thisStop,thatStop));
                 thisStop = thatStop;
             }
         }
-        return time;
+        return routeConnections;
     }
+
 
 }
 

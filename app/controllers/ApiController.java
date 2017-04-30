@@ -70,7 +70,7 @@ public class ApiController extends Controller {
 
         if (stopA == null || stopB == null || stopA.equals(stopB)) return badRequest(Json.parse("[]"));
 
-        AppController.ROUTEFINDER.generateDistancesFrom(stopA);
+        AppController.ROUTEFINDER.generateTimesFrom(stopA);
         Collection<StationStop> route = AppController.ROUTEFINDER.getRouteTo(stopB);
         return ok(Json.toJson(route));
     }
@@ -95,7 +95,7 @@ public class ApiController extends Controller {
 
         rfAvoid.setConnections(listOfConnections);
         rfAvoid.setStops(listOfStops);
-        rfAvoid.generateDistancesFrom(stopA);
+        rfAvoid.generateTimesFrom(stopA);
         Collection<StationStop> routeAvoiding = rfAvoid.getRouteTo(stopB);
 
         if(routeAvoiding == null) return badRequest(Json.parse("[]"));
