@@ -29,6 +29,7 @@ GET     /api/route/:a/:b                controllers.ApiController.getJsonRoute(a
 GET     /api/route/names/:start/:destination  controllers.ApiController.getJsonRouteByName(start: String, destination: String)
 GET     /api/route/:a/:b/avoid/:avoid   controllers.ApiController.getJsonRouteAvoiding(a: Long, b: Long, avoid: Long)
 GET     /api/route/:a/:b/avoid/:avoid   controllers.ApiController.getJsonRouteAvoidingStation(a: String, b: String, avoid: String)
+GET     /api/route/:a/:b/via/:via       controllers.ApiController.getJsonRouteVia(a: Long, b: Long, via: Long)
 
 
 # Admin Routes
