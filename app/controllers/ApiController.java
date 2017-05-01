@@ -8,6 +8,7 @@ import models.Route;
 import models.StationStop;
 import models.StopConnection;
 import models.routefinder.Routefinder;
+import org.apache.commons.lang3.text.WordUtils;
 import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -83,6 +84,28 @@ public class ApiController extends Controller {
         return ok(Json.toJson(route));
     }
 
+    public Result getJsonRouteByName(String start, String destination) {
+        String formattedStart = WordUtils.capitalize(start.toLowerCase().trim());
+        String formattedDestination = WordUtils.capitalize(destination.toLowerCase().trim());
+
+        List<StationStop> startStops = StationStop.find
+                .where()
+                .eq("name", formattedStart)
+                .findList();
+        List<StationStop> destinationStops = StationStop.find
+                .where()
+                .eq("name", formattedDestination)
+                .findList();
+
+        if(startStops.isEmpty() || destinationStops.isEmpty()
+            || formattedStart.equals(formattedDestination))
+            return badRequest(Json.parse("{}"));
+
+        Routefinder rf = new Routefinder(StationStop.find.all(),StopConnection.find.all());
+        Route shortestRoute = Routefinder.getBestRoute(startStops, destinationStops, rf);
+        return  ok(Json.toJson(shortestRoute));
+    }
+
     public Result getJsonRouteVia (Long a, Long b, Long via){
 
         StationStop stopA = StationStop.find.byId(a);
@@ -107,8 +130,7 @@ public class ApiController extends Controller {
 
         return ok(Json.toJson(route));
     }
-
-
+    
     public Result getJsonRouteAvoiding(Long a, Long b, Long avoid){
         Routefinder rfAvoid = new Routefinder();
 

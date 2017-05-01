@@ -206,6 +206,20 @@ public class Routefinder {
         return routeConnections;
     }
 
+    public static Route getBestRoute(List<StationStop> starts, List<StationStop> destinations, Routefinder rf) {
+        Route shortestRoute = null;
+        for(StationStop startingStop : starts) {
+            rf.generateTimesFrom(startingStop);
+            for(StationStop destinationStop : destinations) {
+                LinkedList<StationStop> stops = rf.getRouteTo(destinationStop);
+                LinkedList<StopConnection> connections = rf.getAllConnectionsOnRoute(stops);
+                Route currentRoute = new Route(stops, connections);
+                if (shortestRoute == null) shortestRoute = currentRoute;
+                if (shortestRoute.timeInMinutes > currentRoute.timeInMinutes) shortestRoute = currentRoute;
+            }
+        }
+        return shortestRoute;
+    }
 
 }
 
