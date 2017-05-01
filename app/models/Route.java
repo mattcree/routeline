@@ -10,27 +10,14 @@ import java.util.List;
 /**
  * Created by Cree on 30/04/2017.
  */
-@Entity
+
 public class Route {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
 
-    @Constraints.Required
     public StationStop start;
-
-    @Constraints.Required
     public StationStop destination;
-
-    @OneToMany
-    @Constraints.Required
     public List<StationStop> route;
-
-    @OneToMany
-    @Constraints.Required
     public List<StopConnection> connections;
-
     public int timeInMinutes;
     public int numberOfChanges;
 
@@ -44,7 +31,7 @@ public class Route {
     }
 
 
-    private int timeForRoute(LinkedList<StationStop> stops, LinkedList<StopConnection> connections){
+    private int timeForRoute(List<StationStop> stops, List<StopConnection> connections){
         if (timeInMinutes > 0) return timeInMinutes;
         int time = 0;
         if (route == null) return time;
@@ -62,7 +49,7 @@ public class Route {
         return time;
     }
 
-    private int getTime(StationStop here, StationStop there, LinkedList<StopConnection> connections) {
+    private int getTime(StationStop here, StationStop there, List<StopConnection> connections) {
         for (StopConnection connection : connections){
             if ((connection.from().equals(here)) && (connection.to().equals(there)))
                 return connection.time();
@@ -70,7 +57,7 @@ public class Route {
         throw new RuntimeException("No connection between these stops.");
     }
 
-    private int numberOfChanges(LinkedList<StopConnection> connections) {
+    private int numberOfChanges(List<StopConnection> connections) {
         int number = 0;
         for (StopConnection connection : connections) {
             if(connection.isLineChange()) number++;

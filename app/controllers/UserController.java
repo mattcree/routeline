@@ -4,6 +4,7 @@ import controllers.security.Secured;
 import models.User;
 import play.data.Form;
 import play.data.FormFactory;
+import play.data.validation.Constraints;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -36,21 +37,34 @@ public class UserController extends Controller {
     }
 
     public Result doAddUser() {
-        Form form = formFactory.form().bindFromRequest();
+        Form<UserForm> userForm = formFactory.form(UserForm.class).bindFromRequest();
 
-        String userName = (String) form.data().get("username");
-        String email = (String) form.data().get("email");
-        String password = (String) form.data().get("password");
-        String passwordMatch = (String) form.data().get("passwordmatch");
+        if (userForm.hasErrors()) {
+            return badRequest(userForm.errorsAsJson());
+        }
 
-        if (User.find.where().eq("email_address",email).findUnique() != null)
+        UserForm form = userForm.get();
+
+        if (User.find.where().eq("email_address",form.email).findUnique() != null)
             return badRequest(index.render(add.render(failure.render("E-mail already registered."))));
-        if (!password.equals(passwordMatch))
+        if (!form.password.equals(form.passwordmatch))
             return badRequest(index.render(add.render(failure.render(("Passwords must match.")))));
 
-        User user = new User(email, password, userName);
+        User user = new User(form.email, form.password, form.username);
         user.save();
         return redirect(routes.UserController.list());
+    }
+
+    public static class UserForm {
+        @Constraints.Required
+        public String username;
+        @Constraints.Required
+        @Constraints.Email
+        public String email;
+        @Constraints.Required
+        public String password;
+        @Constraints.Required
+        public String passwordmatch;
     }
 
 }

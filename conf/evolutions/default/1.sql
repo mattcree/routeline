@@ -1,16 +1,11 @@
 # --- !Ups
-/*
-Line Table for Providing Consistent 'Line' input when creating Stations.
-*/
+
 create table line (
   id                            bigint auto_increment not null,
-  name                          varchar(255) not null,
+  name                          varchar(255),
   constraint pk_line primary key (id)
 );
 
-/*
-Stop Table for creating Stops. Line column may change to reference Line table.
-*/
 create table station_stop (
   id                            bigint auto_increment not null,
   name                          varchar(255),
@@ -18,21 +13,14 @@ create table station_stop (
   constraint pk_station_stop primary key (id)
 );
 
-/*
-Connections Table holding information about connections. Each entity is
-a unidirectional Connection.
-*/
 create table stop_connection (
   id                            bigint auto_increment not null,
-  stop_a_id                     bigint not null,
-  stop_b_id                     bigint not null,
-  time                          int not null,
+  stop_a_id                     bigint,
+  stop_b_id                     bigint,
+  time                          integer,
   constraint pk_stop_connection primary key (id)
 );
 
-/*
-Users table for accounts used when authenticating administrator actions.
-*/
 create table user (
   id                            bigint auto_increment not null,
   auth_token                    varchar(255),

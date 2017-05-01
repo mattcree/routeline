@@ -1,11 +1,13 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import controllers.security.Secured;
 import models.Line;
 import models.StationStop;
 import org.apache.commons.lang3.text.WordUtils;
 import play.data.Form;
 import play.data.FormFactory;
+import play.data.validation.Constraints;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -40,26 +42,33 @@ public class StopController extends Controller {
     }
 
     public Result doAddStop() {
-        Form form = formFactory.form().bindFromRequest();
-        String name = (String) form.data().get("name");
-        String line = (String) form.data().get("line");
+        Form<StopForm> stopForm = formFactory.form(StopForm.class).bindFromRequest();
 
-        String formattedName = WordUtils.capitalize(name.toLowerCase().trim());
+        if (stopForm.hasErrors()) {
+            return badRequest(stopForm.errorsAsJson());
+        }
 
-        if(!StationStop.find.where().eq("name", formattedName).eq("line", line).findList().isEmpty()) {
-            List<Line> lines = Line.find.all();
+        StopForm form = stopForm.get();
+
+        String formattedName = WordUtils.capitalize(form.name.toLowerCase().trim());
+        List<Line> lines = Line.find.all();
+
+        if(!StationStop.find.where().eq("name", formattedName).eq("line", form.line).findList().isEmpty()) {
             return badRequest(index.render(add.render(lines, failure.render("The Stop already exists."))));
         }
         if(!Pattern.matches("[a-zA-Z- ']+",formattedName)){
-            List<Line> lines = Line.find.all();
             return badRequest(index.render(add.render(lines, failure.render("Only alphabet characters allowed"))));
         }
 
+        Ebean.beginTransaction();
+        try {
+            StationStop stop = new StationStop(formattedName, form.line);
+            stop.save();
+            Ebean.commitTransaction();
+        } finally {
+            Ebean.endTransaction();
+        }
 
-        StationStop stop = new StationStop();
-        stop.name = name;
-        stop.line = line;
-        stop.save();
         return redirect(routes.StopController.list());
     }
 
@@ -69,6 +78,13 @@ public class StopController extends Controller {
             stop.delete();
         }
         return redirect(routes.StopController.list());
+    }
+
+    public static class StopForm {
+        @Constraints.Required
+        public String name;
+        @Constraints.Required
+        public String line;
     }
 
 }

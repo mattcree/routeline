@@ -153,8 +153,8 @@ public class Routefinder {
         return connectedStationStops;
     }
 
-    public List<StationStop> getRouteTo(StationStop destination) {
-        List<StationStop> route = new LinkedList<>();
+    public LinkedList<StationStop> getRouteTo(StationStop destination) {
+        LinkedList<StationStop> route = new LinkedList<>();
         StationStop waypoint = destination;
         // check if destination has a preceeding stop
         //listed. If no stop preceeds destination,
@@ -191,8 +191,8 @@ public class Routefinder {
     }
 
 
-    public List<StopConnection> getAllConnectionsOnRoute(List<StationStop> route){
-        List<StopConnection> routeConnections = new LinkedList<>();
+    public LinkedList<StopConnection> getAllConnectionsOnRoute(List<StationStop> route){
+        LinkedList<StopConnection> routeConnections = new LinkedList<>();
         StationStop thisStop = null;
         StationStop thatStop = null;
         for (StationStop stop : route) {

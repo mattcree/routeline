@@ -6,6 +6,7 @@ import models.StationStop;
 import models.StopConnection;
 import play.data.Form;
 import play.data.FormFactory;
+import play.data.validation.Constraints;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -38,40 +39,23 @@ public class ConnectionController extends Controller {
     }
 
     public Result doAddConnection() {
-        Form form = formFactory.form().bindFromRequest();
+        Form<ConnectionForm> connectionForm = formFactory.form(ConnectionForm.class).bindFromRequest();
 
-        Long stopAId = null;
-        Long stopBId = null;
-        Integer time = null;
-
-        try {
-            stopAId = Long.parseLong((String) form.data().get("stopA"));
-            stopBId = Long.parseLong((String) form.data().get("stopB"));
-            time = Integer.parseInt((String) form.data().get("time"));
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
+        if (connectionForm.hasErrors()) {
+            return badRequest(connectionForm.errorsAsJson());
         }
 
-        if (time == null || stopAId == null || stopBId == null) return redirect(routes.ConnectionController.add());
+        ConnectionForm form = connectionForm.get();
 
-        StationStop stopA = StationStop.find.byId(stopAId);
-        StationStop stopB = StationStop.find.byId(stopBId);
+        StationStop stopA = StationStop.find.byId(form.stopA);
+        StationStop stopB = StationStop.find.byId(form.stopB);
 
         if (stopA == null || stopB == null || stopA.equals(stopB)) return redirect(routes.ConnectionController.add());
 
         Ebean.beginTransaction();
         try {
-            StopConnection connection = new StopConnection();
-            StopConnection connection2 = new StopConnection();
-
-            connection.stopA = stopA;
-            connection.stopB = stopB;
-            connection.time = time;
-
-            connection2.stopA = stopB;
-            connection2.stopB = stopA;
-            connection2.time = time;
-
+            StopConnection connection = new StopConnection(stopA, stopB, form.time);
+            StopConnection connection2 = new StopConnection(stopB, stopA, form.time);
             connection.save();
             connection2.save();
             Ebean.commitTransaction();
@@ -88,4 +72,14 @@ public class ConnectionController extends Controller {
         }
         return redirect(routes.ConnectionController.list());
     }
+
+    public static class ConnectionForm {
+        @Constraints.Required
+        public Long stopA;
+        @Constraints.Required
+        public Long stopB;
+        @Constraints.Required
+        public int time;
+    }
+
 }

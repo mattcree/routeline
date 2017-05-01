@@ -4,6 +4,7 @@ import com.avaje.ebean.Ebean;
 import com.avaje.ebean.RawSql;
 import com.avaje.ebean.RawSqlBuilder;
 import models.Line;
+import models.Route;
 import models.StationStop;
 import models.StopConnection;
 import models.routefinder.Routefinder;
@@ -13,10 +14,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 
 /**
@@ -70,10 +68,22 @@ public class ApiController extends Controller {
 
         if (stopA == null || stopB == null || stopA.equals(stopB)) return badRequest(Json.parse("[]"));
 
-        AppController.ROUTEFINDER.generateTimesFrom(stopA);
-        Collection<StationStop> route = AppController.ROUTEFINDER.getRouteTo(stopB);
+        List<StationStop> stops = StationStop.find.all();
+        List<StopConnection> connections = StopConnection.find.all();
+
+        Routefinder routefinder = new Routefinder(stops, connections);
+
+        routefinder.generateTimesFrom(stopA);
+
+        LinkedList<StationStop> stopsOnRoute = routefinder.getRouteTo(stopB);
+        LinkedList<StopConnection> connectionsOnRoute = routefinder.getAllConnectionsOnRoute(stopsOnRoute);
+
+        Route route = new Route(stopsOnRoute, connectionsOnRoute);
+
         return ok(Json.toJson(route));
     }
+
+
 
     public Result getJsonRouteAvoiding(Long a, Long b, Long avoid){
         Routefinder rfAvoid = new Routefinder();

@@ -24,6 +24,12 @@ public class StopConnection extends Model {
     @Constraints.Required
     public int time;
 
+    public StopConnection(StationStop stopA, StationStop stopB, int time) {
+        this.stopA = stopA;
+        this.stopB = stopB;
+        this.time = time;
+    }
+
     public static Finder<Long, StopConnection> find = new Finder<>(StopConnection.class);
 
     public StationStop from() {
