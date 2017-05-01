@@ -1,6 +1,8 @@
 var stations;
 var idFrom;
 var idTo;
+var nameFrom;
+var nameTo;
 // takes an array of Objects in the following form
 // {"id":1,"name":"York","line":"Red"}
 // and returns a matcher function that checks whether a given string is found in the "name" of any of the Objects in the array
@@ -21,7 +23,7 @@ var substringMatcher = function(objs) {
      // iterate through the pool of Objects and for any Object that's name
      // contains the substring `q`, add the name-string to the `matches` array
      $.each(objs, function(i, obj) {
-       if (substrRegex.test(obj.name)) {
+       if (substrRegex.test(obj)) {
          matches.push(obj);
        }
      });
@@ -32,7 +34,7 @@ var substringMatcher = function(objs) {
 
 
 // get the list of stations
-$.get(stationApiUrl).then(function(data){
+$.get('/api/stations').then(function(data){
 
    stations = data;
 
@@ -52,7 +54,7 @@ $.get(stationApiUrl).then(function(data){
       source: substringMatcher(stations),
       display: function(obj)
       {
-      return obj.name;
+      return obj;
       }
     };
 
@@ -80,17 +82,19 @@ $('#stationFromInput').bind('typeahead:autocomplete typeahead:select', function(
  console.log('Selection: ' + suggestion.id);
  console.log('suggestion: ' + suggestion.name);
  idFrom = suggestion.id;
+ nameFrom = suggestion;
 });
 
 $('#stationToInput').bind('typeahead:autocomplete typeahead:select', function(ev, suggestion) {
   console.log('Selection: ' + suggestion.id);
   console.log('suggestion: ' + suggestion.name);
   idTo = suggestion.id;
+  nameTo = suggestion;
 });
 
 function getRouteData(idFrom, idTo) {
     console.log('this is id:' + idFrom + ' ' + idTo);
-    var routeApiUrl = '/api/route/' + idFrom + '/' + idTo;
+    var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo;
 
     $.get(routeApiUrl).then(function(data){
 
@@ -98,9 +102,9 @@ function getRouteData(idFrom, idTo) {
 
         var newHtml = '';
 
-        for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
-            var stObject = data[i].name;
+        for (var i = 0; i < data.route.length; i++) {
+            console.log(data.route[i]);
+            var stObject = data.route[i].name;
             newHtml += '<li><b>' + stObject +'</b></li>';
             }
 
