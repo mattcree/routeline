@@ -17,17 +17,20 @@ public class Route {
     public StationStop start;
     public StationStop destination;
     public List<StationStop> route;
-    public List<StopConnection> connections;
     public int timeInMinutes;
     public int numberOfChanges;
+    public List<StopConnection> changes;
+    public List<StopConnection> connections;
+
 
     public Route(LinkedList<StationStop> route, LinkedList<StopConnection> connections) {
         this.start = route.getFirst();
         this.destination = route.getLast();
         this.route = route;
-        this.connections = connections;
         this.timeInMinutes = timeForRoute(route, connections);
-        this.numberOfChanges = numberOfChanges(connections);
+        this.changes = changeList(connections);
+        this.numberOfChanges = changes.size();
+        this.connections = connections;
     }
 
 
@@ -65,4 +68,11 @@ public class Route {
         return number;
     }
 
+    private List<StopConnection> changeList(List<StopConnection> connections) {
+        List<StopConnection> changes = new LinkedList<>();
+        for (StopConnection connection : connections) {
+            if(connection.isLineChange()) changes.add(connection);
+        }
+        return changes;
+    }
 }
