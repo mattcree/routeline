@@ -111,9 +111,7 @@ public class Network {
      */
     public boolean addStationStop(String name, String line) {
         if (getStationStop(name, line) != null) return false;
-        StationStop stop = new StationStop();
-        stop.name = name;
-        stop.line = line;
+        StationStop stop = new StationStop(name, line);
         return stops.add(stop);
     }
 
@@ -214,10 +212,7 @@ public class Network {
     //Private helper functions
     //Adds a Path A -> B
     private boolean addOneWayStopConnection(StationStop a, StationStop b, int time) {
-        StopConnection connection = new StopConnection();
-        connection.stopA = a;
-        connection.stopB = b;
-        connection.time = time;
+        StopConnection connection = new StopConnection(a, b, time);
         return connections.add(connection);
     }
 

@@ -121,7 +121,7 @@ public class ApiController extends Controller {
         rf.generateTimesFrom(viaStop);
         Collection<StationStop> routePart2 = rf.getRouteTo(stopB);
         Collection<StationStop> route = new LinkedList<>();
-        
+
         route.addAll(routePart1);
         route.remove(viaStop); //Should remove duplicate via, test
         route.addAll(routePart2);

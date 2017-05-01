@@ -68,9 +68,7 @@ public class StationStopTest {
     private String lineToString = "Newcastle on A line";
 
     private StationStop createValidStation() {
-        StationStop stop = new StationStop();
-        stop.name = name1;
-        stop.line = line1;
+        StationStop stop = new StationStop(name1, line1);
         return stop;
     }
 
