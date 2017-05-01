@@ -30,7 +30,12 @@
                 <th>@stop.name</th>
                 <th>@stop.line</th>
                 <th>
-                    <a class="btn btn-danger" href="@routes.StopController.deleteStop(stop.id)">Delete</a>
+                    <a class="btn btn-danger" data-toggle="confirmation" href="@routes.StopController.deleteStop(stop.id)" target="_blank">Delete</a>
+                </th>
+
+                <th>
+                    <a href="#" class="help" title="Important!" data-toggle="popover" data-trigger="focus" data-content="Removing a line will remove all stations on that line." data-placement="right">
+                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
                 </th>
             </tr>
             }
@@ -49,3 +54,14 @@
     </div>
 </div>
 <br>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+    $('[data-toggle=confirmation]').confirmation({
+  rootSelector: '[data-toggle=confirmation]',
+});
+});
+
+
+</script>

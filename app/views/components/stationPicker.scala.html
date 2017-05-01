@@ -1,100 +1,49 @@
 <br>
 
-<section class="call-to-action vertical-center">
+<section class="call-to-action">
     <h1><span id="intro-text">Where would you like to go today?</span></h1>
     <br>
     <div id="typeahead" class="row">
 
-            <div class="input-group">
-                <!-- id must match script below -->
-                <input type="text" class="form-control" id="stationFromInput" aria-label="Text input with dropdown button" placeholder="From">
-            </div>
+        <div class="input-group">
+            <!-- id must match script below -->
+            <input type="text" class="form-control" id="stationFromInput" aria-label="Text input with dropdown button" placeholder="From">
+        </div>
 
 
-            <div class="input-group">
-                <!-- id must match script below -->
-                <input type="text" class="form-control" id="stationToInput" aria-label="Text input with dropdown button" placeholder="To">
-                <br>
+        <div class="input-group">
+            <!-- id must match script below -->
+            <input type="text" class="form-control" id="stationToInput" aria-label="Text input with dropdown button" placeholder="To">
+            <br>
 
         </div>
+
+
+
     </div>
     <br>
+    <div class="container">
+        <div id="results-container">
+            <button id="goButton" class = "btn btn-success">Go!</button>
+            <div id="below-go-btn">
+                <div id="route-results" class="results">
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
 </section>
+
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 <script src="@routes.Assets.versioned("bootstrap-3.3.7-dist/js/bootstrap.min.js")"></script>
-
-<script type="text/javascript">
-
-   var stations;
-
-   // takes an array of strings
-   // and returns a matcher function that checks whether a given string is found in the array
-   var substringMatcher = function(strs) {
-	   return function findMatches(q, cb) {
-
-		   console.log('trying to match:');
-		   console.log(q);
-
-	     var matches, substringRegex;
-
-	     // an array that will be populated with substring matches
-	     matches = [];
-
-	     // regex used to determine if a string contains the substring `q`
-	     substrRegex = new RegExp(q, 'i');
-
-	     // iterate through the pool of strings and for any string that
-	     // contains the substring `q`, add it to the `matches` array
-	     $.each(strs, function(i, str) {
-	       if (substrRegex.test(str)) {
-	         matches.push(str);
-	       }
-	     });
-
-	     cb(matches);
-	   };
-	 };
+<script>
+    var stationApiUrl = '@routes.ApiController.getJsonStops()';
 
 
-	// get the list of stations
-   $.get('@routes.ApiController.getJsonStations()').then(function(data){
-
-	   stations = data;
-
-	   // stations should be an array of strings
-   		console.log(stations);
-
-	   // settings for jQuery typeahead plugin
-   		var typeaheadCustomSettings = {
-   		  hint: true,
-   		  highlight: true,
-   		  minLength: 1
-   		};
-
-	   // data source for our jQuery typeahead
-   		var dataSetup = {
-   		  name: 'stations',
-   		  source: substringMatcher(stations)
-   		};
-
-
-
-	   var stationFromInput = $('#stationFromInput');
-
-	   console.log(stationFromInput);
-
-	   // activate the jQuery typeahead plugin on the element with id "stationFromInput"
-   		stationFromInput.typeahead(typeaheadCustomSettings, dataSetup);
-
-
-
-   		var stationToInput = $('#stationToInput');
-
- 	   console.log(stationToInput);
-
- 	   // activate the jQuery typeahead plugin on the element with id "stationToInput"
-    		stationToInput.typeahead(typeaheadCustomSettings, dataSetup);
-   });
-   </script>
+</script>
+<script src="@routes.Assets.versioned("js/typeahead.js")"></script>
