@@ -106,7 +106,7 @@ public class ApiController extends Controller {
         return  ok(Json.toJson(shortestRoute));
     }
 
-    public Result getJsonRouteVia (Long a, Long b, Long via){
+    public Result getJsonRouteVia(Long a, Long b, Long via){
 
         StationStop stopA = StationStop.find.byId(a);
         StationStop stopB = StationStop.find.byId(b);
@@ -114,14 +114,14 @@ public class ApiController extends Controller {
 
         if(stopA == null || stopB == null || viaStop == null) return badRequest(Json.parse("[]"));
 
-        Long viaId = viaStop.id;
+        Routefinder rf = new Routefinder(StationStop.find.all(), StopConnection.find.all());
 
-        AppController.ROUTEFINDER.generateDistancesFrom(stopA);
-        Collection<StationStop> routePart1 = AppController.ROUTEFINDER.getRouteTo(viaStop);
-        AppController.ROUTEFINDER.generateDistancesFrom(viaStop);
-        Collection<StationStop> routePart2 = AppController.ROUTEFINDER.getRouteTo(stopB);
-
-        Collection<StationStop> route = new LinkedList<StationStop>();
+        rf.generateTimesFrom(stopA);
+        Collection<StationStop> routePart1 = rf.getRouteTo(viaStop);
+        rf.generateTimesFrom(viaStop);
+        Collection<StationStop> routePart2 = rf.getRouteTo(stopB);
+        Collection<StationStop> route = new LinkedList<>();
+        
         route.addAll(routePart1);
         route.remove(viaStop); //Should remove duplicate via, test
         route.addAll(routePart2);
@@ -130,7 +130,7 @@ public class ApiController extends Controller {
 
         return ok(Json.toJson(route));
     }
-    
+
     public Result getJsonRouteAvoiding(Long a, Long b, Long avoid){
         Routefinder rfAvoid = new Routefinder();
 
