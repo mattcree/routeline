@@ -42,7 +42,7 @@ public class SecurityController extends Controller {
         User user = User.findByEmailAddressAndPassword(login.emailAddress, login.password);
 
         if (user == null) {
-            return unauthorized();
+            return unauthorized("HTTP 401: Unauthorized.");
         }
         else {
             //Creates
@@ -57,10 +57,10 @@ public class SecurityController extends Controller {
 
     @Security.Authenticated(Secured.class)
     public Result logout() {
-        System.out.println("working");
+        System.out.println("Logging out");
         response().discardCookie(AUTH_TOKEN);
         getUser().deleteAuthToken();
-        return redirect("/");
+        return redirect(routes.AppController.index());
     }
 
     //Nested static class representing Login form.

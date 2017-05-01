@@ -6,6 +6,7 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import play.data.Form;
 import play.data.FormFactory;
+import play.data.validation.Constraints;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -40,9 +41,15 @@ public class LineController extends Controller {
     }
 
     public Result doAddLine() {
-        Form form = formFactory.form().bindFromRequest();
-        String lineName = (String) form.data().get("name");
-        String formattedName = WordUtils.capitalize(lineName.toLowerCase().trim());
+        Form<LineForm> lineForm = formFactory.form(LineForm.class).bindFromRequest();
+
+        if (lineForm.hasErrors()) {
+            return badRequest(lineForm.errorsAsJson());
+        }
+
+        LineForm form = lineForm.get();
+
+        String formattedName = WordUtils.capitalize(form.name.toLowerCase().trim());
 
         if(!Line.find.where().eq("name", formattedName).findList().isEmpty())
             return badRequest(index.render(add.render(failure.render("The Line already exists."))));
@@ -62,6 +69,11 @@ public class LineController extends Controller {
             line.delete();
         }
         return redirect(routes.LineController.list());
+    }
+
+    public static class LineForm {
+        @Constraints.Required
+        public String name;
     }
 
 }

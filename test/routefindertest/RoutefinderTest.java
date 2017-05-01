@@ -1,9 +1,14 @@
 package routefindertest;
 
+import models.StationStop;
+import models.StopConnection;
 import models.routefinder.Network;
 import models.routefinder.Routefinder;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Cree on 03/04/2017.
@@ -16,8 +21,42 @@ public class RoutefinderTest {
         Assert.assertNotNull(rf);
     }
 
+    @Test
+    public void getRouteToFindsRouteToDestination() {
+        Routefinder rf = new Routefinder(createNetwork());
+        StationStop start = createValidStationFromString("Newcastle", "A");
+        StationStop destination = createValidStationFromString("Dunbar", "A");
+        rf.generateTimesFrom(start);
+        System.out.println(rf.getRouteTo(destination));
+        Assert.assertTrue(!rf.getRouteTo(destination).isEmpty());
+    }
+
+    @Test
+    public void getAllConnectionsOnRouteReturnsAllConnections() {
+        Routefinder rf = new Routefinder(createNetwork());
+        StationStop start = createValidStationFromString("Newcastle", "A");
+        StationStop destination = createValidStationFromString("Dunbar", "A");
+        rf.generateTimesFrom(start);
+        System.out.println(rf.getRouteTo(destination));
+        System.out.println(rf.getAllConnectionsOnRoute(rf.getRouteTo(destination)));
+    }
+
     //Helpers for generating routes
 
+    private StationStop createValidStationFromString(String name, String line) {
+        StationStop stop = new StationStop();
+        stop.name = name;
+        stop.line = line;
+        return stop;
+    }
+
+    private StopConnection createValidStopConnectionFromStops(StationStop stop1, StationStop stop2, int time) {
+        StopConnection stopConnection = new StopConnection();
+        stopConnection.stopA = stop1;
+        stopConnection.stopB = stop2;
+        stopConnection.time = time;
+        return stopConnection;
+    }
 
     public Network createNetwork() {
         Network network = new Network();

@@ -4,6 +4,7 @@ import com.avaje.ebean.Ebean;
 import com.avaje.ebean.RawSql;
 import com.avaje.ebean.RawSqlBuilder;
 import models.Line;
+import models.Route;
 import models.StationStop;
 import models.StopConnection;
 import models.routefinder.Routefinder;
@@ -67,8 +68,18 @@ public class ApiController extends Controller {
 
         if (stopA == null || stopB == null || stopA.equals(stopB)) return badRequest(Json.parse("[]"));
 
-        AppController.ROUTEFINDER.generateDistancesFrom(stopA);
-        Collection<StationStop> route = AppController.ROUTEFINDER.getRouteTo(stopB);
+        List<StationStop> stops = StationStop.find.all();
+        List<StopConnection> connections = StopConnection.find.all();
+
+        Routefinder routefinder = new Routefinder(stops, connections);
+
+        routefinder.generateTimesFrom(stopA);
+
+        LinkedList<StationStop> stopsOnRoute = routefinder.getRouteTo(stopB);
+        LinkedList<StopConnection> connectionsOnRoute = routefinder.getAllConnectionsOnRoute(stopsOnRoute);
+
+        Route route = new Route(stopsOnRoute, connectionsOnRoute);
+
         return ok(Json.toJson(route));
     }
 
@@ -94,8 +105,9 @@ public class ApiController extends Controller {
 
         if(route == null) return badRequest(Json.parse("[]"));
 
-            return ok(Json.toJson(route));
+        return ok(Json.toJson(route));
     }
+
 
     public Result getJsonRouteAvoiding(Long a, Long b, Long avoid){
         Routefinder rfAvoid = new Routefinder();
@@ -117,7 +129,7 @@ public class ApiController extends Controller {
 
         rfAvoid.setConnections(listOfConnections);
         rfAvoid.setStops(listOfStops);
-        rfAvoid.generateDistancesFrom(stopA);
+        rfAvoid.generateTimesFrom(stopA);
         Collection<StationStop> routeAvoiding = rfAvoid.getRouteTo(stopB);
 
         if(routeAvoiding == null) return badRequest(Json.parse("[]"));

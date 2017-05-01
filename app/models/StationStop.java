@@ -19,6 +19,11 @@ public class StationStop extends Model {
     @Constraints.Required
     public String line;
 
+    public StationStop(String name, String line) {
+        this.name = name;
+        this.line = line;
+    }
+
     public String getName(){
         return name;
     }
