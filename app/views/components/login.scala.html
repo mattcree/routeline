@@ -1,10 +1,20 @@
 <div class="container">
     <form class="form-signin dark" action="@security.routes.SecurityController.login()" method="post">
         <h2 class="form-signin-heading dark">Admin Sign in</h2>
-        <label for="emailAddress" class="sr-only">Employee ID</label>
-        <input type="email" id="emailAddress" name="emailAddress" class="form-control" placeholder="Employee ID: b1234567" required autofocus/>
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <div class="formbox">
+            <label for="emailAddress" class="sr-only">Employee ID</label>
+            <input type="email" id="emailAddress" name="emailAddress" class="form-control" placeholder="Employee ID: b1234567" required autofocus/>
+            <div class="glyphbox">
+                <a href="#" title="Help!" data-toggle="popover" data-trigger="focus" data-content="What's this?">
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                </a>
+            </div>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+
+
+
         <div class="checkbox">
             <label>
                 <!-- Not yet functional -->
@@ -13,4 +23,18 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
+
+
+
+
+
 </div>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
+
+
