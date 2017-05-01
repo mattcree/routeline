@@ -13,10 +13,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 
 /**
@@ -73,6 +70,31 @@ public class ApiController extends Controller {
         AppController.ROUTEFINDER.generateDistancesFrom(stopA);
         Collection<StationStop> route = AppController.ROUTEFINDER.getRouteTo(stopB);
         return ok(Json.toJson(route));
+    }
+
+    public Result getJsonRouteVia (Long a, Long b, Long via){
+
+        StationStop stopA = StationStop.find.byId(a);
+        StationStop stopB = StationStop.find.byId(b);
+        StationStop viaStop = StationStop.find.byId(via);
+
+        if(stopA == null || stopB == null || viaStop == null) return badRequest(Json.parse("[]"));
+
+        Long viaId = viaStop.id;
+
+        AppController.ROUTEFINDER.generateDistancesFrom(stopA);
+        Collection<StationStop> routePart1 = AppController.ROUTEFINDER.getRouteTo(viaStop);
+        AppController.ROUTEFINDER.generateDistancesFrom(viaStop);
+        Collection<StationStop> routePart2 = AppController.ROUTEFINDER.getRouteTo(stopB);
+
+        Collection<StationStop> route = new LinkedList<StationStop>();
+        route.addAll(routePart1);
+        route.remove(viaStop); //Should remove duplicate via, test
+        route.addAll(routePart2);
+
+        if(route == null) return badRequest(Json.parse("[]"));
+
+            return ok(Json.toJson(route));
     }
 
     public Result getJsonRouteAvoiding(Long a, Long b, Long avoid){
