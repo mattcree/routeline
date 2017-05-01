@@ -6,7 +6,7 @@ insert into line(id, name) values(2, 'Blue');
 insert into station_stop(id, name, line) values(1,'York','Red');
 insert into station_stop(id, name, line) values(2,'Darlington','Red');
 insert into station_stop(id, name, line) values(3,'Newcastle','Red');
-insert into station_stop(id, name, line) values(4,'Berwick-upon-Tweed','Red');
+insert into station_stop(id, name, line) values(4,'Berwick Upon Tweed','Red');
 insert into station_stop(id, name, line) values(5,'Dunbar','Red');
 insert into station_stop(id, name, line) values(6,'Edinburgh Waverley','Red');
 insert into station_stop(id, name, line) values(7,'Edinburgh Haymarket','Red');

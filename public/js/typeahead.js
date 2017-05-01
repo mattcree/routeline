@@ -1,120 +1,114 @@
-var stations;
-var idFrom;
-var idTo;
-var nameFrom;
-var nameTo;
-// takes an array of Objects in the following form
-// {"id":1,"name":"York","line":"Red"}
-// and returns a matcher function that checks whether a given string is found in the "name" of any of the Objects in the array
-var substringMatcher = function(objs) {
-   return function findMatches(q, cb) {
+    var stations;
+    var idFrom;
+    var idTo;
+    var nameFrom;
+    var nameTo;
+    // takes an array of Objects in the following form
+    // {"id":1,"name":"York","line":"Red"}
+    // and returns a matcher function that checks whether a given string is found in the "name" of any of the Objects in the array
+    var substringMatcher = function(objs) {
+        return function findMatches(q, cb) {
 
-       console.log('trying to match:');
-       console.log(q);
+        console.log('trying to match:');
+        console.log(q);
+        var matches, substringRegex;
 
-     var matches, substringRegex;
+        // an array that will be populated with substring matches
+        matches = [];
 
-     // an array that will be populated with substring matches
-     matches = [];
+        // regex used to determine if a string contains the substring `q`
+        substrRegex = new RegExp(q, 'i');
 
-     // regex used to determine if a string contains the substring `q`
-     substrRegex = new RegExp(q, 'i');
+        // iterate through the pool of Objects and for any Object that's name
+        // contains the substring `q`, add the name-string to the `matches` array
+            $.each(objs, function(i, obj) {
+                if (substrRegex.test(obj)) {
+                    matches.push(obj);
+                }
+            });
 
-     // iterate through the pool of Objects and for any Object that's name
-     // contains the substring `q`, add the name-string to the `matches` array
-     $.each(objs, function(i, obj) {
-       if (substrRegex.test(obj)) {
-         matches.push(obj);
-       }
-     });
-
-     cb(matches);
-   };
- };
-
-
-// get the list of stations
-$.get('/api/stations').then(function(data){
-
-   stations = data;
-
-   // stations should be an array of strings
-    console.log(stations);
-
-   // settings for jQuery typeahead plugin
-    var typeaheadCustomSettings = {
-      hint: true,
-      highlight: true,
-      minLength: 1
-    };
-
-   // data source for our jQuery typeahead
-    var dataSetup = {
-      name: 'stations',
-      source: substringMatcher(stations),
-      display: function(obj)
-      {
-      return obj;
-      }
+            cb(matches);
+        };
     };
 
 
+    //get the list of stations
+    $.get('/api/stations').then(function(data){
+        stations = data;
 
-   var stationFromInput = $('#stationFromInput');
+        // stations should be an array of strings
+        console.log(stations);
 
-   console.log(stationFromInput);
+        //settings for jQuery typeahead plugin
+        var typeaheadCustomSettings = {
+            hint: true,
+            highlight: true,
+            minLength: 1
+        };
 
-   // activate the jQuery typeahead plugin on the element with id "stationFromInput"
-    stationFromInput.typeahead(typeaheadCustomSettings, dataSetup);
+        // data source for our jQuery typeahead
+        var dataSetup = {
+            name: 'stations',
+            source: substringMatcher(stations),
+            display: function(obj){
+                return obj;
+            }
+        };
 
+        var stationFromInput = $('#stationFromInput');
+        console.log(stationFromInput);
+        // activate the jQuery typeahead plugin on the element with id "stationFromInput"
+        stationFromInput.typeahead(typeaheadCustomSettings, dataSetup);
 
-
-    var stationToInput = $('#stationToInput');
-
-   console.log(stationToInput);
-
-   // activate the jQuery typeahead plugin on the element with id "stationToInput"
+        var stationToInput = $('#stationToInput');
+        console.log(stationToInput);
+        // activate the jQuery typeahead plugin on the element with id "stationToInput"
         stationToInput.typeahead(typeaheadCustomSettings, dataSetup);
-});
+    });
 
 
-$('#stationFromInput').bind('typeahead:autocomplete typeahead:select', function(ev, suggestion) {
- console.log('Selection: ' + suggestion.id);
- console.log('suggestion: ' + suggestion.name);
- idFrom = suggestion.id;
- nameFrom = suggestion;
-});
+    $('#stationFromInput').bind('typeahead:autocomplete typeahead:select', function(ev, suggestion) {
+        console.log('Selection: ' + suggestion.id);
+        console.log('suggestion: ' + suggestion.name);
+        idFrom = suggestion.id;
+        nameFrom = suggestion;
+    });
 
-$('#stationToInput').bind('typeahead:autocomplete typeahead:select', function(ev, suggestion) {
-  console.log('Selection: ' + suggestion.id);
-  console.log('suggestion: ' + suggestion.name);
-  idTo = suggestion.id;
-  nameTo = suggestion;
-});
+    $('#stationToInput').bind('typeahead:autocomplete typeahead:select', function(ev, suggestion) {
+        console.log('Selection: ' + suggestion.id);
+        console.log('suggestion: ' + suggestion.name);
+        idTo = suggestion.id;
+        nameTo = suggestion;
+    });
 
-function getRouteData(idFrom, idTo) {
-    console.log('this is id:' + idFrom + ' ' + idTo);
-    var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo;
+    function getRouteData(nameFrom, nameTo) {
+        var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo;
 
-    $.get(routeApiUrl).then(function(data){
+        $.get(routeApiUrl).then(function(data){
+            console.log("Objects: " + data);
 
-        console.log("Objects: " + data);
+            var newHtml = '<h3>Journey Summary: </h3><p>'+data.start.name+' to '+data.destination.name+'</p>';
 
-        var newHtml = '';
-
-        for (var i = 0; i < data.route.length; i++) {
-            console.log(data.route[i]);
-            var stObject = data.route[i].name;
-            newHtml += '<li><b>' + stObject +'</b></li>';
+            for (var i = 0; i < data.route.length; i++) {
+                console.log(data.route[i]);
+                var name = data.route[i].name;
+                var line = data.route[i].line;
+                newHtml += '<b>'+name+' on '+line+' line</b><br>';
+                if(i+1 != data.route.length) {
+                    console.log("Yep")
+                    newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
+                }
             }
 
-         $('#route-results').html(
-            '<ul>'+newHtml+'</li></ul>'
-            );
-    });
-}
+            $('#route-results').empty()
 
-$('#goButton').click(function() {
-    getRouteData(idFrom, idTo);
-});
+            $('#route-results').append(
+                '<div class="panel">'+newHtml+'<h3>Time: '+data.timeInMinutes+' minutes</h2></div>'
+            )
+        });
+    }
+
+    $('#goButton').click(function() {
+        getRouteData(nameFrom, nameTo);
+    });
 

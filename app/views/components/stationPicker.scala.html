@@ -1,39 +1,30 @@
 <br>
 
-<section class="call-to-action">
+
     <h1><span id="intro-text">Where would you like to go today?</span></h1>
     <br>
-    <div id="typeahead" class="row">
-
-        <div class="input-group">
-            <!-- id must match script below -->
-            <input type="text" class="form-control" id="stationFromInput" aria-label="Text input with dropdown button" placeholder="From">
-        </div>
-
-
-        <div class="input-group">
-            <!-- id must match script below -->
-            <input type="text" class="form-control" id="stationToInput" aria-label="Text input with dropdown button" placeholder="To">
-            <br>
-
-        </div>
-
-
-
+<div id="typeahead" class="row">
+    <div class="input-group">
+        <!-- id must match script below -->
+        <input type="text" class="form-control" id="stationFromInput" aria-label="Text input with dropdown button" placeholder="From">
     </div>
-    <br>
-    <div class="container">
-        <div id="results-container">
-            <button id="goButton" class = "btn btn-success">Go!</button>
-            <div id="below-go-btn">
-                <div id="route-results" class="results">
-
-                </div>
-            </div>
-        </div>
+    <div class="input-group">
+        <!-- id must match script below -->
+        <input type="text" class="form-control" id="stationToInput" aria-label="Text input with dropdown button" placeholder="To">
+        <br>
+    </div>
+</div>
+<br>
+<div>
+    <div id="results-container">
+        <button id="goButton" class="btn btn-success text-center">Go!</button>
+        <div id="below-go-btn">
+            <div id="route-results" class="results"></div>
         </div>
     </div>
-</section>
+    </div>
+</div>
+
 
 
 
@@ -41,7 +32,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 <script src="@routes.Assets.versioned("bootstrap-3.3.7-dist/js/bootstrap.min.js")"></script>
-<script>
-    var stationApiUrl = '@routes.ApiController.getJsonStations()';
-</script>
 <script src="@routes.Assets.versioned("js/typeahead.js")"></script>
