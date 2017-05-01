@@ -247,9 +247,7 @@ public class NetworkTest {
     private String lineToString = "Stop: Newcastle, Line: A";
 
     private StationStop createValidStation() {
-        StationStop stop = new StationStop();
-        stop.name = name;
-        stop.line = line1;
+        StationStop stop = new StationStop(name, line1);
         return stop;
     }
 
@@ -269,18 +267,12 @@ public class NetworkTest {
     }
 
     private StopConnection createValidStopConnectionFromStops(StationStop stop1, StationStop stop2, int time) {
-        StopConnection stopConnection = new StopConnection();
-        stopConnection.stopA = stop1;
-        stopConnection.stopB = stop2;
-        stopConnection.time = time;
-
+        StopConnection stopConnection = new StopConnection(stop1, stop2, time);
         return stopConnection;
     }
 
     private StationStop createValidStationFromString(String name, String line) {
-        StationStop stop = new StationStop();
-        stop.name = name;
-        stop.line = line;
+        StationStop stop = new StationStop(name, line);
         return stop;
     }
 
