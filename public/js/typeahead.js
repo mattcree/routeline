@@ -103,7 +103,7 @@
             $('#route-results').empty()
 
             $('#route-results').append(
-                '<div class="panel">'+newHtml+'<h3>Time: '+data.timeInMinutes+' minutes</h2></div>'
+                '<div class="panel container-fluid">'+newHtml+'<h3>Time: '+data.timeInMinutes+' minutes</h2></div>'
             )
         });
     }
