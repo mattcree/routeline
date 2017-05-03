@@ -87,12 +87,12 @@
         $.get(routeApiUrl).then(function(data){
             console.log("Objects: " + data);
 
-            var newHtml = '<h3>Journey Summary: </h3><hr><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
+            var newHtml = '<h4>Journey Summary: </h4><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
 
             var firstName = data.route[0].name
             var firstLine = data.route[0].line
 
-            newHtml += '<b>Start:</b> '+firstName+' on '+firstLine+' line<br>';
+            newHtml += '<b class="panel">Start:</b> '+firstName+' on '+firstLine+' line<br>';
             newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
             for (var i = 1; i < data.route.length; i++) {
                 console.log(data.route[i]);
@@ -105,14 +105,14 @@
                     console.log("Yep")
                     newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
                 } else {
-                    newHtml += '<b>Destination: </b> '+name+' on '+line+' line';
+                    newHtml += '<b>Destination: '+name+'</b>';
                 }
             }
 
             $('#route-results').empty()
 
             $('#route-results').append(
-                '<div class="panel container-fluid">'+newHtml+'<hr><h3>Journey duration: '+data.timeInMinutes+' minutes</h2></div>'
+                '<div class="panel container-fluid">'+newHtml+'<h4>Journey duration: '+data.timeInMinutes+' minutes</h4></div>'
             )
         });
     }
@@ -123,7 +123,7 @@
         $.get(routeApiUrl).then(function(data){
             console.log("Objects: " + data);
 
-            var newHtml = '<h3>Journey Summary: </h3><hr><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
+            var newHtml = '<h4>Journey Summary: </h4><hr><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
 
             var firstName = data.route[0].name
             var firstLine = data.route[0].line
@@ -159,7 +159,7 @@
         $.get(routeApiUrl).then(function(data){
             console.log("Objects: " + data);
 
-            var newHtml = '<h3>Journey Summary: </h3><hr><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
+            var newHtml = '<h4>Journey Summary: </h4><hr><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
 
             var firstName = data.route[0].name
             var firstLine = data.route[0].line
@@ -177,14 +177,14 @@
                     console.log("Yep")
                     newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
                 } else {
-                    newHtml += '<b>Destination: </b> '+name+' on '+line+' line';
+                    newHtml += '<b>Destination: </b>'+name+'line';
                 }
             }
 
             $('#route-results').empty()
 
             $('#route-results').append(
-                '<div class="panel container-fluid">'+newHtml+'<hr><h3>Journey duration: '+data.timeInMinutes+' minutes</h2></div>'
+                '<div class="panel container-fluid">'+newHtml+'<hr><h4>Journey duration: '+data.timeInMinutes+' minutes</h4></div>'
             )
         });
     }
