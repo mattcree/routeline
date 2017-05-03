@@ -166,7 +166,8 @@ public class ApiController extends Controller {
         List<StationStop> viaStop = new LinkedList<>();
         viaStop.add(firstLeg.destination);
         Route secondLeg = Routefinder.getBestRoute(viaStop, destinationStops, rf);
-        return  ok(Json.toJson(firstLeg.combineRoute(secondLeg)));
+        Route completeRoute = firstLeg.combineRoute(secondLeg);
+        return  ok(Json.toJson(completeRoute));
     }
 
     public Result getJsonRouteAvoiding(Long a, Long b, Long avoid){

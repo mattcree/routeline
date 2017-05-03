@@ -4,6 +4,7 @@
     var nameFrom;
     var nameTo;
     var avoidVia;
+    var options
     // takes an array of Objects in the following form
     // {"id":1,"name":"York","line":"Red"}
     // and returns a matcher function that checks whether a given string is found in the "name" of any of the Objects in the array
@@ -94,12 +95,20 @@
         avoidVia = suggestion;
     });
 
-    function getRouteData(nameFrom, nameTo) {
-        var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo;
+
+
+
+    function getRouteData(nameFrom, nameTo, options, avoidVia) {
+        var routeApiUrl;
+        if (options == "") {
+            console.log("aw ye")
+            var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo;
+        } else {
+            console.log("fuck");
+            var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo + options + avoidVia;
+        }
 
         $.get(routeApiUrl).then(function(data){
-            console.log("Objects: " + data);
-
             var newHtml = '<h4>Journey Summary: </h4><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
 
             var firstName = data.route[0].name
@@ -130,85 +139,10 @@
         });
     }
 
-    function getRouteVia(nameFrom, nameTo, viaStop) {
-        var routeApiUrl = '/api/route/' + nameFrom + '/' + nameTo + '/via/' + viaStop;
-
-        $.get(routeApiUrl).then(function(data){
-            console.log("Objects: " + data);
-
-            var newHtml = '<h4>Journey Summary: </h4><hr><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
-
-            var firstName = data.route[0].name
-            var firstLine = data.route[0].line
-
-            newHtml += '<b>Start:</b> '+firstName+' on '+firstLine+' line<br>';
-            newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
-            for (var i = 1; i < data.route.length; i++) {
-                console.log(data.route[i]);
-
-                var name = data.route[i].name;
-                var line = data.route[i].line;
-
-                if(i+1 != data.route.length) {
-                    newHtml += '<p>'+name+' on '+line+' line</p>';
-                    console.log("Yep")
-                    newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
-                } else {
-                    newHtml += '<b>Destination: </b> '+name+' on '+line+' line';
-                }
-            }
-
-            $('#route-results').empty()
-
-            $('#route-results').append(
-                '<div class="panel container-fluid">'+newHtml+'<hr><h3>Journey duration: '+data.timeInMinutes+' minutes</h2></div>'
-            )
-        });
-    }
-
-    function getRouteVia(nameFrom, nameTo, avoidStop) {
-        var routeApiUrl = '/api/route/' + nameFrom + '/' + nameTo + '/avoid/' + avoidStop;
-
-        $.get(routeApiUrl).then(function(data){
-            console.log("Objects: " + data);
-
-            var newHtml = '<h4>Journey Summary: </h4><hr><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
-
-            var firstName = data.route[0].name
-            var firstLine = data.route[0].line
-
-            newHtml += '<b>Start:</b> '+firstName+' on '+firstLine+' line<br>';
-            newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
-            for (var i = 1; i < data.route.length; i++) {
-                console.log(data.route[i]);
-
-                var name = data.route[i].name;
-                var line = data.route[i].line;
-
-                if(i+1 != data.route.length) {
-                    newHtml += '<p>'+name+' on '+line+' line</p>';
-                    console.log("Yep")
-                    newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
-                } else {
-                    newHtml += '<b>Destination: </b>'+name+'line';
-                }
-            }
-
-            $('#route-results').empty()
-
-            $('#route-results').append(
-                '<div class="panel container-fluid">'+newHtml+'<hr><h4>Journey duration: '+data.timeInMinutes+' minutes</h4></div>'
-            )
-        });
-    }
 
 
     $('#goButton').click(function() {
-        getRouteData(nameFrom, nameTo);
-    });
-
-    $('#detailsButton').click(function() {
-        getRouteData(nameFrom, nameTo);
+        getRouteData(nameFrom, nameTo, $('#viaAvoidOptions').val(), avoidVia);
     });
 
 
