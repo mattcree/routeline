@@ -79,7 +79,7 @@ h2.logo-text {
     left: 45px;
     top: 7px;
     padding: 2px;
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 1px 1px 1px black;
 }
 
 h1,
@@ -87,7 +87,7 @@ h2 {
     font-weight: bold;
     text-align: center;
     color: #f7f7f7;
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 1px 1px 1px black;
 }
 
 h3.text-center {
@@ -124,16 +124,22 @@ a.btn .glyphicon{
 }
 
 .glyphicon{
-    color: orange;
-    font-size: 25px;
+
+
 }
 
 .glyphbox .glyphicon-question-sign {
+    font-size: 25px;
+    color: orange;
     position: absolute;
     top: 2px;
     right: 0px;
     display: inline-block;
     padding: 2px;
+}
+
+.glyphbox.glyphicon-random {
+    font-size: 10px;
 }
 
 .thumbnail {
@@ -209,7 +215,7 @@ Custom elements
 Viewport settings
 =============================================
 */
-
+/*
 @media (max-width: 991px) {
     h3.text-center{font-size: 20px;}
     .thumbnail .glyphicon{font-size: 20px;}
@@ -234,3 +240,5 @@ Viewport settings
         text-align: center;
     }
 }
+
+*/

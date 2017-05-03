@@ -11,28 +11,56 @@
         <input type="text" class="form-control" id="stationToInput" aria-label="Text input with dropdown button" placeholder="To">
         <br>
     </div>
+
     <div class="input-group">
-        <div class="dropdown show">
-            <select class="dropdown">
-                <option value="">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+        <label class="btn btn-info collapsed" data-toggle="collapse" data-target="#viaAvoid">
+            <input type="checkbox" class="hidden" tabindex="-1">
+            <i class="glyphicon glyphicon-random"></i>
+            <span class="btn-text"> Via / Avoid</span>
+            <br>
+        </label>
+    </div>
+
+    <div class="input-group">
+        <div id="viaAvoid" class="collapse">
+            <select class="form-control">
+                <option value="">Select...</option>
+                <option value="via/">Go via</option>
+                <option value="avoid/">Avoid</option>
             </select>
+            <div>
+                <input type="text" class="form-control" id="stationAvoidViaInput" aria-label="Text input with dropdown button" placeholder="Avoid/Via">
+                <br>
+            </div>
         </div>
     </div>
-</div>
-<br>
-<div class="container">
+    <div class="input-group">
+        <button id="goButton" name="goButton" class="btn btn-success">Go!</button>
+
+    </div>
+
     <div id="results-container">
-        <button id="goButton" class="btn btn-success center-block">Go!</button>
         <div id="below-go-btn"><br>
-            <div id="route-results" class="results col-md-6 col-md-offset-3"></div>
+            <div id="route-results" class="results col-md-6 col-md-offset-3">
+
+            </div>
         </div>
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+<br>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
-<script src="@routes.Assets.versioned("bootstrap-3.3.7-dist/js/bootstrap.min.js")"></script>
 <script src="@routes.Assets.versioned("js/typeahead.js")"></script>
