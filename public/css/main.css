@@ -4,7 +4,7 @@ General settings
 =============================================
 */
 body {
-    background: #403b59;
+    background: #2C2C74;
     font-family: 'Raleway', sans-serif;
     background-repeat: no-repeat;
     background-size: cover;
@@ -79,6 +79,7 @@ h2.logo-text {
     left: 45px;
     top: 7px;
     padding: 2px;
+    text-shadow: 2px 2px 2px black;
 }
 
 h1,
@@ -86,6 +87,7 @@ h2 {
     font-weight: bold;
     text-align: center;
     color: #f7f7f7;
+    text-shadow: 2px 2px 2px black;
 }
 
 h3.text-center {

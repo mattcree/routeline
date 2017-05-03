@@ -183,7 +183,7 @@ public class ApiController extends Controller {
         rf.setConnections(listOfConnections);
         Route route = Routefinder.getBestRoute(stopA, stopB, rf);
         if(route == null) return badRequest(Json.parse("{}"));
-        
+
         return ok(Json.toJson(route));
 
     }
