@@ -3,6 +3,7 @@
     var idTo;
     var nameFrom;
     var nameTo;
+    var avoidVia;
     // takes an array of Objects in the following form
     // {"id":1,"name":"York","line":"Red"}
     // and returns a matcher function that checks whether a given string is found in the "name" of any of the Objects in the array
@@ -64,6 +65,11 @@
         console.log(stationToInput);
         // activate the jQuery typeahead plugin on the element with id "stationToInput"
         stationToInput.typeahead(typeaheadCustomSettings, dataSetup);
+
+        var stationAvoidViaInput = $('#stationAvoidViaInput');
+        console.log(stationAvoidViaInput);
+        // activate the jQuery typeahead plugin on the element with id "stationToInput"
+        stationAvoidViaInput.typeahead(typeaheadCustomSettings, dataSetup);
     });
 
 
@@ -79,6 +85,13 @@
         console.log('suggestion: ' + suggestion.name);
         idTo = suggestion.id;
         nameTo = suggestion;
+    });
+
+    $('#stationAvoidViaInput').bind('typeahead:autocomplete typeahead:select', function(ev, suggestion) {
+        console.log('Selection: ' + suggestion.id);
+        console.log('suggestion: ' + suggestion.name);
+        idTo = suggestion.id;
+        avoidVia = suggestion;
     });
 
     function getRouteData(nameFrom, nameTo) {
@@ -197,4 +210,6 @@
     $('#detailsButton').click(function() {
         getRouteData(nameFrom, nameTo);
     });
+
+
 
