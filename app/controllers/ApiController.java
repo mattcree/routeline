@@ -155,29 +155,36 @@ public class ApiController extends Controller {
         Collection<StationStop> routeAvoiding = rfAvoid.getRouteTo(stopB);
 
         if(routeAvoiding == null) return badRequest(Json.parse("[]"));
-
-            return ok(Json.toJson(routeAvoiding));
+        return ok(Json.toJson(routeAvoiding));
 
     }
 
     public Result getJsonRouteAvoidingStation(String a, String b, String avoid){
-//        Routefinder rfAvoid = new Routefinder();
-//
-//        StationStop stopA = StationStop.find.byId(a);
-//        StationStop stopB = StationStop.find.byId(b);
-//        StationStop avoidStop = StationStop.find.byId(avoid);
-//
-//        if(stopA == null || stopB == null || avoidStop == null) return badRequest(Json.parse("[]"));
-//
-//        Long avoidId = avoidStop.id;
-//
-//        List<StationStop> listOfStops = StationStop.find.where().ne("id", avoidId).findList();
-//        List<StopConnection> listOfConnections = StopConnection.find
-//                .where()
-//                .ne("stop_a_id", avoidId)
-//                .ne("stop_b_id", avoidId)
-//                .findList();
-//
-        return ok();
+        System.out.println("Got here.");
+        Routefinder rf = new Routefinder();
+
+        String formattedStart = WordUtils.capitalize(a.toLowerCase().trim());
+        String formattedDestination = WordUtils.capitalize(b.toLowerCase().trim());
+        String formattedAvoid = WordUtils.capitalize(avoid.toLowerCase().trim());
+
+        List<StationStop> stopA = StationStop.find.where().eq("name", formattedStart).findList();
+        List<StationStop> stopB = StationStop.find.where().eq("name", formattedDestination).findList();
+        List<StationStop> avoidStops = StationStop.find.where().eq("name", formattedAvoid).findList();
+
+        if(stopA.isEmpty() || stopB.isEmpty() || avoidStops.isEmpty()) return badRequest(Json.parse("[]"));
+
+        List<Long> avoidIds = new ArrayList<>();
+        avoidStops.forEach(stop -> avoidIds.add(stop.id));
+
+        List<StationStop> listOfStops = StationStop.find.where().notIn("id", avoidIds).findList();
+        List<StopConnection> listOfConnections = StopConnection.find.where().notIn("stop_a_id", avoidIds).notIn("stop_b_id", avoidIds).findList();
+
+        rf.setStops(listOfStops);
+        rf.setConnections(listOfConnections);
+        Route route = Routefinder.getBestRoute(stopA, stopB, rf);
+        if(route == null) return badRequest(Json.parse("{}"));
+        
+        return ok(Json.toJson(route));
+
     }
 }

@@ -210,14 +210,19 @@ public class Routefinder {
         Route shortestRoute = null;
         for(StationStop startingStop : starts) {
             rf.generateTimesFrom(startingStop);
+            System.out.println("And here: " + rf);
             for(StationStop destinationStop : destinations) {
                 LinkedList<StationStop> stops = rf.getRouteTo(destinationStop);
+                System.out.println("and here again: "+ stops);
+                if (stops == null) return shortestRoute;
                 LinkedList<StopConnection> connections = rf.getAllConnectionsOnRoute(stops);
+                System.out.println(connections);
                 Route currentRoute = new Route(stops, connections);
                 if (shortestRoute == null) shortestRoute = currentRoute;
                 if (shortestRoute.timeInMinutes > currentRoute.timeInMinutes) shortestRoute = currentRoute;
             }
         }
+        System.out.println(shortestRoute);
         return shortestRoute;
     }
 
