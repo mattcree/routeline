@@ -109,12 +109,17 @@
         }
 
         $.get(routeApiUrl).then(function(data){
-            var newHtml = '<h4>Journey Summary: </h4><b>From '+data.start.name+' to '+data.destination.name+'</b><hr>';
-
+            var newHtml = '<h4>Journey Summary: </h4><p>From '+data.start.name+' to '+data.destination.name+'</p><p>Duration: '+data.timeInMinutes+' minutes</p>';
+            if (data.numberOfChanges > 0) {
+                newHtml+= '<p>'+data.numberOfChanges+' change(s)</p>';
+                for(var i = 0; i < data.changes.length;i++) {
+                    newHtml += '<p>'+data.changes[i].stopA.name +' to '+ data.changes[i].stopB.line +' line</p>';
+                }
+            }
             var firstName = data.route[0].name
             var firstLine = data.route[0].line
-
-            newHtml += '<b class="panel">Start:</b> '+firstName+' on '+firstLine+' line<br>';
+            newHtml += '<hr>';
+            newHtml += '<b class="panel">Start: '+firstName+' on '+firstLine+' line</b><br>';
             newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
             for (var i = 1; i < data.route.length; i++) {
                 console.log(data.route[i]);
@@ -136,6 +141,7 @@
             $('#route-results').append(
                 '<div class="panel container-fluid">'+newHtml+'<h4>Journey duration: '+data.timeInMinutes+' minutes</h4></div>'
             )
+
         });
     }
 
