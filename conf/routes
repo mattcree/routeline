@@ -25,11 +25,15 @@ GET     /api/lines                      controllers.ApiController.getJsonAllLine
 GET     /api/lines/:line                controllers.ApiController.getJsonAllStopsOnLine(line: String)
 
 # Route Information
-GET     /api/route/:a/:b                controllers.ApiController.getJsonRoute(a: Long, b: Long)
-GET     /api/route/names/:start/:destination  controllers.ApiController.getJsonRouteByName(start: String, destination: String)
-GET     /api/route/:a/:b/avoid/:avoid   controllers.ApiController.getJsonRouteAvoiding(a: Long, b: Long, avoid: Long)
-GET     /api/route/names/:a/:b/avoid/:avoid   controllers.ApiController.getJsonRouteAvoidingStation(a: String, b: String, avoid: String)
-GET     /api/route/:a/:b/via/:via       controllers.ApiController.getJsonRouteVia(a: Long, b: Long, via: Long)
+# By Stop ID (Avoids only one Stop at station)
+GET     /api/route/:a/:b                        controllers.ApiController.getJsonRoute(a: Long, b: Long)
+GET     /api/route/:a/:b/avoid/:avoid           controllers.ApiController.getJsonRouteAvoiding(a: Long, b: Long, avoid: Long)
+GET     /api/route/:a/:b/via/:via               controllers.ApiController.getJsonRouteVia(a: Long, b: Long, via: Long)
+
+# By Station Name (Avoids all stops at station)
+GET     /api/route/names/:a/:b    controllers.ApiController.getJsonRouteByName(a: String, b: String)
+GET     /api/route/names/:a/:b/avoid/:avoid     controllers.ApiController.getJsonRouteAvoidingStation(a: String, b: String, avoid: String)
+GET     /api/route/names/:a/:b/via/:via         controllers.ApiController.getJsonRouteViaStation(a: String, b: String, via: String)
 
 
 # Admin Routes
