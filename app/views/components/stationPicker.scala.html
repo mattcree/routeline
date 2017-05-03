@@ -13,7 +13,7 @@
     </div>
 
     <div class="input-group">
-        <label class="btn btn-info collapsed" data-toggle="collapse" data-target="#viaAvoid">
+        <label class="btn btn-info collapsed form-control" data-toggle="collapse" data-target="#viaAvoid">
             <input type="checkbox" class="hidden" tabindex="-1">
             <i class="glyphicon glyphicon-random"></i>
             <span class="btn-text"> Via / Avoid</span>
@@ -23,42 +23,30 @@
 
     <div class="input-group">
         <div id="viaAvoid" class="collapse">
-            <select class="form-control">
+            <select>
                 <option value="">Select...</option>
                 <option value="via/">Go via</option>
                 <option value="avoid/">Avoid</option>
             </select>
+            <br>
             <div>
                 <input type="text" class="form-control" id="stationAvoidViaInput" aria-label="Text input with dropdown button" placeholder="Avoid/Via">
-                <br>
             </div>
         </div>
     </div>
     <div class="input-group">
         <button id="goButton" name="goButton" class="btn btn-success">Go!</button>
-
     </div>
+</div>
+<div id="results-container">
+    <div id="below-go-btn"><br>
+        <div id="route-results" class="results col-md-6 col-md-offset-3">
 
-    <div id="results-container">
-        <div id="below-go-btn"><br>
-            <div id="route-results" class="results col-md-6 col-md-offset-3">
-
-            </div>
         </div>
     </div>
 </div>
 
 
-
-
-
-
-
-
-
-
-
-<br>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

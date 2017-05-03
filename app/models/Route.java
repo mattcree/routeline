@@ -75,4 +75,15 @@ public class Route {
         }
         return changes;
     }
+
+    public Route combineRoute(Route secondLeg) {
+        this.destination = secondLeg.destination;
+        this.route.remove(secondLeg.start);
+        this.route.addAll(secondLeg.route);
+        this.timeInMinutes = this.timeInMinutes + secondLeg.timeInMinutes;
+        this.numberOfChanges = this.numberOfChanges + secondLeg.numberOfChanges;
+        this.changes.addAll(secondLeg.changes);
+        this.connections.addAll(secondLeg.connections);
+        return this;
+    }
 }
