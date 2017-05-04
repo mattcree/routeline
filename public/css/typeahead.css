@@ -10,7 +10,7 @@
 .tt-input, /* UPDATE: newer versions use tt-input instead of tt-query */
 .tt-hint {
     width: 100px;
-    height: 25px;
+    height: 30px;
     font-size: 14px;
     line-height: 16px;
     outline: none;
