@@ -105,6 +105,9 @@ h3.text-center {
 Buttons and Bootstrap
 =============================================
 */
+.btn {
+    padding: 7px 37px;
+}
 .btn-primary {
     color: #fff;
     background-color: #181863;
@@ -124,7 +127,7 @@ a.btn .glyphicon{
 }
 
 .glyphicon{
-
+    top: 0px;
 
 }
 
@@ -191,6 +194,14 @@ Custom elements
 */
 .input-group {
     margin: auto;
+}
+
+.input-group .form-control {
+    float: none;
+}
+
+.form-control {
+    border-radius: initial;
 }
 
 .container #results-container{
