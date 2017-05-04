@@ -100,6 +100,7 @@
 
     function getRouteData(nameFrom, nameTo, options, avoidVia) {
         var routeApiUrl;
+
         if (options == "") {
             console.log("aw ye")
             var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo;
@@ -109,16 +110,38 @@
         }
 
         $.get(routeApiUrl).then(function(data){
-            var newHtml = '<h4>Journey Summary: </h4><p>From '+data.start.name+' to '+data.destination.name+'</p><p>Duration: '+data.timeInMinutes+' minutes</p>';
+            console.log(data)
+            if (data == "{ }") {
+                $('#route-results').empty()
+                $('#route-results').append('<div class="panel container-fluid"><h3>No route</h3></div>')
+            }
+
+            var firstName = data.route[0].name;
+            var firstLine = data.route[0].line;
+            var hours = Math.floor(data.timeInMinutes / 60);
+            var minutes = data.timeInMinutes % 60;
+            var totalTime;
+            if (hours < 1){
+                totalTime = data.timeInMinutes + ' minutes';
+            } else {
+                totalTime = hours + ' hour(s) ' + minutes + ' minutes';
+            }
+
+            var newHtml = '<h4>Journey Summary: </h4><p>From '+data.start.name+' to '+data.destination.name+'</p>'
+            newHtml += '<p>Duration: '+totalTime+'</p>';
+
             if (data.numberOfChanges > 0) {
                 newHtml+= '<p>'+data.numberOfChanges+' change(s)</p>';
                 for(var i = 0; i < data.changes.length;i++) {
                     newHtml += '<p>'+data.changes[i].stopA.name +' to '+ data.changes[i].stopB.line +' line</p>';
                 }
             }
-            var firstName = data.route[0].name
-            var firstLine = data.route[0].line
-            newHtml += '<hr>';
+            newHtml+='<div>'
+            newHtml+='<button id="detailsButton" name="details" class="" data-toggle="collapse" data-target="#details">Details</button>'
+
+
+
+            newHtml += '<div id="details" class="collapse"><hr>';
             newHtml += '<b class="panel">Start: '+firstName+' on '+firstLine+' line</b><br>';
             newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
             for (var i = 1; i < data.route.length; i++) {
@@ -132,14 +155,14 @@
                     console.log("Yep")
                     newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
                 } else {
-                    newHtml += '<b>Destination: '+name+'</b>';
+                    newHtml += '<b>Destination: '+name+'</b></div>';
                 }
             }
 
             $('#route-results').empty()
 
             $('#route-results').append(
-                '<div class="panel container-fluid">'+newHtml+'<h4>Journey duration: '+data.timeInMinutes+' minutes</h4></div>'
+                '<div class="panel container-fluid">'+newHtml+'<h4>Journey duration: '+totalTime+'</h4></div>'
             )
 
         });
@@ -150,6 +173,7 @@
     $('#goButton').click(function() {
         getRouteData(nameFrom, nameTo, $('#viaAvoidOptions').val(), avoidVia);
     });
+
 
 
 
