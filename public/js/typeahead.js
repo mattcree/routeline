@@ -120,49 +120,52 @@
             var firstLine = data.route[0].line;
             var hours = Math.floor(data.timeInMinutes / 60);
             var minutes = data.timeInMinutes % 60;
-            var totalTime;
+            var totalTime = '';
+            var expandedDetails = '';
+            var details = '';
+            var summary = '';
+
             if (hours < 1){
                 totalTime = data.timeInMinutes + ' minutes';
             } else {
                 totalTime = hours + ' hour(s) ' + minutes + ' minutes';
             }
 
-            var newHtml = '<h4>Journey Summary: </h4><p>From '+data.start.name+' to '+data.destination.name+'</p>'
-            newHtml += '<p>Duration: '+totalTime+'</p>';
+            summary += '<h4>Journey Summary: </h4><p>From '+data.start.name+' to '+data.destination.name+'</p>'
+            summary += '<p>Duration: '+totalTime+'</p>';
 
             if (data.numberOfChanges > 0) {
-                newHtml+= '<p>'+data.numberOfChanges+' change(s)</p>';
+                summary += '<p>'+data.numberOfChanges+' change(s)</p>';
                 for(var i = 0; i < data.changes.length;i++) {
-                    newHtml += '<p>'+data.changes[i].stopA.name +' to '+ data.changes[i].stopB.line +' line</p>';
+                    summary += '<p>'+data.changes[i].stopA.name +' to '+ data.changes[i].stopB.line +' line</p>';
                 }
             }
-            newHtml+='<div>'
-            newHtml+='<button id="detailsButton" name="details" class="" data-toggle="collapse" data-target="#details">Details</button>'
 
+            details += '<b class="panel">Start: '+firstName+' on '+firstLine+' line</b><br>';
+            details += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
 
-
-            newHtml += '<div id="details" class="collapse"><hr>';
-            newHtml += '<b class="panel">Start: '+firstName+' on '+firstLine+' line</b><br>';
-            newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
             for (var i = 1; i < data.route.length; i++) {
-                console.log(data.route[i]);
-
                 var name = data.route[i].name;
                 var line = data.route[i].line;
 
                 if(i+1 != data.route.length) {
-                    newHtml += '<p>'+name+' on '+line+' line</p>';
-                    console.log("Yep")
-                    newHtml += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
+                    details += '<p>'+name+' on '+line+' line</p>';
+                    details += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
                 } else {
-                    newHtml += '<b>Destination: '+name+'</b></div>';
+                    details += '<b>Destination: '+name+'</b>';
                 }
             }
+
+            details += '<h4>Journey duration: '+totalTime+'</h4>';
+            expandedDetails +='<details>'+details+'</details>';
+
+            console.log(details);
+            console.log(expandedDetails);
 
             $('#route-results').empty()
 
             $('#route-results').append(
-                '<div class="panel container-fluid">'+newHtml+'<h4>Journey duration: '+totalTime+'</h4></div>'
+                '<div class="panel container-fluid">'+summary+expandedDetails+'</div>'
             )
 
         });

@@ -13,15 +13,6 @@
     </div>
 
     <div class="input-group">
-        <label class="btn btn-info collapsed form-control" data-toggle="collapse" data-target="#viaAvoid">
-            <input type="checkbox" class="hidden" tabindex="-1">
-            <i class="glyphicon glyphicon-random"></i>
-            <span class="btn-text"> Via / Avoid</span>
-            <br>
-        </label>
-    </div>
-
-    <div class="input-group">
         <div id="viaAvoid" class="collapse">
             <select id="viaAvoidOptions" class="input-group tt-input form-control">
                 <option value="">Select...</option>
@@ -33,9 +24,14 @@
             </div>
         </div>
     </div>
+
+
+
     <div class="input-group">
-        <button id="goButton" name="goButton" class="btn btn-success">Go!</button>
+        <button class="btn btn-info collapsed glyphicon glyphicon-cog" data-toggle="collapse" data-target="#viaAvoid"></button>
+        <button class="btn btn-success" id="goButton" name="goButton">Go!</button>
     </div>
+
 </div>
 <div id="results-container">
     <div id="below-go-btn"><br>
