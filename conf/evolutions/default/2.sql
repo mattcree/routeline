@@ -1,41 +1,41 @@
 # --- !Ups
-insert into line(id, name) values(1, 'Red');
-insert into line(id, name) values(2, 'Blue');
+insert into line(id, name) values(1, 'East Coast');
+insert into line(id, name) values(2, 'Cross Country');
 
 /*Line A*/
-insert into station_stop(id, name, line) values(1,'York','Red');
-insert into station_stop(id, name, line) values(2,'Darlington','Red');
-insert into station_stop(id, name, line) values(3,'Newcastle','Red');
-insert into station_stop(id, name, line) values(4,'Berwick Upon Tweed','Red');
-insert into station_stop(id, name, line) values(5,'Dunbar','Red');
-insert into station_stop(id, name, line) values(6,'Edinburgh Waverley','Red');
-insert into station_stop(id, name, line) values(7,'Edinburgh Haymarket','Red');
+insert into station_stop(id, name, line) values(1,'York','East Coast');
+insert into station_stop(id, name, line) values(2,'Darlington','East Coast');
+insert into station_stop(id, name, line) values(3,'Newcastle','East Coast');
+insert into station_stop(id, name, line) values(4,'Berwick Upon Tweed','East Coast');
+insert into station_stop(id, name, line) values(5,'Dunbar','East Coast');
+insert into station_stop(id, name, line) values(6,'Edinburgh Waverley','East Coast');
+insert into station_stop(id, name, line) values(7,'Edinburgh Haymarket','East Coast');
 
-insert into station_stop(id, name, line) values(8,'Stirling','Red');
-insert into station_stop(id, name, line) values(9,'Perth','Red');
-insert into station_stop(id, name, line) values(10,'Pitlochry','Red');
-insert into station_stop(id, name, line) values(11,'Kingussie','Red');
-insert into station_stop(id, name, line) values(12,'Aviemore','Red');
+insert into station_stop(id, name, line) values(8,'Stirling','East Coast');
+insert into station_stop(id, name, line) values(9,'Perth','East Coast');
+insert into station_stop(id, name, line) values(10,'Pitlochry','East Coast');
+insert into station_stop(id, name, line) values(11,'Kingussie','East Coast');
+insert into station_stop(id, name, line) values(12,'Aviemore','East Coast');
 
-insert into station_stop(id, name, line) values(13,'Inverkeithing','Red');
-insert into station_stop(id, name, line) values(14,'Leuchars','Red');
-insert into station_stop(id, name, line) values(15,'Dundee','Red');
-insert into station_stop(id, name, line) values(16,'Montrose','Red');
-insert into station_stop(id, name, line) values(17,'Aberdeen','Red');
+insert into station_stop(id, name, line) values(13,'Inverkeithing','East Coast');
+insert into station_stop(id, name, line) values(14,'Leuchars','East Coast');
+insert into station_stop(id, name, line) values(15,'Dundee','East Coast');
+insert into station_stop(id, name, line) values(16,'Montrose','East Coast');
+insert into station_stop(id, name, line) values(17,'Aberdeen','East Coast');
 
 /*Line B*/
-insert into station_stop(id, name, line) values(18,'York','Blue');
-insert into station_stop(id, name, line) values(19,'Northallerton','Blue');
-insert into station_stop(id, name, line) values(20,'Darlington','Blue');
-insert into station_stop(id, name, line) values(21,'Durham','Blue');
-insert into station_stop(id, name, line) values(22,'Newcastle','Blue');
-insert into station_stop(id, name, line) values(23,'Sunderland','Blue');
-insert into station_stop(id, name, line) values(24,'Morpeth','Blue');
-insert into station_stop(id, name, line) values(25,'Alnmouth','Blue');
-insert into station_stop(id, name, line) values(26,'Edinburgh Waverley','Blue');
-insert into station_stop(id, name, line) values(27,'Edinburgh Haymarket','Blue');
-insert into station_stop(id, name, line) values(28,'Motherwell','Blue');
-insert into station_stop(id, name, line) values(29,'Glasgow','Blue');
+insert into station_stop(id, name, line) values(18,'York','Cross Country');
+insert into station_stop(id, name, line) values(19,'Northallerton','Cross Country');
+insert into station_stop(id, name, line) values(20,'Darlington','Cross Country');
+insert into station_stop(id, name, line) values(21,'Durham','Cross Country');
+insert into station_stop(id, name, line) values(22,'Newcastle','Cross Country');
+insert into station_stop(id, name, line) values(23,'Sunderland','Cross Country');
+insert into station_stop(id, name, line) values(24,'Morpeth','Cross Country');
+insert into station_stop(id, name, line) values(25,'Alnmouth','Cross Country');
+insert into station_stop(id, name, line) values(26,'Edinburgh Waverley','Cross Country');
+insert into station_stop(id, name, line) values(27,'Edinburgh Haymarket','Cross Country');
+insert into station_stop(id, name, line) values(28,'Motherwell','Cross Country');
+insert into station_stop(id, name, line) values(29,'Glasgow','Cross Country');
 
 /*Connections*/
 /*Line A*/

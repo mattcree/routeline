@@ -204,6 +204,11 @@ Custom elements
     border-radius: initial;
 }
 
+hr {
+    margin-top: 0px;
+    margin-bottom: 7px;
+}
+
 .container #results-container{
     position: relative;
     height: auto;

@@ -1,7 +1,9 @@
 <br>
 <h1><span id="intro-text">Where would you like to go today?</span></h1>
 <br>
+
 <div id="typeahead" class="row">
+
     <div class="input-group">
         <!-- id must match script below -->
         <input type="text" class="form-control" id="stationFromInput" aria-label="Text input with dropdown button" placeholder="From">
@@ -16,7 +18,7 @@
         <div id="viaAvoid" class="collapse">
             <select id="viaAvoidOptions" class="input-group tt-input form-control">
                 <option value="">Select...</option>
-                <option value="/via/">Go via</option>
+                <option value="/via/">Via</option>
                 <option value="/avoid/">Avoid</option>
             </select>
             <div>
@@ -24,8 +26,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div class="input-group">
         <button class="btn btn-info collapsed glyphicon glyphicon-cog" data-toggle="collapse" data-target="#viaAvoid"></button>
@@ -36,13 +36,9 @@
 <div id="results-container">
     <div id="below-go-btn"><br>
         <div id="route-results" class="results col-md-6 col-md-offset-3">
-
         </div>
     </div>
 </div>
-
-
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
