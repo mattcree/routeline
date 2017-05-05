@@ -102,19 +102,12 @@
         var routeApiUrl;
 
         if (options == "") {
-            console.log("aw ye")
             var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo;
         } else {
-            console.log("fuck");
             var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo + options + avoidVia;
         }
 
         $.get(routeApiUrl).then(function(data){
-            console.log(data)
-            if (data == "{ }") {
-                $('#route-results').empty()
-                $('#route-results').append('<div class="panel container-fluid"><h3>No route</h3></div>')
-            }
 
             var firstName = data.route[0].name;
             var firstLine = data.route[0].line;
@@ -131,17 +124,20 @@
                 totalTime = hours + ' hour(s) ' + minutes + ' minutes';
             }
 
-            summary += '<h4>Journey Summary: </h4><p>From '+data.start.name+' to '+data.destination.name+'</p>'
-            summary += '<p>Duration: '+totalTime+'</p>';
+            summary += '<h4>Journey Summary: </h4><p>From '+data.start.name+' to '+data.destination.name+'</p><hr>'
+
 
             if (data.numberOfChanges > 0) {
                 summary += '<p>'+data.numberOfChanges+' change(s)</p>';
+                summary += '<ul>';
                 for(var i = 0; i < data.changes.length;i++) {
-                    summary += '<p>'+data.changes[i].stopA.name +' to '+ data.changes[i].stopB.line +' line</p>';
+                    summary += '<li>at '+data.changes[i].stopA.name +' to '+ data.changes[i].stopB.line +' line</li>';
                 }
             }
+            summary += '</ul>';
+            summary += '<p>Duration: '+totalTime+'</p>';
 
-            details += '<b class="panel">Start: '+firstName+' on '+firstLine+' line</b><br>';
+            details += '<hr><b>Start: '+firstName+' on '+firstLine+'</b><br>';
             details += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
 
             for (var i = 1; i < data.route.length; i++) {
@@ -149,10 +145,10 @@
                 var line = data.route[i].line;
 
                 if(i+1 != data.route.length) {
-                    details += '<p>'+name+' on '+line+' line</p>';
+                    details += '<p>'+name+' on '+line+'</p>';
                     details += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
                 } else {
-                    details += '<b>Destination: '+name+'</b>';
+                    details += '<b>Destination: '+name+'</b><hr>';
                 }
             }
 
@@ -168,6 +164,9 @@
                 '<div class="panel container-fluid">'+summary+expandedDetails+'</div>'
             )
 
+        }).fail(function() {
+              $('#route-results').empty();
+              $('#route-results').append('<div class="panel container-fluid"><h4>No route found with your currently selected options.</h4><p><b>Note: </b>Some stations cannot be avoided.</p></div>');
         });
     }
 
