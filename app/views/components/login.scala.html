@@ -1,16 +1,17 @@
 <br>
-<div class="container">
-    <form class="form-signin dark" action="@security.routes.SecurityController.login()" method="post">
+
+    <form class="form-signin dark col-md-4 col-md-offset-4 text-center well" action="@security.routes.SecurityController.login()" method="post">
+        <div class="glyphbox pull-right">
+            <a href="#" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Enter a valid email address and password" data-placement="left">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+            </a>
+        </div>
         <h3 class="form-signin-heading dark">Admin Sign in</h3>
         <div class="formbox">
             <label for="emailAddress" class="sr-only">Employee ID</label>
-            <input type="email" id="emailAddress" name="emailAddress" class="form-control" placeholder="Employee ID: b1234567" required autofocus/>
-            <div class="glyphbox">
-                <a href="#" title="Help!" data-toggle="popover" data-trigger="focus" data-content="What's this?">
-                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                </a>
-            </div>
+            <input type="email" id="emailAddress" name="emailAddress" class="form-control" placeholder="E.g. bob@@bob.com" required autofocus/>
             <label for="password" class="sr-only">Password</label>
+
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </div>
         <div class="checkbox">
@@ -21,7 +22,7 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
-</div>
+
 
 
 <script>

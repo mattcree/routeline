@@ -65,3 +65,4 @@ GET     /admin/lines/delete/:id         controllers.LineController.deleteLine(id
 GET     /admin/users                    controllers.UserController.list
 GET     /admin/users/add                controllers.UserController.add
 POST    /admin/users/add                controllers.UserController.doAddUser
+GET     /admin/users/delete/:id         controllers.UserController.deleteUser(id: Long)

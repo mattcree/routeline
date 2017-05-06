@@ -47,10 +47,24 @@ public class ConnectionController extends Controller {
 
         ConnectionForm form = connectionForm.get();
 
+
         StationStop stopA = StationStop.find.byId(form.stopA);
         StationStop stopB = StationStop.find.byId(form.stopB);
 
         if (stopA == null || stopB == null || stopA.equals(stopB)) return redirect(routes.ConnectionController.add());
+
+        if (form.checkbox)
+        {
+            Ebean.beginTransaction();
+            try {
+                StopConnection connection = new StopConnection(stopA, stopB, form.time);
+                connection.save();
+                Ebean.commitTransaction();
+            } finally {
+                Ebean.endTransaction();
+            }
+            return redirect(routes.ConnectionController.list());
+        }
 
         Ebean.beginTransaction();
         try {
@@ -80,6 +94,8 @@ public class ConnectionController extends Controller {
         public Long stopB;
         @Constraints.Required
         public int time;
+        @Constraints.Required
+        public boolean checkbox = false;
     }
 
 }

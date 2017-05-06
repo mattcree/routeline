@@ -4,7 +4,7 @@ General settings
 =============================================
 */
 body {
-    background: #2C2C74;
+    background: #B2C0FF;
     font-family: 'Raleway', sans-serif;
     background-repeat: no-repeat;
     background-size: cover;
@@ -87,13 +87,13 @@ h2 {
     font-weight: bold;
     text-align: center;
     color: #f7f7f7;
-    text-shadow: 1px 1px 1px black;
+    text-shadow: 1px 1px 1px #16165A;
 }
 
 h3.text-center {
     padding: 5px;
     margin: 0px;
-    font-size:1.5vw;
+    font-size:1.5em;
     background: #16165A;
     color: white;
     border-radius: 10px;
@@ -105,9 +105,79 @@ h3.text-center {
 Buttons and Bootstrap
 =============================================
 */
-.btn {
-    padding: 7px 37px;
+.panel{
+    box-shadow: .5px .5px .5px #16165A;
 }
+
+ ul.displayroute li{
+     padding-left: 15px;
+     margin-top: -1px;
+ }
+ ul.displayroute li {
+     padding-left: 0px;
+     margin-bottom: 2.5em;
+     list-style: none;
+     background: url('') no-repeat;
+ }
+
+
+
+
+ul.displayroute li {
+    position:relative; /* so that pseudoelements are positioned relatively to their "li"s*/
+    /* use padding-bottom instead of margin-bottom.*/
+    margin-bottom: 0; /* This overrides previously specified margin-bottom */
+    padding-bottom: 2.5em;
+}
+
+ul.displayroute li:after {
+    /* bullets */
+    position: absolute;
+    top: 14px;
+    left: -22px;
+    content: ' ';
+    display: block;
+    width: 13px;
+    height: 13px;
+    margin-top: -10px;
+    background: #fff;
+    border-radius: 10px;
+    border: 2px solid #21314d;
+    z-index: 3;
+}
+
+ul.displayroute li:before {
+    content:"";
+    position: absolute;
+    left: -17px; /* adjust manually */
+    border-left: 3px solid #16165A;
+    height: 100%;
+    width: 1px;
+}
+
+ul.displayroute li:first-child:before {
+   /* first li's line */
+   top: 6px; /* moves the line down so that it disappears under the bullet. Adjust manually */
+}
+
+ul.displayroute li.destination:before {
+    /* last li's line */
+   height: 6px; /* shorten the line so it goes only up to the bullet. Is equal to first-child:before's top */
+}
+
+ul.displayroute li:first-child:after, ul.displayroute li.destination:after {
+    width:17px;
+    height: 17px;
+    left: -24px;
+
+}
+
+
+.btn {
+
+    box-shadow: .5px .5px .5px #16165A;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #181863;
@@ -122,8 +192,16 @@ Buttons and Bootstrap
     border-color: transparent;
 }
 
+.btn-primary .btn-default{
+font-size: 1.5em;
+}
+
 a.btn .glyphicon{
     font-size: 10px;
+}
+
+th.glyphicon{
+    font-size: 1.5em;
 }
 
 .glyphicon{
@@ -145,18 +223,20 @@ a.btn .glyphicon{
     font-size: 10px;
 }
 
+.form-signin-heading .popover{
+position: absolute;
+
+}
+
 .thumbnail {
-    display: block;
-    width: 50%;
-    height: auto;
-    margin: 100px;
+
     background-color: transparent;
     border: none;
 }
 
 .thumbnail .glyphicon {
     position: absolute;
-    font-size: 1.5vw;
+    font-size: 1em;
 }
 
 .thumbnail .caption {
@@ -167,8 +247,14 @@ a.btn .glyphicon{
     color: #181863;
 }
 
+
+
 .thumbnail a.help{
-    position: absolute;
+    position: relative;
+    display: block;
+    text-align: right;
+    color: green;
+    font-size: 1.7em;
 }
 
 .card {
@@ -257,25 +343,14 @@ Viewport settings
     h3.text-center{font-size: 20px;}
     .thumbnail .glyphicon{font-size: 20px;}
 }
-
-@media (max-width: 715px) {
-    #route-results{
-        display: block;
-        padding: 0px;
-        padding-top: 30px;
-        padding-bottom: 10px;
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) {
-    #route-results{
-        display: block;
-        padding: 0px;
-        padding-top: 30px;
-        padding-bottom: 10px;
-        text-align: center;
-    }
-}
-
 */
+@media (max-width: 800px) {
+    .thumbnail .card-link img{
+    display: none;
+    }
+    h3.text-center{
+    padding: 20px;
+    }
+}
+
+

@@ -136,24 +136,23 @@
             }
             summary += '</ul>';
             summary += '<p>Duration: '+totalTime+'</p>';
-
-            details += '<hr><b>Start: '+firstName+' on '+firstLine+'</b><br>';
-            details += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
+            details += '<hr>'
+            details += '<ul class = "displayroute"><li><b>Start: '+firstName+' on '+firstLine+'</b></li>';
 
             for (var i = 1; i < data.route.length; i++) {
                 var name = data.route[i].name;
                 var line = data.route[i].line;
 
                 if(i+1 != data.route.length) {
-                    details += '<p>'+name+' on '+line+'</p>';
-                    details += '<span class="glyphicon glyphicon-arrow-down"></span><br>';
+                    details += '<li>'+name+' on '+line+'</li>';
+
                 } else {
-                    details += '<b>Destination: '+name+'</b><hr>';
+                    details += '<li class = "destination"><b>Destination: '+name+'</b></li>';
                 }
             }
-
+            details += '</ul><hr>'
             details += '<h4>Journey duration: '+totalTime+'</h4>';
-            expandedDetails +='<details>'+details+'</details>';
+            expandedDetails +='<details id = "details">'+details+'</details>';
 
             console.log(details);
             console.log(expandedDetails);
@@ -173,7 +172,15 @@
 
 
     $('#goButton').click(function() {
+        console.log(nameFrom);
+        console.log(nameTo);
         getRouteData(nameFrom, nameTo, $('#viaAvoidOptions').val(), avoidVia);
+        nameFrom = '';
+        nameTo = '';
+        avoidVia = '';
+        $('#stationFromInput').val("");
+        $('#stationToInput').val("");
+        $('#stationAvoidViaInput').val("");
     });
 
 
