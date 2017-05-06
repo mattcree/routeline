@@ -5,7 +5,7 @@ General settings
 */
 body {
     background: #B2C0FF;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Cabin', sans-serif;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 0%;
@@ -75,6 +75,7 @@ Headings
 =============================================
 */
 h2.logo-text {
+    font-family: 'Raleway', sans-serif;
     position: relative;
     left: 45px;
     top: 7px;
@@ -89,8 +90,11 @@ h2 {
     color: #f7f7f7;
     text-shadow: 1px 1px 1px #16165A;
 }
-
+#intro-text{
+ font-style: italic;
+}
 h3.text-center {
+
     padding: 5px;
     margin: 0px;
     font-size:1.5em;
