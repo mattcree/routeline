@@ -117,6 +117,8 @@
             var expandedDetails = '';
             var details = '';
             var summary = '';
+            var start;
+            var destination;
 
             if (hours < 1){
                 totalTime = data.timeInMinutes + ' minutes';
@@ -124,7 +126,9 @@
                 totalTime = hours + ' hour(s) ' + minutes + ' minutes';
             }
 
-            summary += '<h4>Journey Summary: </h4><p>From '+data.start.name+' to '+data.destination.name+'</p><hr>'
+            start = data.start;
+            destination = data.destination;
+            summary += '<h4>Journey Summary: </h4><p>From '+start.name+' to '+destination.name+'</p><hr>'
 
 
             if (data.numberOfChanges > 0) {
@@ -138,18 +142,23 @@
             summary += '<p>Duration: '+totalTime+'</p>';
             details += '<hr>'
             details += '<ul class = "displayroute"><li><b>Start: '+firstName+' on '+firstLine+'</b></li>';
+            details += '<li class="times">'+data.connections[0].time+' minutes</li>'
+            for (var i = 1; i < data.connections.length; i++) {
+                var connection = data.connections[i];
+                var name = connection.stopA.name;
+                var line = connection.stopA.line;
+                var time = connection.time;
 
-            for (var i = 1; i < data.route.length; i++) {
-                var name = data.route[i].name;
-                var line = data.route[i].line;
-
-                if(i+1 != data.route.length) {
-                    details += '<li>'+name+' on '+line+'</li>';
-
+                details += '<li>'+name+' on '+line+'</li>';
+                if (connection.lineChange) {
+                    details += '<li class = "changes">Change to '+connection.stopB.line+', transfer time '+ time +' minutes</li>';
                 } else {
-                    details += '<li class = "destination"><b>Destination: '+name+'</b></li>';
+                    details += '<li class = "times">'+ time +' minutes</li>';
                 }
+
+
             }
+            details += '<li class = "destination"><b>Destination: '+destination.name+'</b></li>';
             details += '</ul><hr>'
             details += '<h4>Journey duration: '+totalTime+'</h4>';
             expandedDetails +='<details id = "details">'+details+'</details>';

@@ -127,7 +127,7 @@ ul.displayroute li {
     position:relative; /* so that pseudoelements are positioned relatively to their "li"s*/
     /* use padding-bottom instead of margin-bottom.*/
     margin-bottom: 0; /* This overrides previously specified margin-bottom */
-    padding-bottom: 2.5em;
+    padding-bottom: 1em;
 }
 
 ul.displayroute li:after {
@@ -153,6 +153,26 @@ ul.displayroute li:before {
     border-left: 3px solid #16165A;
     height: 100%;
     width: 1px;
+}
+
+ul.displayroute li.changes:after{
+    width: 9px;
+    height: 9px;
+    left: -20px;
+
+    background: green;
+}
+
+ul.displayroute li.times:after{
+    list-style-type: none;
+    display: none;
+
+
+}
+
+ul.displayroute li.times, ul.displayroute li.changes{
+
+      font-size: 0.8em;
 }
 
 ul.displayroute li:first-child:before {
