@@ -1,4 +1,4 @@
-@(users: List[User])
+@(users: List[User], message: Html)
 <br>
 <div class="container transparent">
     <div class="container-fluid">
@@ -14,6 +14,7 @@
                     <a href="@routes.UserController.add()"id="add" name="add" class="btn btn-success">Add User</a>
                 </div>
             </div></legend>
+            @message
             <thead>
 
             <tr>
@@ -27,10 +28,10 @@
                 <th>@user.fullName</th>
                 <th>@user.getEmailAddress</th>
                 <th>
-                    <a class="btn btn-danger" data-toggle="confirmation" href="#" target="_blank">Delete</a>
+                    <a class="btn btn-danger" data-toggle="confirmation" href="@routes.UserController.deleteUser(user.id)" target="">Delete</a>
                 </th>
                 <th>
-                    <a href="#" class="help" title="Important!" data-toggle="popover" data-trigger="focus" data-content="Removing a line will remove all stations on that line." data-placement="right">
+                    <a href="#" class="help" title="Warning" data-toggle="popover" data-trigger="focus" data-content="Removing user will delete all their login details." data-placement="left">
                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
                 </th>
             </tr>

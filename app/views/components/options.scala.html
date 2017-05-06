@@ -4,11 +4,12 @@
             <div class="col-sm-6 col-md-3">
 
                     <div class="thumbnail">
-                        <a href="#" class="help" title="Help!" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Train Lines" data-placement="top">
-                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                        </a>
+
                         <a href="@routes.LineController.list()" class="card-link">
                             <img src="@routes.Assets.versioned("img/linesbtn.png")" alt="Lines">
+                        </a>
+                        <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Lines. Lines must be added to allow Stops to be added." data-placement="top">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                         </a>
                         <a href="@routes.LineController.list()" class="card-link">
                             <div class="caption">
@@ -21,11 +22,12 @@
             <div class="col-sm-6 col-md-3">
 
                     <div class="thumbnail">
-                        <a href="#" class="help" title="Help!" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Stations" data-placement="top">
-                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                        </a>
+
                         <a href="@routes.StopController.list()" class="card-link">
                             <img src="@routes.Assets.versioned("img/stationbtn.png")" alt="Stations">
+                        </a>
+                        <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Stops. Stops cannot be added without a Line. Stops must be added before Connections can be created." data-placement="top">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                         </a>
                         <a href="@routes.StopController.list()" class="card-link">
                             <div class="caption">
@@ -38,11 +40,12 @@
             <div class="col-sm-6 col-md-3">
 
                     <div class="thumbnail">
-                        <a href="#" class="help" title="Help!" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Connections between Stations" data-placement="top">
-                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                        </a>
+
                         <a href="@routes.ConnectionController.list()" class="card-link">
                             <img src="@routes.Assets.versioned("img/connectionsbtn.png")" alt="Connections">
+                        </a>
+                        <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-html="true" data-content="Add/Remove Connections between Stops. Two Stops <em>must</em> be added before a Connection can be added." data-placement="top">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                         </a>
                         <a href="@routes.ConnectionController.list()" class="card-link">
                             <div class="caption">
@@ -54,15 +57,20 @@
             </div>
             <div class="col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        <a href="#" class="help" title="Help!" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Accounts for Admins" data-placement="top">
-                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                        </a>
+
                         <a href="@routes.UserController.list()" class="card-link">
                         <img src="@routes.Assets.versioned("img/adminbtn.png")" alt="Users">
                         </a>
+                        <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Accounts for Admins. Create new accounts with associated email and password." data-placement="top">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                        </a>
                         <a href="@routes.UserController.list()" class="card-link">
+
+
                         <div class="caption">
                             <h3 class="text-center">Accounts</h3>
+
+                            </a>
                         </div>
                         </a>
                     </div>

@@ -37,10 +37,10 @@
                 <th>@connection.stopB</th>
                 <th>@connection.time</th>
                 <th>
-                    <a class="btn btn-danger" data-toggle="confirmation" href="@routes.ConnectionController.deleteConnection(connection.id)" target="_blank">Delete</a>
+                    <a class="btn btn-danger" data-toggle="confirmation" href="@routes.ConnectionController.deleteConnection(connection.id)" target="">Delete</a>
                 </th>
                 <th>
-                    <a href="#" class="help" title="Important!" data-toggle="popover" data-trigger="focus" data-content="Removing a line will remove all stations on that line." data-placement="right">
+                    <a href="#" class="help" title="Warning!" data-toggle="popover" data-trigger="focus" data-content="Deleting a Connection may affect route viability." data-placement="left">
                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
                 </th>
             </tr>

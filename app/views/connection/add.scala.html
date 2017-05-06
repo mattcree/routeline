@@ -37,11 +37,23 @@
                     <input id="time" name="time" type="number" placeholder="i.e. time between stops (minutes)" class="form-control input-md" required="" min="0">
                 </div>
             </div>
+            <div class = "form-group>">
+                <label class="col-md-4 control-label" for="checkbox">Make Uni-Directional</label>
+                <div class="col-md-6">
+                    <div class="checkbox">
+                        <input type="checkbox" id="checkbox" name="checkbox" value="true">
+                        <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Bi-Directional lines connect Stops in both directions. Uni-Directional lines only connect Stops in the following order; Stop A --> Stop B." data-placement="top">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
 
+            </div>
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="submit"></label>
                 <div class="col-md-8">
+
                     <button id="submit" name="submit" class="btn btn-success">Add</button>
                     <a href="@routes.ConnectionController.list()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
                 </div>
@@ -51,3 +63,8 @@
     </form>
 </div>
 <br>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>

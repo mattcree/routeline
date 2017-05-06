@@ -29,7 +29,7 @@ public class UserController extends Controller {
     //Shows list of Users
     public Result list() {
         List<User> user = User.find.all();
-        return ok(index.render(list.render(user)));
+        return ok(index.render(list.render(user, Html.apply(""))));
     }
 
     public Result add() {
@@ -52,6 +52,19 @@ public class UserController extends Controller {
 
         User user = new User(form.email, form.password, form.username);
         user.save();
+        return redirect(routes.UserController.list());
+    }
+
+    public Result deleteUser(Long id) {
+        if(id == 1)
+        {
+            List<User> users = User.find.all();
+            return badRequest(index.render(list.render(users, failure.render("Can't delete default user"))));
+        }
+        User user = User.find.byId(id);
+        if(user != null) {
+            user.delete();
+        }
         return redirect(routes.UserController.list());
     }
 
