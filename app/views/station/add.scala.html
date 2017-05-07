@@ -1,0 +1,29 @@
+@(message: Html)
+<div class="container">
+    <br>
+    <form class="form-horizontal dark" action="@routes.StationController.doAddStation()" method="post">
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Add Station</legend>
+            @message
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Station Name</label>
+                <div class="col-md-4">
+                    <input id="name" name="name" type="text" placeholder="e.g. Newcastle" class="form-control input-md" required="">
+
+                </div>
+            </div>
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="submit"></label>
+                <div class="col-md-8">
+                    <button id="submit" name="submit" class="btn btn-success">Add</button>
+                    <a href="@routes.StationController.list()" id="cancel" name="cancel" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+    <br>
+</div>

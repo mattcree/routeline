@@ -1,7 +1,7 @@
 <br>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3">
 
                     <div class="thumbnail">
 
@@ -19,12 +19,32 @@
                     </div>
 
             </div>
-            <div class="col-sm-6 col-md-3">
+
+            <div class="col-md-3">
+
+                <div class="thumbnail">
+
+                    <a href="@routes.StationController.list()" class="card-link">
+                        <img src="@routes.Assets.versioned("img/stationbtn.png")" alt="Stations">
+                    </a>
+                    <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Stations. Lines and Stations must be added to allow Stops to be added." data-placement="top">
+                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    </a>
+                    <a href="@routes.StationController.list()" class="card-link">
+                        <div class="caption">
+                            <h3 class="text-center">Stations</h3>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
 
                     <div class="thumbnail">
 
                         <a href="@routes.StopController.list()" class="card-link">
-                            <img src="@routes.Assets.versioned("img/stationbtn.png")" alt="Stations">
+                            <img src="@routes.Assets.versioned("img/stopbtn.png")" alt="Stops">
                         </a>
                         <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Stops. Stops cannot be added without a Line. Stops must be added before Connections can be created." data-placement="top">
                             <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
@@ -37,7 +57,7 @@
                     </div>
 
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3">
 
                     <div class="thumbnail">
 
@@ -55,26 +75,22 @@
                     </div>
 
             </div>
-            <div class="col-sm-6 col-md-3">
-                    <div class="thumbnail">
 
-                        <a href="@routes.UserController.list()" class="card-link">
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+                <div class="thumbnail">
+                    <a href="@routes.UserController.list()" class="card-link">
                         <img src="@routes.Assets.versioned("img/adminbtn.png")" alt="Users">
-                        </a>
-                        <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Accounts for Admins. Create new accounts with associated email and password." data-placement="top">
-                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                        </a>
-                        <a href="@routes.UserController.list()" class="card-link">
-
-
+                    </a>
+                    <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Add/Remove Accounts for Admins. Create new accounts with associated email and password." data-placement="top">
+                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    </a>
+                    <a href="@routes.UserController.list()" class="card-link">
                         <div class="caption">
                             <h3 class="text-center">Accounts</h3>
-
-                            </a>
-                        </div>
-                        </a>
-                    </div>
-
+                    </a>
+                </div>
             </div>
         </div>
     </div>

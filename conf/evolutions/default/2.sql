@@ -1,6 +1,70 @@
 # --- !Ups
 insert into line(id, name) values(1, 'East Coast');
 insert into line(id, name) values(2, 'Cross Country');
+insert into line(id, name) values(3, 'Virgin Trains');
+insert into line(id, name) values(4, 'TransPennine Express');
+insert into line(id, name) values(5, 'ScotRail');
+
+insert into station(id, name) values (1,'Aberdeen');
+insert into station(id, name) values (2,'Alnmouth');
+insert into station(id, name) values (3,'Aviemore');
+insert into station(id, name) values (4,'Berwick Upon Tweed');
+insert into station(id, name) values (5,'Darlington');
+insert into station(id, name) values (6,'Dunbar');
+insert into station(id, name) values (7,'Dundee');
+insert into station(id, name) values (8,'Durham');
+insert into station(id, name) values (9,'Edinburgh Haymarket');
+insert into station(id, name) values (10,'Edinburgh Waverley');
+insert into station(id, name) values (11,'Glasgow');
+insert into station(id, name) values (12,'Inverkeithing');
+insert into station(id, name) values (13,'Kingussie');
+insert into station(id, name) values (14,'Leuchars');
+insert into station(id, name) values (15,'Montrose');
+insert into station(id, name) values (16,'Morpeth');
+insert into station(id, name) values (17,'Motherwell');
+insert into station(id, name) values (18,'Newcastle');
+insert into station(id, name) values (19,'Northallerton');
+insert into station(id, name) values (20,'Perth');
+insert into station(id, name) values (21,'Pitlochry');
+insert into station(id, name) values (22,'Stirling');
+insert into station(id, name) values (24,'Sunderland');
+insert into station(id, name) values (25,'Bristol');
+insert into station(id, name) values (26,'Cambridge');
+insert into station(id, name) values (27,'Cardiff');
+insert into station(id, name) values (28,'Carlisle');
+insert into station(id, name) values (29,'York');
+insert into station(id, name) values (30,'Liverpool');
+insert into station(id, name) values (31,'Plymouth');
+insert into station(id, name) values (32,'London');
+insert into station(id, name) values (33,'Winchester');
+
+
+
+/*Stations*/
+'York');
+insert into station(id, name) values (2,'Darlington');
+insert into station(id, name) values (3,'Newcastle');
+insert into station(id, name) values (4,'Berwick Upon Tweed');
+insert into station(id, name) values (5,'Dunbar');
+insert into station(id, name) values (6,'Edinburgh Waverley');
+insert into station(id, name) values (7,'Edinburgh Haymarket');
+insert into station(id, name) values (8,'Stirling');
+insert into station(id, name) values (9,'Perth');
+insert into station(id, name) values (10,'Pitlochry');
+insert into station(id, name) values (11,'Kingussie');
+insert into station(id, name) values (12,'Aviemore');
+insert into station(id, name) values (13,'Inverkeithing');
+insert into station(id, name) values (14,'Leuchars');
+insert into station(id, name) values (15,'Dundee');
+insert into station(id, name) values (16,'Montrose');
+insert into station(id, name) values (17,'Aberdeen');
+insert into station(id, name) values (18,'Northallerton');
+insert into station(id, name) values (19,'Durham');
+insert into station(id, name) values (20,'Sunderland');
+insert into station(id, name) values (21,'Morpeth');
+insert into station(id, name) values (22,'Alnmouth');
+insert into station(id, name) values (23,'Motherwell');
+insert into station(id, name) values (24,'Glasgow');
 
 /*Line A*/
 insert into station_stop(id, name, line) values(1,'York','East Coast');

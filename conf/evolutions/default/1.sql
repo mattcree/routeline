@@ -6,6 +6,12 @@ create table line (
   constraint pk_line primary key (id)
 );
 
+create table station (
+  id                            bigint auto_increment not null,
+  name                          varchar(255),
+  constraint pk_station primary key (id)
+);
+
 create table station_stop (
   id                            bigint auto_increment not null,
   name                          varchar(255),
