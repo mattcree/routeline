@@ -54,4 +54,5 @@ public class StationStop extends Model {
         result = 31 * result + line.hashCode();
         return result;
     }
+
 }

@@ -1,4 +1,4 @@
-@(lines: List[Line], message: Html)
+@(stations: List[Station], lines: List[Line], message: Html)
 <div class="container">
     <br>
     <form class="form-horizontal dark" action="@routes.StopController.doAddStop()" method="post">
@@ -11,16 +11,30 @@
                 <div class="text-center">
                     <a href="@routes.StopController.list()" id="cancel" name="cancel" class="btn btn-danger">Back</a>
                 </div>
-            </div>            } else {
+            </div>
+            }
+            @if(stations.isEmpty) {
+            <legend>Add Stop</legend>
+            <h1 class="dark">Add Stations first.</h1>
+            <div class="form-group">
+                <br>
+                <div class="text-center">
+                    <a href="@routes.StopController.list()" id="cancel" name="cancel" class="btn btn-danger">Back</a>
+                </div>
+            </div>
+            } else {
             <!-- Form Name -->
             <legend>Add Stop</legend>
             @message
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="name">Stop Name</label>
-                <div class="col-md-4">
-                    <input id="name" name="name" type="text" placeholder="e.g. Newcastle" class="form-control input-md" required="">
-
+                <label class="col-md-4 control-label" for="line">Stations</label>
+                <div class="col-md-6">
+                    <select id="name" name="name" class="form-control" required="">
+                        @for(station <- stations) {
+                        <option value="@station.name">@station.name</option>
+                        }
+                    </select>
                 </div>
             </div>
 

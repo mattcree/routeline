@@ -3,6 +3,7 @@ package controllers;
 import com.avaje.ebean.Ebean;
 import controllers.security.Secured;
 import models.Line;
+import models.Station;
 import models.StationStop;
 import org.apache.commons.lang3.text.WordUtils;
 import play.data.Form;
@@ -38,7 +39,8 @@ public class StopController extends Controller {
 
     public Result add() {
         List<Line> lines = Line.find.all();
-        return ok(index.render(add.render(lines, Html.apply(""))));
+        List<Station> stations = Station.find.all();
+        return ok(index.render(add.render(stations, lines, Html.apply(""))));
     }
 
     public Result doAddStop() {
@@ -51,13 +53,16 @@ public class StopController extends Controller {
         StopForm form = stopForm.get();
 
         String formattedName = WordUtils.capitalize(form.name.toLowerCase().trim());
-        List<Line> lines = Line.find.all();
 
         if(!StationStop.find.where().eq("name", formattedName).eq("line", form.line).findList().isEmpty()) {
-            return badRequest(index.render(add.render(lines, failure.render("The Stop already exists."))));
+            List<Line> lines = Line.find.all();
+            List<Station> stations = Station.find.all();
+            return badRequest(index.render(add.render(stations, lines, failure.render("The Stop already exists."))));
         }
         if(!Pattern.matches("[a-zA-Z- ']+",formattedName)){
-            return badRequest(index.render(add.render(lines, failure.render("Only alphabet characters allowed"))));
+            List<Line> lines = Line.find.all();
+            List<Station> stations = Station.find.all();
+            return badRequest(index.render(add.render(stations, lines, failure.render("Only alphabet characters allowed"))));
         }
 
         Ebean.beginTransaction();
