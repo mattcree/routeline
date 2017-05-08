@@ -1,3 +1,12 @@
+/*
+* Derived from Java Dijkstra's shortest path algorithm in Java Tutorial
+* (http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html)
+* Copyright © 2012-2016 vogella GmbH licensed under Creative Commons
+* Variable and method names changed to match domain.
+*
+*/
+
+
 package models.routefinder;
 import models.Route;
 import models.StationStop;

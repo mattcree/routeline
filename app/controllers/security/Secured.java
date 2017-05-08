@@ -1,3 +1,9 @@
+/*
+* Derived from Example/Tutorial Play-Rest-Security
+* (https://github.com/jamesward/play-rest-security)
+* by James Ward
+*/
+
 package controllers.security;
 
 import models.User;
