@@ -1,11 +1,11 @@
-@(stops: List[StationStop])
+@(stops: List[StationStop], message: Html)
 <br>
 <div class="container">
     <form class="form-horizontal dark" action="@routes.ConnectionController.doAddConnection()" method="post">
         <fieldset>
             <!-- Form Name -->
             <legend>Add Connection</legend>
-
+            @message
             <!-- Select Basic -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="stopA">Stop A</label>
@@ -47,7 +47,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
             <!-- Button (Double) -->
             <div class="form-group">

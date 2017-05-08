@@ -33,13 +33,13 @@ public class StopController extends Controller {
 
     //Shows list of Stops
     public Result list() {
-        List<StationStop> stops = StationStop.find.all();
+        List<StationStop> stops = StationStop.find.orderBy("name asc").findList();
         return ok(index.render(list.render(stops)));
     }
 
     public Result add() {
-        List<Line> lines = Line.find.all();
-        List<Station> stations = Station.find.all();
+        List<Line> lines = Line.find.orderBy("name asc").findList();
+        List<Station> stations = Station.find.orderBy("name asc").findList();
         return ok(index.render(add.render(stations, lines, Html.apply(""))));
     }
 
@@ -55,13 +55,13 @@ public class StopController extends Controller {
         String formattedName = WordUtils.capitalize(form.name.toLowerCase().trim());
 
         if(!StationStop.find.where().eq("name", formattedName).eq("line", form.line).findList().isEmpty()) {
-            List<Line> lines = Line.find.all();
-            List<Station> stations = Station.find.all();
+            List<Line> lines = Line.find.orderBy("name asc").findList();
+            List<Station> stations = Station.find.orderBy("name asc").findList();
             return badRequest(index.render(add.render(stations, lines, failure.render("The Stop already exists."))));
         }
         if(!Pattern.matches("[a-zA-Z- ']+",formattedName)){
-            List<Line> lines = Line.find.all();
-            List<Station> stations = Station.find.all();
+            List<Line> lines = Line.find.orderBy("name asc").findList();
+            List<Station> stations = Station.find.orderBy("name asc").findList();
             return badRequest(index.render(add.render(stations, lines, failure.render("Only alphabet characters allowed"))));
         }
 

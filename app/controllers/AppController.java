@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import models.StationStop;
 import models.StopConnection;
 import models.User;
@@ -20,26 +21,20 @@ import java.util.Collection;
  */
 public class AppController extends Controller {
 
-    protected static Routefinder ROUTEFINDER = new Routefinder();
-
     //Functions for Dev purposes. Seeding DB with first User and
     //populating Routefinder with current state of database.
-    public Result createFirstUser() {
-        User user = new User("bob@bob.com", "bob", "Ole Bob");
-        user.save();
-        System.out.println(User.find.all());
-        return ok(Json.toJson(user));
-    }
-
-    public Result populateRoutefinder() {
-        Collection<StationStop> stops = StationStop.find.all();
-        Collection<StopConnection> connections = StopConnection.find.all();
-
-        if (stops == null || connections == null) return noContent();
-
-        ROUTEFINDER.setStops(stops);
-        ROUTEFINDER.setConnections(connections);
-        return ok(Json.toJson(ROUTEFINDER));
+    public Result createFirstUsers() {
+        Ebean.beginTransaction();
+        try {
+            User admin = new User("admin@routeline.com", "admin", "Route Line");
+            admin.save();
+            User olebob = new User("bob@bob.com", "bob", "Ole Bob");
+            olebob.save();
+            Ebean.commitTransaction();
+        } finally {
+            Ebean.endTransaction();
+        }
+        return ok(Json.toJson(User.find.all()));
     }
 
     //For Handling publicly available view options

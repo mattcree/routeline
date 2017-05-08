@@ -32,7 +32,7 @@ public class StationController {
 
     //Shows list of Stops
     public Result list() {
-        List<Station> stations = Station.find.all();
+        List<Station> stations = Station.find.orderBy("name asc").findList();
         return ok(index.render(list.render(stations)));
     }
 
@@ -51,7 +51,7 @@ public class StationController {
 
         String formattedName = WordUtils.capitalize(form.name.toLowerCase().trim());
 
-        if(!StationStop.find.where().eq("name", formattedName).findList().isEmpty()) {
+        if(!Station.find.where().eq("name", formattedName).findList().isEmpty()) {
             return badRequest(index.render(add.render(failure.render("The Station already exists."))));
         }
         if(!Pattern.matches("[a-zA-Z- ']+",formattedName)){

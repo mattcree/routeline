@@ -7,8 +7,7 @@
 GET     /                               controllers.AppController.index
 
 # Development Helpers
-GET     /init                           controllers.AppController.createFirstUser
-GET     /make                           controllers.AppController.populateRoutefinder
+GET     /init                           controllers.AppController.createFirstUsers
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                   controllers.Assets.versioned(path="/public", file)
