@@ -1,5 +1,10 @@
-package controllers.security;
+/*
+* Derived from Example/Tutorial Play-Rest-Security
+* (https://github.com/jamesward/play-rest-security)
+* by James Ward
+*/
 
+package controllers.security;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import controllers.routes;
 import models.User;
@@ -36,11 +41,8 @@ public class SecurityController extends Controller {
         if (loginForm.hasErrors()) {
             return badRequest(loginForm.errorsAsJson());
         }
-
         Login login = loginForm.get();
-
         User user = User.findByEmailAddressAndPassword(login.emailAddress, login.password);
-
         if (user == null) {
             return unauthorized("HTTP 401: Unauthorized.");
         }
@@ -57,7 +59,6 @@ public class SecurityController extends Controller {
 
     @Security.Authenticated(Secured.class)
     public Result logout() {
-        System.out.println("Logging out");
         response().discardCookie(AUTH_TOKEN);
         getUser().deleteAuthToken();
         return redirect(routes.AppController.index());
