@@ -1,10 +1,10 @@
 @(stations: List[Station], lines: List[Line], message: Html)
 <div class="container">
     <br>
-    <form class="form-horizontal dark" action="@routes.StopController.doAddStop()" method="post">
+    <form class="form-horizontal" action="@routes.StopController.doAddStop()" method="post">
         <fieldset>
-            @if(lines.isEmpty) {
             <legend>Add Stop</legend>
+            @if(lines.isEmpty) {
             <h1 class="dark">Add Lines first.</h1>
             <div class="form-group">
                 <br>
@@ -14,7 +14,6 @@
             </div>
             }
             @if(stations.isEmpty) {
-            <legend>Add Stop</legend>
             <h1 class="dark">Add Stations first.</h1>
             <div class="form-group">
                 <br>
@@ -23,10 +22,7 @@
                 </div>
             </div>
             } else {
-            <!-- Form Name -->
-            <legend>Add Stop</legend>
             @message
-            <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="line">Stations</label>
                 <div class="col-md-6">
@@ -37,19 +33,16 @@
                     </select>
                 </div>
             </div>
-
             <div class="form-group">
-                <label class="col-md-4 control-label" for="line">Line</label>
+                <label class="col-md-4 control-label" for="line">Lines</label>
                 <div class="col-md-6">
                     <select id="line" name="line" class="form-control" required="">
                         @for(line <- lines) {
-                        <option value="@line.name">@line.name Line</option>
+                        <option value="@line.name">@line.name</option>
                         }
                     </select>
                 </div>
             </div>
-
-            <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="submit"></label>
                 <div class="col-md-8">
