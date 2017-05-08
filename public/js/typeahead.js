@@ -174,7 +174,7 @@
 
         }).fail(function() {
               $('#route-results').empty();
-              $('#route-results').append('<div class="panel container-fluid"><h4>No route found with your currently selected options.</h4><p><b>Note: </b>Some stations cannot be avoided.</p></div>');
+              $('#route-results').append('<div class="panel container-fluid" id="no-route"><h4>No route found with your currently selected options.</h4><p><b>Note: </b>Some stations cannot be avoided.</p></div>');
         });
     }
 

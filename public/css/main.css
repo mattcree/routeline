@@ -332,11 +332,17 @@ hr {
     padding: 7px
 }
 
-#route-results .panel > h4 {
+#route-results .panel > h4{
      text-align: center;
 }
 
-#route-results .panel > p  {
+
+#no-route p {
+    text-align: center;
+}
+
+
+#help-panel > p  {
     text-align: center;
     color: #16165A;
 }
