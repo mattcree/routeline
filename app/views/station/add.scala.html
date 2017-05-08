@@ -11,7 +11,9 @@
                 <label class="col-md-4 control-label" for="name">Station Name</label>
                 <div class="col-md-4">
                     <input id="name" name="name" type="text" placeholder="e.g. Newcastle" class="form-control input-md" required="">
-
+                    <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Only characters A-Z  and - ' are allowed." data-placement="top">
+                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    </a>
                 </div>
             </div>
             <!-- Button (Double) -->
@@ -27,3 +29,9 @@
     </form>
     <br>
 </div>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>

@@ -4,10 +4,13 @@
 
 <div id="typeahead" class="row">
 
+
     <div class="input-group">
         <!-- id must match script below -->
         <input type="text" class="form-control" id="stationFromInput" aria-label="Text input with dropdown button" placeholder="From">
+
     </div>
+
     <div class="input-group">
         <!-- id must match script below -->
         <input type="text" class="form-control" id="stationToInput" aria-label="Text input with dropdown button" placeholder="To">
@@ -27,15 +30,22 @@
         </div>
     </div>
 
+
     <div class="input-group">
-        <button class="btn btn-info collapsed glyphicon glyphicon-cog" data-toggle="collapse" data-target="#viaAvoid" ></button>
-        <button class="btn btn-success" id="goButton" name="goButton">Go!</button>
+
+        <button class="btn btn-info collapsed glyphicon glyphicon-transfer" data-toggle="collapse" data-target="#viaAvoid" ></button>
+        <button class="btn btn-success" id="goButton" name="goButton" >Go!</button>
+
     </div>
 
 </div>
 <div id="results-container">
     <div id="below-go-btn"><br>
         <div id="route-results" class="results col-md-6 col-md-offset-3">
+            <div class = "panel">
+                <h4> First time?</h4><p>Just start typing the city you are travelling from/to and select it from the list!</h4>
+            <p> Remember you can add a specific Station to/from your route by using the blue button.</p>
+            </div>
         </div>
     </div>
 </div>
@@ -43,3 +53,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 <script src="@routes.Assets.versioned("js/typeahead.js")"></script>
+

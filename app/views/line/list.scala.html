@@ -33,7 +33,7 @@
                     <a class="btn btn-danger" data-toggle="confirmation" href="@routes.LineController.deleteLine(line.id)" target="">Delete</a>
                 </th>
                 <th>
-                    <a href="#" class="help" title="Warning!" data-toggle="popover" data-trigger="focus" data-html="true" data-content="Removing a line will remove <em>all</em> stations on that line." data-placement="left">
+                    <a href="#" class="help" title="Warning!" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<ul><li>You should remove <em>all</em> stops on this Line and <em>all</em> stops at a station before deleting a line.</li><li>  Deleting this line will remove <em>all</em> Connections</li></ul>" data-placement="left">
                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
                 </th>
             </tr>
