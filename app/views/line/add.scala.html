@@ -4,14 +4,16 @@
     <form class="form-horizontal dark" action="@routes.LineController.doAddLine()" method="post">
         <fieldset>
             <!-- Form Name -->
-            <legend>Add Line</legend>
+            <legend>Add Line </legend>
             @message
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="name">Line Name</label>
                 <div class="col-md-4">
                     <input id="name" name="name" type="text" placeholder="e.g. Blue, Red, A, B" class="form-control input-md" required="">
-
+                    <a href="#" class="help" title="Information:" data-toggle="popover" data-trigger="focus" data-content="Only characters A-Z  and - ' are allowed." data-placement="top">
+                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    </a>
                 </div>
             </div>
 
@@ -27,3 +29,9 @@
     </form>
     <br>
 </div>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
