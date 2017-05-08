@@ -100,10 +100,13 @@
 
     function getRouteData(nameFrom, nameTo, options, avoidVia) {
         var routeApiUrl;
+        var optionsText;
 
         if (options == "") {
+            optionsText = "";
             var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo;
         } else {
+            optionsText = options.substring(1, options.length-1) + " " + avoidVia;
             var routeApiUrl = '/api/route/names/' + nameFrom + '/' + nameTo + options + avoidVia;
         }
 
@@ -128,7 +131,7 @@
 
             start = data.start;
             destination = data.destination;
-            summary += '<h4>Journey Summary: </h4><p>From '+start.name+' to '+destination.name+'</p><hr>'
+            summary += '<h4>Journey Summary: </h4><p>From '+start.name+' to '+destination.name+' '+optionsText+'</p>'
 
 
             if (data.numberOfChanges > 0) {
