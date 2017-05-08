@@ -1,3 +1,10 @@
+    /*!
+     * Derived from Bootstrap 'Twitter Typeahead'
+     * Copyright 2013 Twitter, Inc.
+     * Licensed under the MIT License
+     *
+     */
+
     var stations;
     var idFrom;
     var idTo;
